@@ -504,155 +504,62 @@ to download the full example code.</p>
     &quot;input&quot;: {
         &quot;demand&quot;: &quot;生成一个快速排序函数&quot;
     },
-    &quot;id&quot;: &quot;call_778072e020c54d7099f7d0&quot;
+    &quot;id&quot;: &quot;call_a1d1400f1936470688c410&quot;
 }
-PythonAgent: 下面是一个使用 Python 编写的快速排序算法的实现。这个函数接受一个列表作为输入，并对其进行原地排序。
+PythonAgent: 下面是一个使用 Python 编写的快速排序函数。这个实现采用了一个简单的递归方法，选取列表中的第一个元素作为基准(pivot)来划分列表。
+```python
+def quicksort(arr):
+    if len(arr) &lt;= 1:
+        return arr
+    else:
+        pivot = arr[0]
+        less = [x for x in arr[1:] if x &lt;= pivot]
+        greater = [x for x in arr[1:] if x &gt; pivot]
+        return quicksort(less) + [pivot] + quicksort(greater)
+```
+你可以将一个整数列表传递给 `quicksort` 函数，它会返回一个新的已排序的列表。例如：
+```python
+unsorted_list = [3, 6, 8, 10, 1, 2, 1]
+sorted_list = quicksort(unsorted_list)
+print(sorted_list)
+```
+这段代码将会输出排序后的列表 `[1, 1, 2, 3, 6, 8, 10]`。
+system: {
+    &quot;type&quot;: &quot;tool_result&quot;,
+    &quot;id&quot;: &quot;call_a1d1400f1936470688c410&quot;,
+    &quot;name&quot;: &quot;generate_python&quot;,
+    &quot;output&quot;: [
+        {
+            &quot;type&quot;: &quot;text&quot;,
+            &quot;text&quot;: &quot;下面是一个使用 Python 编写的快速排序函数。这个实现采用了一个简单的递归方法，选取列表中的第一个元素作为基准(pivot)来划分列表。\n```python\ndef quicksort(arr):\n    if len(arr) &lt;= 1:\n        return arr\n    else:\n        pivot = arr[0]\n        less = [x for x in arr[1:] if x &lt;= pivot]\n        greater = [x for x in arr[1:] if x &gt; pivot]\n        return quicksort(less) + [pivot] + quicksort(greater)\n```\n你可以将一个整数列表传递给 `quicksort` 函数，它会返回一个新的已排序的列表。例如：\n```python\nunsorted_list = [3, 6, 8, 10, 1, 2, 1]\nsorted_list = quicksort(unsorted_list)\nprint(sorted_list)\n```\n这段代码将会输出排序后的列表 `[1, 1, 2, 3, 6, 8, 10]`。&quot;
+        }
+    ]
+}
+Router: 下面是一个使用 Python 编写的快速排序函数。这个实现采用了一个简单的递归方法，选取列表中的第一个元素作为基准（pivot）来划分列表。
 
 ```python
 def quicksort(arr):
     if len(arr) &lt;= 1:
         return arr
-    pivot = arr[len(arr) // 2]
-    left = [x for x in arr if x &lt; pivot]
-    middle = [x for x in arr if x == pivot]
-    right = [x for x in arr if x &gt; pivot]
-    return quicksort(left) + middle + quicksort(right)
+    else:
+        pivot = arr[0]
+        less = [x for x in arr[1:] if x &lt;= pivot]
+        greater = [x for x in arr[1:] if x &gt; pivot]
+        return quicksort(less) + [pivot] + quicksort(greater)
 ```
 
-这是一个简洁的递归版本，它选择了列表中间的元素作为基准（pivot），然后创建了三个列表：`left` 用于存放比基准小的元素，`middle` 用来存放与基准相等的元素，`right` 则存放比基准大的元素。之后，函数会递归地对 `left` 和 `right` 列表进行排序，并将结果合并起来。
-
-如果你需要一个在原地进行排序的版本，不需要额外的空间来存储 `left`, `middle` 和 `right` 列表，我可以为你提供这样的代码。
-system: {
-    &quot;type&quot;: &quot;tool_result&quot;,
-    &quot;id&quot;: &quot;call_778072e020c54d7099f7d0&quot;,
-    &quot;name&quot;: &quot;generate_python&quot;,
-    &quot;output&quot;: [
-        {
-            &quot;type&quot;: &quot;text&quot;,
-            &quot;text&quot;: &quot;下面是一个使用 Python 编写的快速排序算法的实现。这个函数接受一个列表作为输入，并对其进行原地排序。\n\n```python\ndef quicksort(arr):\n    if len(arr) &lt;= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x &lt; pivot]\n    middle = [x for x in arr if x == pivot]\n    right = [x for x in arr if x &gt; pivot]\n    return quicksort(left) + middle + quicksort(right)\n```\n\n这是一个简洁的递归版本，它选择了列表中间的元素作为基准（pivot），然后创建了三个列表：`left` 用于存放比基准小的元素，`middle` 用来存放与基准相等的元素，`right` 则存放比基准大的元素。之后，函数会递归地对 `left` 和 `right` 列表进行排序，并将结果合并起来。\n\n如果你需要一个在原地进行排序的版本，不需要额外的空间来存储 `left`, `middle` 和 `right` 列表，我可以为你提供这样的代码。&quot;
-        }
-    ]
-}
-Router: 提供的 Python 代码实现了一个快速排序算法，它使用了简洁的递归方法。在这个版本中，列表中间的元素被选为基准值（pivot），函数会创建三个独立的列表：`left` 用于存放比基准小的元素，`middle` 存放与基准相等的元素，`right` 则存放比基准大的元素。之后，函数递归地对 `left` 和 `right` 列表进行排序，并将结果连接起来。
+你可以将一个整数列表传递给 `quicksort` 函数，它会返回一个新的已排序的列表。例如：
 
 ```python
-def quicksort(arr):
-    if len(arr) &lt;= 1:
-        return arr
-    pivot = arr[len(arr) // 2]
-    left = [x for x in arr if x &lt; pivot]
-    middle = [x for x in arr if x == pivot]
-    right = [x for x in arr if x &gt; pivot]
-    return quicksort(left) + middle + quicksort(right)
+unsorted_list = [3, 6, 8, 10, 1, 2, 1]
+sorted_list = quicksort(unsorted_list)
+print(sorted_list)
 ```
 
-如果你需要一个在原地执行排序的版本，不需要额外的空间来存储 `left`, `middle` 和 `right` 列表，请告诉我，我可以为你生成这样的代码。你想要这个就地排序的版本吗？
-{
-    &quot;type&quot;: &quot;tool_use&quot;,
-    &quot;name&quot;: &quot;generate_python&quot;,
-    &quot;input&quot;: {
-        &quot;demand&quot;: &quot;生成一个就地排序的快速排序函数&quot;
-    },
-    &quot;id&quot;: &quot;call_d5a1bffbbe0b4f2999387e&quot;
-}
-
-PythonAgent: 下面是一个就地排序的快速排序函数的 Python 代码。这个实现使用了 Lomuto 划分方案，并且是递归的。它会对输入列表进行就地排序，不需要额外的空间（除了递归栈）。
-
-```python
-def quicksort(arr, low, high):
-    if low &lt; high:
-        # Partition the array
-        pi = partition(arr, low, high)
-
-        # Recursively sort the elements before and after partition
-        quicksort(arr, low, pi - 1)
-        quicksort(arr, pi + 1, high)
-
-def partition(arr, low, high):
-    # Choose the rightmost element as pivot
-    pivot = arr[high]
-
-    # Pointer for greater element
-    i = low - 1
-
-    # Traverse through all elements
-    # compare each element with pivot
-    for j in range(low, high):
-        if arr[j] &lt;= pivot:
-            # If element smaller than pivot is found
-            # swap it with the greater element pointed by i
-            i = i + 1
-
-            # Swapping the elements
-            arr[i], arr[j] = arr[j], arr[i]
-
-    # Swap the pivot element with the element at i+1
-    arr[i + 1], arr[high] = arr[high], arr[i + 1]
-
-    # Return the position from where partition is done
-    return i + 1
-
-# Example usage:
-example_array = [10, 7, 8, 9, 1, 5]
-quicksort(example_array, 0, len(example_array) - 1)
-print(&quot;Sorted array:&quot;, example_array)
-```
-
-要使用这个函数，你需要调用 `quicksort` 并传入数组和数组的起始与结束索引。上面的例子中，我们对一个整数数组进行了排序。如果你想要测试这段代码，请确保你有一个可以运行 Python 代码的环境。
-system: {
-    &quot;type&quot;: &quot;tool_result&quot;,
-    &quot;id&quot;: &quot;call_d5a1bffbbe0b4f2999387e&quot;,
-    &quot;name&quot;: &quot;generate_python&quot;,
-    &quot;output&quot;: [
-        {
-            &quot;type&quot;: &quot;text&quot;,
-            &quot;text&quot;: &quot;下面是一个就地排序的快速排序函数的 Python 代码。这个实现使用了 Lomuto 划分方案，并且是递归的。它会对输入列表进行就地排序，不需要额外的空间（除了递归栈）。\n\n```python\ndef quicksort(arr, low, high):\n    if low &lt; high:\n        # Partition the array\n        pi = partition(arr, low, high)\n\n        # Recursively sort the elements before and after partition\n        quicksort(arr, low, pi - 1)\n        quicksort(arr, pi + 1, high)\n\ndef partition(arr, low, high):\n    # Choose the rightmost element as pivot\n    pivot = arr[high]\n\n    # Pointer for greater element\n    i = low - 1\n\n    # Traverse through all elements\n    # compare each element with pivot\n    for j in range(low, high):\n        if arr[j] &lt;= pivot:\n            # If element smaller than pivot is found\n            # swap it with the greater element pointed by i\n            i = i + 1\n\n            # Swapping the elements\n            arr[i], arr[j] = arr[j], arr[i]\n\n    # Swap the pivot element with the element at i+1\n    arr[i + 1], arr[high] = arr[high], arr[i + 1]\n\n    # Return the position from where partition is done\n    return i + 1\n\n# Example usage:\nexample_array = [10, 7, 8, 9, 1, 5]\nquicksort(example_array, 0, len(example_array) - 1)\nprint(\&quot;Sorted array:\&quot;, example_array)\n```\n\n要使用这个函数，你需要调用 `quicksort` 并传入数组和数组的起始与结束索引。上面的例子中，我们对一个整数数组进行了排序。如果你想要测试这段代码，请确保你有一个可以运行 Python 代码的环境。&quot;
-        }
-    ]
-}
-Router: 下面是就地排序的快速排序函数的 Python 代码实现。这个版本使用了 Lomuto 划分方案，它会直接在给定的列表上进行操作而不需要额外的空间（除了递归调用栈）。
-
-```python
-def quicksort(arr, low, high):
-    if low &lt; high:
-        # 对数组进行划分
-        pi = partition(arr, low, high)
-
-        # 递归地对划分点两边的元素进行快速排序
-        quicksort(arr, low, pi - 1)
-        quicksort(arr, pi + 1, high)
-
-def partition(arr, low, high):
-    # 选择最右边的元素作为基准值
-    pivot = arr[high]
-
-    # i 指向大于基准值的元素
-    i = low - 1
-
-    # 遍历从 low 到 high-1 的所有元素
-    for j in range(low, high):
-        # 如果当前元素小于或等于基准值
-        if arr[j] &lt;= pivot:
-            # 将 i 向右移动一位，并交换 arr[i] 和 arr[j]
-            i += 1
-            arr[i], arr[j] = arr[j], arr[i]
-
-    # 最后将基准值放到正确的位置
-    arr[i + 1], arr[high] = arr[high], arr[i + 1]
-
-    # 返回划分完成后的基准值位置
-    return i + 1
-
-# 使用示例：
-example_array = [10, 7, 8, 9, 1, 5]
-quicksort(example_array, 0, len(example_array) - 1)
-print(&quot;Sorted array:&quot;, example_array)
-```
-
-这段代码定义了 `quicksort` 函数和辅助的 `partition` 函数。要使用这个快速排序功能，你只需调用 `quicksort` 并传入待排序的数组以及数组的第一个和最后一个索引。如例子所示，我们对一个整数数组进行了排序。如果你有 Python 环境的话，你可以运行这段代码来测试它的效果。
+这段代码将会输出排序后的列表 `[1, 1, 2, 3, 6, 8, 10]`。
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (1 minutes 26.500 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 21.688 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorial-workflow-routing-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/3266c75280f96697c4cc46d7d55a3ac8/workflow_routing.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">workflow_routing.ipynb</span></code></a></p>

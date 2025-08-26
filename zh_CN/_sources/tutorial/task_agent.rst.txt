@@ -208,7 +208,7 @@ ReAct 智能体
 
     Jarvis: {
         "type": "tool_use",
-        "id": "call_5d030e5db43b4c04ba419c",
+        "id": "call_8ddc95c0d5164c9189745a",
         "name": "example_tool_function",
         "input": {
             "tag": "tag1"
@@ -216,18 +216,18 @@ ReAct 智能体
     }
     system: {
         "type": "tool_result",
-        "id": "call_5d030e5db43b4c04ba419c",
+        "id": "call_8ddc95c0d5164c9189745a",
         "name": "example_tool_function",
         "output": [
             {
                 "type": "text",
-                "text": "标签 tag1 开始于 09:22:53.587627，结束于 09:22:56.590690。"
+                "text": "标签 tag1 开始于 10:06:52.218499，结束于 10:06:55.221576。"
             }
         ]
     }
     Jarvis: {
         "type": "tool_use",
-        "id": "call_c510f1e046ca4e32ad3ba2",
+        "id": "call_267e04c569a946ccb49694",
         "name": "example_tool_function",
         "input": {
             "tag": "tag2"
@@ -235,16 +235,16 @@ ReAct 智能体
     }
     system: {
         "type": "tool_result",
-        "id": "call_c510f1e046ca4e32ad3ba2",
+        "id": "call_267e04c569a946ccb49694",
         "name": "example_tool_function",
         "output": [
             {
                 "type": "text",
-                "text": "标签 tag2 开始于 09:23:00.082156，结束于 09:23:03.085219。"
+                "text": "标签 tag2 开始于 10:06:57.026347，结束于 10:07:00.029405。"
             }
         ]
     }
-    Jarvis: 两个函数调用已经并行执行完毕。第一个以'tag1'为标签的函数从09:22:53.587627开始，在09:22:56.590690结束。第二个以'tag2'为标签的函数则从09:23:00.082156开始，并在09:23:03.085219完成。
+    Jarvis: 两个函数调用已经并行执行完成。第一个使用标签 'tag1' 的 `example_tool_function` 函数从 10:06:52.218499 开始，在 10:06:55.221576 结束。第二个使用标签 'tag2' 的 `example_tool_function` 函数则从 10:06:57.026347 开始，并在 10:07:00.029405 完成。由于它们是并行运行的，所以你可以看到它们的执行时间是重叠的。
 
 
 
@@ -309,15 +309,17 @@ AgentScope 中的结构化输出是与工具调用紧密结合的。具体来说
 
  .. code-block:: none
 
-    Jarvis: 阿尔伯特·爱因斯坦（Albert Einstein，1879-1955）是一位德裔瑞士籍美国理论物理学家，他最著名的是相对论的创立者。他的工作对现代物理学有着深远的影响，并为核能的发展奠定了基础。爱因斯坦于1921年被授予诺贝尔物理学奖，以表彰他对理论物理学的贡献，特别是光电效应定律的发现。
+    Jarvis: 阿尔伯特·爱因斯坦（Albert Einstein, 1879-1955）是一位理论物理学家，他最著名的是提出了相对论，并因此对整个现代物理学产生了深远的影响。他的工作也包括了光电效应的研究，为此他在1921年被授予诺贝尔物理学奖。爱因斯坦不仅是一个杰出的科学家，也是一个和平主义者和社会活动家。
 
     结构化输出：
     {
         "name": "Albert Einstein",
-        "description": "一位改变了我们对宇宙理解的理论物理学家。",
+        "description": "一位理论物理学家，相对论的创立者",
         "age": 76,
         "honor": [
-            "1921年诺贝尔物理学奖"
+            "1921年诺贝尔物理学奖",
+            "科普利奖章 (1925)",
+            "马克斯·普朗克奖章 (1929)"
         ]
     }
 
@@ -387,7 +389,7 @@ AgentScope 提供了两个基类：``AgentBase`` 和 ``ReActAgentBase``，它们
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 24.318 seconds)
+   **Total running time of the script:** (0 minutes 28.887 seconds)
 
 
 .. _sphx_glr_download_tutorial_task_agent.py:
