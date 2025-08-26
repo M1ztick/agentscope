@@ -110,11 +110,11 @@ Initialize a routing agent
 
  .. code-block:: none
 
-    Router: Sure, I can help with that. Could you please give me a bit more information? Such as the theme or any specific elements you'd like to include in your poem?
+    Router: Sure, I can help you with that. Could you please provide me with a theme or some keywords that you would like the poem to revolve around?
     The structured output:
     {
         "your_choice": "Content Generation",
-        "task_description": "The user wants assistance in writing a poem and is looking for guidance on developing it."
+        "task_description": null
     }
 
 
@@ -247,63 +247,49 @@ After that, we define a routing agent and equip it with the above tool functions
         "input": {
             "demand": "a quick sort function"
         },
-        "id": "call_faa4717d9f2443b6bacb63"
+        "id": "call_cb115d3703714b3d82687c"
     }
-    PythonAgent: Here's a Python implementation of the quicksort algorithm. This is a popular and efficient sorting algorithm that uses a divide-and-conquer approach to sort elements.
+    PythonAgent: Here is a simple implementation of the quick sort algorithm in Python:
 
     ```python
     def quick_sort(arr):
         if len(arr) <= 1:
             return arr
         else:
-            # Choosing the pivot - here we're using the last element
-            pivot = arr.pop()
-            # Partitioning the array into two halves
-            less_than_pivot = [x for x in arr if x < pivot]
-            greater_than_pivot = [x for x in arr if x >= pivot]
-            # Recursively applying the same logic to the partitions
-            return quick_sort(less_than_pivot) + [pivot] + quick_sort(greater_than_pivot)
-
-    # Example usage
-    example_array = [10, 7, 8, 9, 1, 5]
-    sorted_array = quick_sort(example_array)
-    print('Sorted Array:', sorted_array)
+            pivot = arr[len(arr) // 2]
+            left = [x for x in arr if x < pivot]
+            middle = [x for x in arr if x == pivot]
+            right = [x for x in arr if x > pivot]
+            return quick_sort(left) + middle + quick_sort(right)
     ```
 
-    This function will take an array `arr` as input and return a new array with the elements sorted in ascending order. If you want to use this function in place (i.e., to sort the array without creating a new one), the implementation would be slightly different.
+    You can use this function to sort a list of numbers. For example, `quick_sort([3, 6, 8, 10, 1, 2, 1])` will return `[1, 1, 2, 3, 6, 8, 10]`. Would you like to see an example with a different type of data or do you have any specific requirements?
     system: {
         "type": "tool_result",
-        "id": "call_faa4717d9f2443b6bacb63",
+        "id": "call_cb115d3703714b3d82687c",
         "name": "generate_python",
         "output": [
             {
                 "type": "text",
-                "text": "Here's a Python implementation of the quicksort algorithm. This is a popular and efficient sorting algorithm that uses a divide-and-conquer approach to sort elements.\n\n```python\ndef quick_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    else:\n        # Choosing the pivot - here we're using the last element\n        pivot = arr.pop()\n        # Partitioning the array into two halves\n        less_than_pivot = [x for x in arr if x < pivot]\n        greater_than_pivot = [x for x in arr if x >= pivot]\n        # Recursively applying the same logic to the partitions\n        return quick_sort(less_than_pivot) + [pivot] + quick_sort(greater_than_pivot)\n\n# Example usage\nexample_array = [10, 7, 8, 9, 1, 5]\nsorted_array = quick_sort(example_array)\nprint('Sorted Array:', sorted_array)\n```\n\nThis function will take an array `arr` as input and return a new array with the elements sorted in ascending order. If you want to use this function in place (i.e., to sort the array without creating a new one), the implementation would be slightly different."
+                "text": "Here is a simple implementation of the quick sort algorithm in Python:\n\n```python\ndef quick_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    else:\n        pivot = arr[len(arr) // 2]\n        left = [x for x in arr if x < pivot]\n        middle = [x for x in arr if x == pivot]\n        right = [x for x in arr if x > pivot]\n        return quick_sort(left) + middle + quick_sort(right)\n```\n\nYou can use this function to sort a list of numbers. For example, `quick_sort([3, 6, 8, 10, 1, 2, 1])` will return `[1, 1, 2, 3, 6, 8, 10]`. Would you like to see an example with a different type of data or do you have any specific requirements?"
             }
         ]
     }
-    Router: The quick sort function in Python has been generated for you. Here it is:
+    Router: Here is a simple implementation of the quick sort algorithm in Python:
 
     ```python
     def quick_sort(arr):
         if len(arr) <= 1:
             return arr
         else:
-            # Choosing the pivot - here we're using the last element
-            pivot = arr.pop()
-            # Partitioning the array into two halves
-            less_than_pivot = [x for x in arr if x < pivot]
-            greater_than_pivot = [x for x in arr if x >= pivot]
-            # Recursively applying the same logic to the partitions
-            return quick_sort(less_than_pivot) + [pivot] + quick_sort(greater_than_pivot)
-
-    # Example usage
-    example_array = [10, 7, 8, 9, 1, 5]
-    sorted_array = quick_sort(example_array)
-    print('Sorted Array:', sorted_array)
+            pivot = arr[len(arr) // 2]
+            left = [x for x in arr if x < pivot]
+            middle = [x for x in arr if x == pivot]
+            right = [x for x in arr if x > pivot]
+            return quick_sort(left) + middle + quick_sort(right)
     ```
 
-    This function will take an array as input and return a new sorted array. To see it in action, you can run the example provided. If you need further assistance or modifications to this code, feel free to ask!
+    You can use this function to sort a list of numbers. For example, `quick_sort([3, 6, 8, 10, 1, 2, 1])` will return `[1, 1, 2, 3, 6, 8, 10]`. Would you like to see an example with a different type of data or do you have any specific requirements?
 
 
 
@@ -311,7 +297,7 @@ After that, we define a routing agent and equip it with the above tool functions
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 34.644 seconds)
+   **Total running time of the script:** (0 minutes 30.521 seconds)
 
 
 .. _sphx_glr_download_tutorial_workflow_routing.py:

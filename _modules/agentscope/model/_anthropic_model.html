@@ -322,13 +322,20 @@
     <span class="n">TYPE_CHECKING</span><span class="p">,</span>
     <span class="n">List</span><span class="p">,</span>
     <span class="n">Literal</span><span class="p">,</span>
+    <span class="n">Type</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">._model_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatModelBase</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">._model_response</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatResponse</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">._model_usage</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatUsage</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.._utils._common</span><span class="w"> </span><span class="kn">import</span> <span class="n">_json_loads_with_repair</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.._logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.._utils._common</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">_json_loads_with_repair</span><span class="p">,</span>
+    <span class="n">_create_tool_from_base_model</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..message</span><span class="w"> </span><span class="kn">import</span> <span class="n">TextBlock</span><span class="p">,</span> <span class="n">ToolUseBlock</span><span class="p">,</span> <span class="n">ThinkingBlock</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..tracing</span><span class="w"> </span><span class="kn">import</span> <span class="n">trace_llm</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..types._json</span><span class="w"> </span><span class="kn">import</span> <span class="n">JSONSerializableObject</span>
@@ -417,6 +424,7 @@
         <span class="n">tool_choice</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;any&quot;</span><span class="p">,</span> <span class="s2">&quot;required&quot;</span><span class="p">]</span>
         <span class="o">|</span> <span class="nb">str</span>
         <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">structured_model</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">BaseModel</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">generate_kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ChatResponse</span> <span class="o">|</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">ChatResponse</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the response from Anthropic chat completions API by the given</span>
@@ -452,12 +460,26 @@
 <span class="sd">                        },</span>
 <span class="sd">                        # More schemas here</span>
 <span class="sd">                    ]</span>
+
 <span class="sd">            tool_choice (`Literal[&quot;auto&quot;, &quot;none&quot;, &quot;any&quot;, &quot;required&quot;] | str \</span>
 <span class="sd">            | None`, default `None`):</span>
 <span class="sd">                Controls which (if any) tool is called by the model.</span>
 <span class="sd">                 Can be &quot;auto&quot;, &quot;none&quot;, &quot;any&quot;, &quot;required&quot;, or specific tool</span>
 <span class="sd">                 name. For more details, please refer to</span>
 <span class="sd">                 https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/implement-tool-use</span>
+<span class="sd">            structured_model (`Type[BaseModel] | None`, default `None`):</span>
+<span class="sd">                A Pydantic BaseModel class that defines the expected structure</span>
+<span class="sd">                for the model&#39;s output. When provided, the model will be forced</span>
+<span class="sd">                to return data that conforms to this schema by automatically</span>
+<span class="sd">                converting the BaseModel to a tool function and setting</span>
+<span class="sd">                `tool_choice` to enforce its usage. This enables structured</span>
+<span class="sd">                output generation.</span>
+
+<span class="sd">                .. note:: When `structured_model` is specified,</span>
+<span class="sd">                    both `tools` and `tool_choice` parameters are ignored,</span>
+<span class="sd">                    and the model will only perform structured output</span>
+<span class="sd">                    generation without calling any other tools.</span>
+
 <span class="sd">            **generate_kwargs (`Any`):</span>
 <span class="sd">                The keyword arguments for Anthropic chat completions API,</span>
 <span class="sd">                e.g. `temperature`, `top_p`, etc. Please</span>
@@ -484,6 +506,22 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_validate_tool_choice</span><span class="p">(</span><span class="n">tool_choice</span><span class="p">,</span> <span class="n">tools</span><span class="p">)</span>
             <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;tool_choice&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_tool_choice</span><span class="p">(</span><span class="n">tool_choice</span><span class="p">)</span>
 
+        <span class="k">if</span> <span class="n">structured_model</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">tools</span> <span class="ow">or</span> <span class="n">tool_choice</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="s2">&quot;structured_model is provided. Both &#39;tools&#39; and &quot;</span>
+                    <span class="s2">&quot;&#39;tool_choice&#39; parameters will be overridden and &quot;</span>
+                    <span class="s2">&quot;ignored. The model will only perform structured output &quot;</span>
+                    <span class="s2">&quot;generation without calling any other tools.&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="n">format_tool</span> <span class="o">=</span> <span class="n">_create_tool_from_base_model</span><span class="p">(</span><span class="n">structured_model</span><span class="p">)</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;tools&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_tools_json_schemas</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">format_tool</span><span class="p">],</span>
+            <span class="p">)</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;tool_choice&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_tool_choice</span><span class="p">(</span>
+                <span class="n">format_tool</span><span class="p">[</span><span class="s2">&quot;function&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+            <span class="p">)</span>
+
         <span class="c1"># Extract the system message</span>
         <span class="k">if</span> <span class="n">messages</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;role&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;system&quot;</span><span class="p">:</span>
             <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;system&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">messages</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;content&quot;</span><span class="p">]</span>
@@ -499,12 +537,14 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_anthropic_stream_completion_response</span><span class="p">(</span>
                 <span class="n">start_datetime</span><span class="p">,</span>
                 <span class="n">response</span><span class="p">,</span>
+                <span class="n">structured_model</span><span class="p">,</span>
             <span class="p">)</span>
 
         <span class="c1"># Non-streaming response</span>
         <span class="n">parsed_response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_anthropic_completion_response</span><span class="p">(</span>
             <span class="n">start_datetime</span><span class="p">,</span>
             <span class="n">response</span><span class="p">,</span>
+            <span class="n">structured_model</span><span class="p">,</span>
         <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">parsed_response</span></div>
@@ -514,10 +554,30 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">start_datetime</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
         <span class="n">response</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span>
+        <span class="n">structured_model</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">BaseModel</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ChatResponse</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse the Anthropic chat completion response into a `ChatResponse`</span>
-<span class="sd">        object.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Given an Anthropic Message object, extract the content blocks and</span>
+<span class="sd">        usages from it.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            start_datetime (`datetime`):</span>
+<span class="sd">                The start datetime of the response generation.</span>
+<span class="sd">            response (`Message`):</span>
+<span class="sd">                Anthropic Message object to parse.</span>
+<span class="sd">            structured_model (`Type[BaseModel] | None`, default `None`):</span>
+<span class="sd">                A Pydantic BaseModel class that defines the expected structure</span>
+<span class="sd">                for the model&#39;s output.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ChatResponse (`ChatResponse`):</span>
+<span class="sd">                A ChatResponse object containing the content blocks and usage.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            If `structured_model` is not `None`, the expected structured output</span>
+<span class="sd">            will be stored in the metadata of the `ChatResponse`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">content_blocks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ThinkingBlock</span> <span class="o">|</span> <span class="n">TextBlock</span> <span class="o">|</span> <span class="n">ToolUseBlock</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">content_block</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
@@ -552,6 +612,8 @@
                             <span class="nb">input</span><span class="o">=</span><span class="n">content_block</span><span class="o">.</span><span class="n">input</span><span class="p">,</span>
                         <span class="p">),</span>
                     <span class="p">)</span>
+                    <span class="k">if</span> <span class="n">structured_model</span><span class="p">:</span>
+                        <span class="n">metadata</span> <span class="o">=</span> <span class="n">content_block</span><span class="o">.</span><span class="n">input</span>
 
         <span class="n">usage</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">usage</span><span class="p">:</span>
@@ -564,6 +626,7 @@
         <span class="n">parsed_response</span> <span class="o">=</span> <span class="n">ChatResponse</span><span class="p">(</span>
             <span class="n">content</span><span class="o">=</span><span class="n">content_blocks</span><span class="p">,</span>
             <span class="n">usage</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span>
+            <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span>
         <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">parsed_response</span>
@@ -572,9 +635,30 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">start_datetime</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
         <span class="n">response</span><span class="p">:</span> <span class="n">AsyncStream</span><span class="p">,</span>
+        <span class="n">structured_model</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">BaseModel</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">ChatResponse</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse the Anthropic chat completion response stream into an async</span>
-<span class="sd">        generator of `ChatResponse` objects.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Given an Anthropic streaming response, extract the content blocks</span>
+<span class="sd">        and usages from it and yield ChatResponse objects.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            start_datetime (`datetime`):</span>
+<span class="sd">                The start datetime of the response generation.</span>
+<span class="sd">            response (`AsyncStream`):</span>
+<span class="sd">                Anthropic AsyncStream object to parse.</span>
+<span class="sd">            structured_model (`Type[BaseModel] | None`, default `None`):</span>
+<span class="sd">                A Pydantic BaseModel class that defines the expected structure</span>
+<span class="sd">                for the model&#39;s output.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `AsyncGenerator[ChatResponse, None]`:</span>
+<span class="sd">                An async generator that yields ChatResponse objects containing</span>
+<span class="sd">                the content blocks and usage information for each chunk in</span>
+<span class="sd">                the streaming response.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            If `structured_model` is not `None`, the expected structured output</span>
+<span class="sd">            will be stored in the metadata of the `ChatResponse`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">usage</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">text_buffer</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -583,6 +667,7 @@
         <span class="n">tool_calls</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="n">tool_call_buffers</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">res</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="k">async</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
             <span class="n">content_changed</span> <span class="o">=</span> <span class="kc">False</span>
@@ -673,10 +758,13 @@
                             <span class="nb">input</span><span class="o">=</span><span class="n">input_obj</span><span class="p">,</span>
                         <span class="p">),</span>
                     <span class="p">)</span>
+                    <span class="k">if</span> <span class="n">structured_model</span><span class="p">:</span>
+                        <span class="n">metadata</span> <span class="o">=</span> <span class="n">input_obj</span>
                 <span class="k">if</span> <span class="n">contents</span><span class="p">:</span>
                     <span class="n">res</span> <span class="o">=</span> <span class="n">ChatResponse</span><span class="p">(</span>
                         <span class="n">content</span><span class="o">=</span><span class="n">contents</span><span class="p">,</span>
                         <span class="n">usage</span><span class="o">=</span><span class="n">usage</span><span class="p">,</span>
+                        <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span>
                     <span class="p">)</span>
                     <span class="k">yield</span> <span class="n">res</span>
 

@@ -280,9 +280,9 @@ Specifically, the agents within the same ``MsgHub`` will receive messages from o
 
  .. code-block:: none
 
-    Alice: Hi there! I'm Alice, a student. Nice to meet you! Could you tell me a bit about yourself?
-    Bob: Hello Alice, I'm Bob. It's great to meet you too! I'm also a student, and I enjoy playing basketball and reading in my free time. What about your hobbies?
-    Charlie: Hi Bob, it's nice to meet you as well! I like painting and hiking when I have some free time. It's always a pleasure to meet someone with diverse interests. Do you have a favorite book or basketball team?
+    Alice: Hello! I'm Alice, a student currently pursuing my studies in computer science. It's nice to meet you. Could you tell me a little bit about yourself?
+    Bob: Hello Alice! I'm Bob, and I'm also a student. I have a keen interest in technology and how it can be used to solve everyday problems. It's great to meet another tech enthusiast. What particular area of computer science are you most interested in?
+    Charlie: Hi Bob, it's great to meet you too! I'm really into machine learning and artificial intelligence. There's so much potential in those fields, and I find the way algorithms can learn from data and make decisions or predictions to be fascinating. What about you, are there any specific areas of technology that you're particularly passionate about?
 
 
 
@@ -319,9 +319,9 @@ Now we print the memory of Alice to check if her memory is updated correctly.
     system: Now you meet each other with a brief self-introduction.
     Alice: None
     system: None
-    Alice: Hi there! I'm Alice, a student. Nice to meet you! Could you tell me a bit about yourself?
-    Bob: Hello Alice, I'm Bob. It's great to meet you too! I'm also a student, and I enjoy playing basketball and reading in my free time. What about your hobbies?
-    Charlie: Hi Bob, it's nice to meet you as well! I like painting and hiking when I have some free time. It's always a pleasure to meet someone with diverse interests. Do you have a favorite book or basketball team?
+    Alice: Hello! I'm Alice, a student currently pursuing my studies in computer science. It's nice to meet you. Could you tell me a little bit about yourself?
+    Bob: Hello Alice! I'm Bob, and I'm also a student. I have a keen interest in technology and how it can be used to solve everyday problems. It's great to meet another tech enthusiast. What particular area of computer science are you most interested in?
+    Charlie: Hi Bob, it's great to meet you too! I'm really into machine learning and artificial intelligence. There's so much potential in those fields, and I find the way algorithms can learn from data and make decisions or predictions to be fascinating. What about you, are there any specific areas of technology that you're particularly passionate about?
 
 
 
@@ -338,7 +338,7 @@ Further Reading
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 9.253 seconds)
+   **Total running time of the script:** (0 minutes 14.253 seconds)
 
 
 .. _sphx_glr_download_tutorial_workflow_conversation.py:
