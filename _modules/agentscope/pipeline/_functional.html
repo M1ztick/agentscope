@@ -313,6 +313,9 @@
           <h1>Source code for agentscope.pipeline._functional</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;Functional counterpart for Pipeline&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..agent</span><span class="w"> </span><span class="kn">import</span> <span class="n">AgentBase</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..message</span><span class="w"> </span><span class="kn">import</span> <span class="n">Msg</span>
 
@@ -347,7 +350,6 @@
 <span class="sd">            A list of agents.</span>
 <span class="sd">        msg (`Msg | list[Msg] | None`, defaults to `None`):</span>
 <span class="sd">            The initial input that will be passed to the first agent.</span>
-
 <span class="sd">    Returns:</span>
 <span class="sd">        `Msg | list[Msg] | None`:</span>
 <span class="sd">            The output of the last agent in the sequence.</span>
@@ -355,6 +357,69 @@
     <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">agents</span><span class="p">:</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="k">await</span> <span class="n">agent</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">msg</span></div>
+
+
+
+<div class="viewcode-block" id="fanout_pipeline">
+<a class="viewcode-back" href="../../../api/agentscope.pipeline.html#agentscope.pipeline.fanout_pipeline">[docs]</a>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fanout_pipeline</span><span class="p">(</span>
+    <span class="n">agents</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">AgentBase</span><span class="p">],</span>
+    <span class="n">msg</span><span class="p">:</span> <span class="n">Msg</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="n">Msg</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">enable_gather</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Msg</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A fanout pipeline that distributes the same input to multiple agents.</span>
+<span class="sd">    This pipeline sends the same message (or a deep copy of it) to all agents</span>
+<span class="sd">    and collects their responses. Agents can be executed either concurrently</span>
+<span class="sd">    using asyncio.gather() or sequentially depending on the enable_gather</span>
+<span class="sd">    parameter.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            agent1 = ReActAgent(...)</span>
+<span class="sd">            agent2 = ReActAgent(...)</span>
+<span class="sd">            agent3 = ReActAgent(...)</span>
+
+<span class="sd">            msg_input = Msg(&quot;user&quot;, &quot;Hello&quot;, &quot;user&quot;)</span>
+
+<span class="sd">            # Concurrent execution (default)</span>
+<span class="sd">            results = await fanout_pipeline(</span>
+<span class="sd">                [agent1, agent2, agent3],</span>
+<span class="sd">                msg_input</span>
+<span class="sd">            )</span>
+
+<span class="sd">            # Sequential execution</span>
+<span class="sd">            results = await fanout_pipeline(</span>
+<span class="sd">                [agent1, agent2, agent3],</span>
+<span class="sd">                msg_input,</span>
+<span class="sd">                enable_gather=False</span>
+<span class="sd">            )</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        agents (`list[AgentBase]`):</span>
+<span class="sd">            A list of agents.</span>
+<span class="sd">        msg (`Msg | list[Msg] | None`, defaults to `None`):</span>
+<span class="sd">            The initial input that will be passed to all agents.</span>
+<span class="sd">        enable_gather (`bool`, defaults to `True`):</span>
+<span class="sd">            Whether to execute agents concurrently using `asyncio.gather()`.</span>
+<span class="sd">            If False, agents are executed sequentially.</span>
+<span class="sd">        **kwargs (`Any`):</span>
+<span class="sd">            Additional keyword arguments passed to each agent during execution.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        `list[Msg]`:</span>
+<span class="sd">            A list of response messages from each agent.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">enable_gather</span><span class="p">:</span>
+        <span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">agent</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">msg</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">agents</span>
+        <span class="p">]</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">tasks</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="k">await</span> <span class="n">agent</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">msg</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">agents</span><span class="p">]</span></div>
 
 </pre></div>
         </article>

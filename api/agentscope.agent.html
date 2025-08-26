@@ -557,12 +557,29 @@ Otherwise, clear the specified type of instance-level hooks.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="agentscope.agent.AgentBase.reset_subscribers">
-<span class="sig-name descname"><span class="pre">reset_subscribers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subscribers</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/agentscope/agent/_agent_base.html#AgentBase.reset_subscribers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#agentscope.agent.AgentBase.reset_subscribers" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">reset_subscribers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msghub_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subscribers</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/agentscope/agent/_agent_base.html#AgentBase.reset_subscribers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#agentscope.agent.AgentBase.reset_subscribers" title="Link to this definition">¶</a></dt>
 <dd><p>Reset the subscribers of the agent.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>subscribers</strong> (<cite>list[AgentBase]</cite>) – A list of agents that will receive the reply message from
-this agent via their <cite>observe</cite> method.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msghub_name</strong> (<cite>str</cite>) – The name of the MsgHub that manages the subscribers.</p></li>
+<li><p><strong>subscribers</strong> (<cite>list[AgentBase]</cite>) – A list of agents that will receive the reply message from
+this agent via their <cite>observe</cite> method.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="agentscope.agent.AgentBase.remove_subscribers">
+<span class="sig-name descname"><span class="pre">remove_subscribers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msghub_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/agentscope/agent/_agent_base.html#AgentBase.remove_subscribers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#agentscope.agent.AgentBase.remove_subscribers" title="Link to this definition">¶</a></dt>
+<dd><p>Remove the msghub subscribers by the given msg hub name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>msghub_name</strong> (<cite>str</cite>) – The name of the MsgHub that manages the subscribers.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -1094,6 +1111,7 @@ user or something else.</p>
 <li><a class="reference internal" href="#agentscope.agent.AgentBase.clear_class_hooks"><code class="docutils literal notranslate"><span class="pre">AgentBase.clear_class_hooks()</span></code></a></li>
 <li><a class="reference internal" href="#agentscope.agent.AgentBase.clear_instance_hooks"><code class="docutils literal notranslate"><span class="pre">AgentBase.clear_instance_hooks()</span></code></a></li>
 <li><a class="reference internal" href="#agentscope.agent.AgentBase.reset_subscribers"><code class="docutils literal notranslate"><span class="pre">AgentBase.reset_subscribers()</span></code></a></li>
+<li><a class="reference internal" href="#agentscope.agent.AgentBase.remove_subscribers"><code class="docutils literal notranslate"><span class="pre">AgentBase.remove_subscribers()</span></code></a></li>
 <li><a class="reference internal" href="#agentscope.agent.AgentBase.disable_console_output"><code class="docutils literal notranslate"><span class="pre">AgentBase.disable_console_output()</span></code></a></li>
 </ul>
 </li>
