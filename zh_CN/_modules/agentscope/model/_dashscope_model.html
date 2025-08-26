@@ -402,7 +402,6 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="n">api_key</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">enable_thinking</span> <span class="o">=</span> <span class="n">enable_thinking</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">incremental_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">generate_kwargs</span> <span class="o">=</span> <span class="n">generate_kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
 
         <span class="k">if</span> <span class="n">base_http_api_url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -467,8 +466,9 @@
             <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">generate_kwargs</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
             <span class="s2">&quot;result_format&quot;</span><span class="p">:</span> <span class="s2">&quot;message&quot;</span><span class="p">,</span>
-            <span class="c1"># In agentscope, the `incremental_output` must be `True`</span>
-            <span class="s2">&quot;incremental_output&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">incremental_output</span><span class="p">,</span>
+            <span class="c1"># In agentscope, the `incremental_output` must be `True` when</span>
+            <span class="c1"># `self.stream` is True</span>
+            <span class="s2">&quot;incremental_output&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="p">,</span>
         <span class="p">}</span>
 
         <span class="k">if</span> <span class="n">tools</span><span class="p">:</span>

@@ -506,9 +506,10 @@ Charlie: 我也是！顺便说一下，我是 Charlie。
 <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">example_msghub</span><span class="p">())</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Alice: 大家好，我叫Alice，是一名学生。我喜欢阅读、学习新知识还有和朋友们一起度过愉快的时光。很高兴认识大家！你们有什么兴趣爱好呢？
-Bob: 大家好，我叫Bob，也是一名学生。我对科技和编程很感兴趣，平时喜欢打篮球保持活力。同样也很高兴认识你们！听起来我们都有很多共同点呢。
-Charlie: 大家好，我叫Charlie，同样是一名学生。我对音乐特别感兴趣，喜欢弹吉他和创作歌曲。我也热衷于探索自然，经常去远足。很高兴遇见你们！看来我们都有各自的兴趣爱好，也都很享受学习的过程。
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Alice: 大家好，我叫Alice，是一名学生。很高兴认识大家！我喜欢阅读和探索新知识，也热爱户外活动。希望我们能够成为好朋友，并且一起度过愉快的时光。
+Alice: Hello everyone, my name is Alice and I&#39;m a student. It&#39;s nice to meet you all! I enjoy reading and exploring new knowledge, as well as outdoor activities. I hope we can become good friends and have a great time together.
+Bob: Hello Alice, it&#39;s great to meet you! My name is Bob and I&#39;m also a student. I like to tinker with computers and play video games in my free time. I look forward to getting to know everyone better and having a lot of fun together.
+Charlie: Hi Alice and Bob, I&#39;m Charlie, a fellow student. I have a passion for music and play the guitar whenever I get the chance. I also enjoy sports and I&#39;m on the school&#39;s soccer team. It&#39;s great to meet you both and I&#39;m excited to share some good times with you all.
 </pre></div>
 </div>
 <p>现在我们打印 Alice 的记忆，检查她的记忆是否正确更新。</p>
@@ -528,18 +529,22 @@ Charlie: 大家好，我叫Charlie，同样是一名学生。我对音乐特别�
 system: &quot;现在大家互相认识一下，简单自我介绍。&quot;
 Alice: [
     {
-        &quot;id&quot;: &quot;TaLiT5E3CDNm7Fj2NJYqE5&quot;,
+        &quot;type&quot;: &quot;text&quot;,
+        &quot;text&quot;: &quot;大家好，我叫Alice，是一名学生。很高兴认识大家！我喜欢阅读和探索新知识，也热爱户外活动。希望我们能够成为好朋友，并且一起度过愉快的时光。&quot;
+    },
+    {
         &quot;type&quot;: &quot;tool_use&quot;,
+        &quot;id&quot;: &quot;call_f1e83afd951d409aa4a3fc&quot;,
         &quot;name&quot;: &quot;generate_response&quot;,
         &quot;input&quot;: {
-            &quot;response&quot;: &quot;大家好，我叫Alice，是一名学生。我喜欢阅读、学习新知识还有和朋友们一起度过愉快的时光。很高兴认识大家！你们有什么兴趣爱好呢？&quot;
+            &quot;response&quot;: &quot;Hello everyone, my name is Alice and I&#39;m a student. It&#39;s nice to meet you all! I enjoy reading and exploring new knowledge, as well as outdoor activities. I hope we can become good friends and have a great time together.&quot;
         }
     }
 ]
 system: [
     {
         &quot;type&quot;: &quot;tool_result&quot;,
-        &quot;id&quot;: &quot;TaLiT5E3CDNm7Fj2NJYqE5&quot;,
+        &quot;id&quot;: &quot;call_f1e83afd951d409aa4a3fc&quot;,
         &quot;name&quot;: &quot;generate_response&quot;,
         &quot;output&quot;: [
             {
@@ -549,9 +554,9 @@ system: [
         ]
     }
 ]
-Alice: &quot;大家好，我叫Alice，是一名学生。我喜欢阅读、学习新知识还有和朋友们一起度过愉快的时光。很高兴认识大家！你们有什么兴趣爱好呢？&quot;
-Bob: &quot;大家好，我叫Bob，也是一名学生。我对科技和编程很感兴趣，平时喜欢打篮球保持活力。同样也很高兴认识你们！听起来我们都有很多共同点呢。&quot;
-Charlie: &quot;大家好，我叫Charlie，同样是一名学生。我对音乐特别感兴趣，喜欢弹吉他和创作歌曲。我也热衷于探索自然，经常去远足。很高兴遇见你们！看来我们都有各自的兴趣爱好，也都很享受学习的过程。&quot;
+Alice: &quot;Hello everyone, my name is Alice and I&#39;m a student. It&#39;s nice to meet you all! I enjoy reading and exploring new knowledge, as well as outdoor activities. I hope we can become good friends and have a great time together.&quot;
+Bob: &quot;Hello Alice, it&#39;s great to meet you! My name is Bob and I&#39;m also a student. I like to tinker with computers and play video games in my free time. I look forward to getting to know everyone better and having a lot of fun together.&quot;
+Charlie: &quot;Hi Alice and Bob, I&#39;m Charlie, a fellow student. I have a passion for music and play the guitar whenever I get the chance. I also enjoy sports and I&#39;m on the school&#39;s soccer team. It&#39;s great to meet you both and I&#39;m excited to share some good times with you all.&quot;
 </pre></div>
 </div>
 </section>
@@ -562,7 +567,7 @@ Charlie: &quot;大家好，我叫Charlie，同样是一名学生。我对音乐�
 <li><p><a class="reference internal" href="task_prompt.html#prompt"><span class="std std-ref">提示词格式化</span></a></p></li>
 <li><p><a class="reference internal" href="task_pipeline.html#pipeline"><span class="std std-ref">管道 (Pipeline)</span></a></p></li>
 </ul>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 14.187 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 15.784 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorial-workflow-conversation-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/6fc2f5ac2a455c83476d717ce963aa17/workflow_conversation.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">workflow_conversation.ipynb</span></code></a></p>

@@ -272,9 +272,10 @@ User-assistant 对话，也称为聊天机器人（chatbot），是最常见的�
 
  .. code-block:: none
 
-    Alice: 大家好，我叫Alice，是一名学生。我喜欢阅读、学习新知识还有和朋友们一起度过愉快的时光。很高兴认识大家！你们有什么兴趣爱好呢？
-    Bob: 大家好，我叫Bob，也是一名学生。我对科技和编程很感兴趣，平时喜欢打篮球保持活力。同样也很高兴认识你们！听起来我们都有很多共同点呢。
-    Charlie: 大家好，我叫Charlie，同样是一名学生。我对音乐特别感兴趣，喜欢弹吉他和创作歌曲。我也热衷于探索自然，经常去远足。很高兴遇见你们！看来我们都有各自的兴趣爱好，也都很享受学习的过程。
+    Alice: 大家好，我叫Alice，是一名学生。很高兴认识大家！我喜欢阅读和探索新知识，也热爱户外活动。希望我们能够成为好朋友，并且一起度过愉快的时光。
+    Alice: Hello everyone, my name is Alice and I'm a student. It's nice to meet you all! I enjoy reading and exploring new knowledge, as well as outdoor activities. I hope we can become good friends and have a great time together.
+    Bob: Hello Alice, it's great to meet you! My name is Bob and I'm also a student. I like to tinker with computers and play video games in my free time. I look forward to getting to know everyone better and having a lot of fun together.
+    Charlie: Hi Alice and Bob, I'm Charlie, a fellow student. I have a passion for music and play the guitar whenever I get the chance. I also enjoy sports and I'm on the school's soccer team. It's great to meet you both and I'm excited to share some good times with you all.
 
 
 
@@ -313,18 +314,22 @@ User-assistant 对话，也称为聊天机器人（chatbot），是最常见的�
     system: "现在大家互相认识一下，简单自我介绍。"
     Alice: [
         {
-            "id": "TaLiT5E3CDNm7Fj2NJYqE5",
+            "type": "text",
+            "text": "大家好，我叫Alice，是一名学生。很高兴认识大家！我喜欢阅读和探索新知识，也热爱户外活动。希望我们能够成为好朋友，并且一起度过愉快的时光。"
+        },
+        {
             "type": "tool_use",
+            "id": "call_f1e83afd951d409aa4a3fc",
             "name": "generate_response",
             "input": {
-                "response": "大家好，我叫Alice，是一名学生。我喜欢阅读、学习新知识还有和朋友们一起度过愉快的时光。很高兴认识大家！你们有什么兴趣爱好呢？"
+                "response": "Hello everyone, my name is Alice and I'm a student. It's nice to meet you all! I enjoy reading and exploring new knowledge, as well as outdoor activities. I hope we can become good friends and have a great time together."
             }
         }
     ]
     system: [
         {
             "type": "tool_result",
-            "id": "TaLiT5E3CDNm7Fj2NJYqE5",
+            "id": "call_f1e83afd951d409aa4a3fc",
             "name": "generate_response",
             "output": [
                 {
@@ -334,9 +339,9 @@ User-assistant 对话，也称为聊天机器人（chatbot），是最常见的�
             ]
         }
     ]
-    Alice: "大家好，我叫Alice，是一名学生。我喜欢阅读、学习新知识还有和朋友们一起度过愉快的时光。很高兴认识大家！你们有什么兴趣爱好呢？"
-    Bob: "大家好，我叫Bob，也是一名学生。我对科技和编程很感兴趣，平时喜欢打篮球保持活力。同样也很高兴认识你们！听起来我们都有很多共同点呢。"
-    Charlie: "大家好，我叫Charlie，同样是一名学生。我对音乐特别感兴趣，喜欢弹吉他和创作歌曲。我也热衷于探索自然，经常去远足。很高兴遇见你们！看来我们都有各自的兴趣爱好，也都很享受学习的过程。"
+    Alice: "Hello everyone, my name is Alice and I'm a student. It's nice to meet you all! I enjoy reading and exploring new knowledge, as well as outdoor activities. I hope we can become good friends and have a great time together."
+    Bob: "Hello Alice, it's great to meet you! My name is Bob and I'm also a student. I like to tinker with computers and play video games in my free time. I look forward to getting to know everyone better and having a lot of fun together."
+    Charlie: "Hi Alice and Bob, I'm Charlie, a fellow student. I have a passion for music and play the guitar whenever I get the chance. I also enjoy sports and I'm on the school's soccer team. It's great to meet you both and I'm excited to share some good times with you all."
 
 
 
@@ -353,7 +358,7 @@ User-assistant 对话，也称为聊天机器人（chatbot），是最常见的�
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 14.187 seconds)
+   **Total running time of the script:** (0 minutes 15.784 seconds)
 
 
 .. _sphx_glr_download_tutorial_workflow_conversation.py:
