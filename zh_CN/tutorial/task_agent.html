@@ -483,7 +483,7 @@ to download the full example code.</p>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Jarvis: {
     &quot;type&quot;: &quot;tool_use&quot;,
-    &quot;id&quot;: &quot;call_8ddc95c0d5164c9189745a&quot;,
+    &quot;id&quot;: &quot;call_f0cdbc89a6aa4328bdbfbb&quot;,
     &quot;name&quot;: &quot;example_tool_function&quot;,
     &quot;input&quot;: {
         &quot;tag&quot;: &quot;tag1&quot;
@@ -491,18 +491,18 @@ to download the full example code.</p>
 }
 system: {
     &quot;type&quot;: &quot;tool_result&quot;,
-    &quot;id&quot;: &quot;call_8ddc95c0d5164c9189745a&quot;,
+    &quot;id&quot;: &quot;call_f0cdbc89a6aa4328bdbfbb&quot;,
     &quot;name&quot;: &quot;example_tool_function&quot;,
     &quot;output&quot;: [
         {
             &quot;type&quot;: &quot;text&quot;,
-            &quot;text&quot;: &quot;标签 tag1 开始于 10:06:52.218499，结束于 10:06:55.221576。&quot;
+            &quot;text&quot;: &quot;标签 tag1 开始于 03:40:43.794873，结束于 03:40:46.797951。&quot;
         }
     ]
 }
 Jarvis: {
     &quot;type&quot;: &quot;tool_use&quot;,
-    &quot;id&quot;: &quot;call_267e04c569a946ccb49694&quot;,
+    &quot;id&quot;: &quot;call_8b5773f7f7fc43b7975b1a&quot;,
     &quot;name&quot;: &quot;example_tool_function&quot;,
     &quot;input&quot;: {
         &quot;tag&quot;: &quot;tag2&quot;
@@ -510,16 +510,21 @@ Jarvis: {
 }
 system: {
     &quot;type&quot;: &quot;tool_result&quot;,
-    &quot;id&quot;: &quot;call_267e04c569a946ccb49694&quot;,
+    &quot;id&quot;: &quot;call_8b5773f7f7fc43b7975b1a&quot;,
     &quot;name&quot;: &quot;example_tool_function&quot;,
     &quot;output&quot;: [
         {
             &quot;type&quot;: &quot;text&quot;,
-            &quot;text&quot;: &quot;标签 tag2 开始于 10:06:57.026347，结束于 10:07:00.029405。&quot;
+            &quot;text&quot;: &quot;标签 tag2 开始于 03:40:48.461289，结束于 03:40:51.464364。&quot;
         }
     ]
 }
-Jarvis: 两个函数调用已经并行执行完成。第一个使用标签 &#39;tag1&#39; 的 `example_tool_function` 函数从 10:06:52.218499 开始，在 10:06:55.221576 结束。第二个使用标签 &#39;tag2&#39; 的 `example_tool_function` 函数则从 10:06:57.026347 开始，并在 10:07:00.029405 完成。由于它们是并行运行的，所以你可以看到它们的执行时间是重叠的。
+Jarvis: 两个函数调用已经并行执行完毕。下面是它们各自的运行时间：
+
+- 第一个带有标签 `tag1` 的 &#39;example_tool_function&#39; 开始于 03:40:43.794873，结束于 03:40:46.797951。
+- 第二个带有标签 `tag2` 的 &#39;example_tool_function&#39; 开始于 03:40:48.461289，结束于 03:40:51.464364。
+
+这两个函数是独立调用的，所以在实际环境中，如果系统支持真正的并行处理，它们将能够同时运行。在当前情况下，由于我们的环境限制，并行性通过连续调用来模拟。
 </pre></div>
 </div>
 </section>
@@ -566,17 +571,17 @@ Jarvis: 两个函数调用已经并行执行完成。第一个使用标签 &#39;
 <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">example_structured_output</span><span class="p">())</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Jarvis: 阿尔伯特·爱因斯坦（Albert Einstein, 1879-1955）是一位理论物理学家，他最著名的是提出了相对论，并因此对整个现代物理学产生了深远的影响。他的工作也包括了光电效应的研究，为此他在1921年被授予诺贝尔物理学奖。爱因斯坦不仅是一个杰出的科学家，也是一个和平主义者和社会活动家。
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Jarvis: 阿尔伯特·爱因斯坦（Albert Einstein，1879-1955）是一位理论物理学家，他最著名的贡献是相对论。爱因斯坦以其对光电效应的理论解释获得了1921年的诺贝尔物理学奖。他的质能方程E=mc²是世界上最著名的公式之一。爱因斯坦的工作不仅改变了我们对于时间、空间和重力的理解，而且奠定了现代物理学的基础。
 
 结构化输出：
 {
     &quot;name&quot;: &quot;Albert Einstein&quot;,
-    &quot;description&quot;: &quot;一位理论物理学家，相对论的创立者&quot;,
+    &quot;description&quot;: &quot;一位理论物理学家，以相对论闻名于世。&quot;,
     &quot;age&quot;: 76,
     &quot;honor&quot;: [
         &quot;1921年诺贝尔物理学奖&quot;,
-        &quot;科普利奖章 (1925)&quot;,
-        &quot;马克斯·普朗克奖章 (1929)&quot;
+        &quot;普朗克奖章&quot;,
+        &quot;科普利奖章&quot;
     ]
 }
 </pre></div>
@@ -663,7 +668,7 @@ Jarvis: 两个函数调用已经并行执行完成。第一个使用标签 &#39;
 <li><p><a class="reference internal" href="task_tool.html#tool"><span class="std std-ref">工具</span></a></p></li>
 <li><p><a class="reference internal" href="task_hook.html#hook"><span class="std std-ref">智能体钩子函数</span></a></p></li>
 </ul>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 28.887 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 26.164 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorial-task-agent-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/7dec07e2c813e72e1dad091b3ac4913a/task_agent.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">task_agent.ipynb</span></code></a></p>
