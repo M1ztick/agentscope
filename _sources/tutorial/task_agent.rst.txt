@@ -218,7 +218,7 @@ they will be executed in parallel by the ``asyncio.gather`` function.
 
     Jarvis: {
         "type": "tool_use",
-        "id": "call_b6e8ffe8b4314a83bc4bea",
+        "id": "call_bf1909bad79a4b77999800",
         "name": "example_tool_function",
         "input": {
             "tag": "tag1"
@@ -226,18 +226,18 @@ they will be executed in parallel by the ``asyncio.gather`` function.
     }
     system: {
         "type": "tool_result",
-        "id": "call_b6e8ffe8b4314a83bc4bea",
+        "id": "call_bf1909bad79a4b77999800",
         "name": "example_tool_function",
         "output": [
             {
                 "type": "text",
-                "text": "Tag tag1 started at 10:01:57.297510 and ended at 10:02:00.300606. "
+                "text": "Tag tag1 started at 03:36:03.013963 and ended at 03:36:06.017034. "
             }
         ]
     }
     Jarvis: {
         "type": "tool_use",
-        "id": "call_190cdf2b2b4b4a45ae5f14",
+        "id": "call_b78b81536e4c4a52a853bd",
         "name": "example_tool_function",
         "input": {
             "tag": "tag2"
@@ -245,19 +245,21 @@ they will be executed in parallel by the ``asyncio.gather`` function.
     }
     system: {
         "type": "tool_result",
-        "id": "call_190cdf2b2b4b4a45ae5f14",
+        "id": "call_b78b81536e4c4a52a853bd",
         "name": "example_tool_function",
         "output": [
             {
                 "type": "text",
-                "text": "Tag tag2 started at 10:02:04.331835 and ended at 10:02:07.334944. "
+                "text": "Tag tag2 started at 03:36:09.556819 and ended at 03:36:12.559929. "
             }
         ]
     }
-    Jarvis: The two function calls with 'example_tool_function' have been executed in parallel. 
+    Jarvis: The two function calls for 'example_tool_function' were executed with tags 'tag1' and 'tag2'. 
 
-    - The process for the tag 'tag1' started at 10:01:57.297510 and ended at 10:02:00.300606.
-    - The process for the tag 'tag2' started at 10:02:04.331835 and ended at 10:02:07.334944.
+    - For the tag 'tag1', it started at 03:36:03.013963 and ended at 03:36:06.017034.
+    - For the tag 'tag2', it started at 03:36:09.556819 and ended at 03:36:12.559929.
+
+    Both functions have completed their execution in parallel as requested.
 
 
 
@@ -332,17 +334,17 @@ Taking introducing Einstein as an example:
 
  .. code-block:: none
 
-    Jarvis: Albert Einstein was a theoretical physicist who developed the theory of relativity, one of the two pillars of modern physics. He is best known for his mass–energy equivalence formula E = mc².
+    Jarvis: Albert Einstein was a renowned physicist who developed the theory of relativity, one of the two pillars of modern physics. He was born in 1879 and passed away in 1955 at the age of 76. His work has greatly influenced the philosophy of science. Some of his honors include the Nobel Prize in Physics in 1921, the Copley Medal in 1925, and the Time Person of the Century in 1999.
 
     The structured output:
     {
         "name": "Albert Einstein",
-        "description": "Theoretical physicist who developed the theory of relativity",
+        "description": "A theoretical physicist who is best known for developing the theory of relativity.",
         "age": 76,
         "honor": [
             "Nobel Prize in Physics (1921)",
             "Copley Medal (1925)",
-            "Max Planck Medal (1929)"
+            "Time Person of the Century (1999)"
         ]
     }
 
@@ -414,7 +416,7 @@ Further Reading
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 25.046 seconds)
+   **Total running time of the script:** (0 minutes 27.413 seconds)
 
 
 .. _sphx_glr_download_tutorial_task_agent.py:

@@ -337,22 +337,21 @@ First, we create a function to allow the orchestrator to create workers dynamica
     &quot;type&quot;: &quot;tool_use&quot;,
     &quot;name&quot;: &quot;create_worker&quot;,
     &quot;input&quot;: {
-        &quot;task_description&quot;: &quot;Print &#39;Hello, world!&#39; using Python&quot;
+        &quot;task_description&quot;: &quot;Print &#39;Hello, world!&#39; using Python.&quot;
     },
-    &quot;id&quot;: &quot;call_f1d9f2b022d54a6c961ce2&quot;
+    &quot;id&quot;: &quot;call_dd37058c1f174c1a9dbacf&quot;
 }
 Worker: {
     &quot;type&quot;: &quot;tool_use&quot;,
     &quot;name&quot;: &quot;execute_python_code&quot;,
     &quot;input&quot;: {
-        &quot;code&quot;: &quot;print(&#39;Hello, world!&#39;)&quot;,
-        &quot;timeout&quot;: 5
+        &quot;code&quot;: &quot;print(&#39;Hello, world!&#39;)&quot;
     },
-    &quot;id&quot;: &quot;call_70640c0a05c348c88b2650&quot;
+    &quot;id&quot;: &quot;call_9f3aed9bda034ef8a07db3&quot;
 }
 system: {
     &quot;type&quot;: &quot;tool_result&quot;,
-    &quot;id&quot;: &quot;call_70640c0a05c348c88b2650&quot;,
+    &quot;id&quot;: &quot;call_9f3aed9bda034ef8a07db3&quot;,
     &quot;name&quot;: &quot;execute_python_code&quot;,
     &quot;output&quot;: [
         {
@@ -361,27 +360,19 @@ system: {
         }
     ]
 }
-Worker: The Python code has been executed and it printed:
-
-```
-Hello, world!
-```
+Worker: The Python code has been executed successfully and printed &#39;Hello, world!&#39; as you requested.
 system: {
     &quot;type&quot;: &quot;tool_result&quot;,
-    &quot;id&quot;: &quot;call_f1d9f2b022d54a6c961ce2&quot;,
+    &quot;id&quot;: &quot;call_dd37058c1f174c1a9dbacf&quot;,
     &quot;name&quot;: &quot;create_worker&quot;,
     &quot;output&quot;: [
         {
             &quot;type&quot;: &quot;text&quot;,
-            &quot;text&quot;: &quot;The Python code has been executed and it printed:\n\n```\nHello, world!\n```&quot;
+            &quot;text&quot;: &quot;The Python code has been executed successfully and printed &#39;Hello, world!&#39; as you requested.&quot;
         }
     ]
 }
-Orchestrator: The Python code has been successfully executed and it printed:
-
-```
-Hello, world!
-```
+Orchestrator: The Python code has been executed successfully and printed &#39;Hello, world!&#39; as you requested.
 </pre></div>
 </div>
 <div class="line-block">
@@ -464,7 +455,7 @@ Hello, world!
 <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">run_handoffs</span><span class="p">())</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 12.104 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 10.586 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorial-workflow-handoffs-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/91c90a0c5fa0aaee5502046f62e97d67/workflow_handoffs.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">workflow_handoffs.ipynb</span></code></a></p>

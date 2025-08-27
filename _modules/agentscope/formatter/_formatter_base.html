@@ -358,13 +358,13 @@
 <a class="viewcode-back" href="../../../api/agentscope.formatter.html#agentscope.formatter.FormatterBase.convert_tool_result_to_string">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">convert_tool_result_to_string</span><span class="p">(</span>
-        <span class="n">output</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TextBlock</span> <span class="o">|</span> <span class="n">ImageBlock</span> <span class="o">|</span> <span class="n">AudioBlock</span><span class="p">],</span>
+        <span class="n">output</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">List</span><span class="p">[</span><span class="n">TextBlock</span> <span class="o">|</span> <span class="n">ImageBlock</span> <span class="o">|</span> <span class="n">AudioBlock</span><span class="p">],</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Turn the tool result list into a textual output to be compatible</span>
 <span class="sd">        with the LLM API that doesn&#39;t support multimodal data.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            output (`List[TextBlock | ImageBlock | AudioBlock]`):</span>
+<span class="sd">            output (`str | List[TextBlock | ImageBlock | AudioBlock]`):</span>
 <span class="sd">                The output of the tool response, including text and multimodal</span>
 <span class="sd">                data like images and audio.</span>
 
@@ -374,6 +374,9 @@
 <span class="sd">                concatenated and multimodal data represented by file paths</span>
 <span class="sd">                or URLs.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">output</span>
 
         <span class="n">textual_output</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
