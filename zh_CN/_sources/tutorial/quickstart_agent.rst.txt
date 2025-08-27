@@ -167,16 +167,16 @@ AgentScope 在 ``agentscope.agent`` 模块下提供了开箱即用的 ReAct 智�
 
     Jarvis: {
         "type": "tool_use",
-        "id": "call_10c45a38acf446e1b9d901",
+        "id": "call_c646cbc2cb2b41429d7f20",
         "name": "execute_python_code",
         "input": {
             "code": "print('Hello World')",
-            "timeout": 5
+            "timeout": 300
         }
     }
     system: {
         "type": "tool_result",
-        "id": "call_10c45a38acf446e1b9d901",
+        "id": "call_c646cbc2cb2b41429d7f20",
         "name": "execute_python_code",
         "output": [
             {
@@ -185,7 +185,7 @@ AgentScope 在 ``agentscope.agent`` 模块下提供了开箱即用的 ReAct 智�
             }
         ]
     }
-    Jarvis: 您的 Python 代码已成功运行，输出为：
+    Jarvis: 您的 Python 代码已成功执行，输出为：
 
     ```
     Hello World
@@ -311,7 +311,7 @@ AgentScope 在 ``agentscope.agent`` 模块下提供了开箱即用的 ReAct 智�
 
  .. code-block:: none
 
-    Friday: 我是Friday，一个虚拟助手，旨在帮助回答问题、提供信息和完成各种任务。有什么我可以帮你的吗？
+    Friday: 我是Friday，一个虚拟助手，设计用来帮助回答问题、提供信息和完成各种任务。有什么我可以帮您的？
 
 
 
@@ -329,7 +329,7 @@ AgentScope 在 ``agentscope.agent`` 模块下提供了开箱即用的 ReAct 智�
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 6.552 seconds)
+   **Total running time of the script:** (0 minutes 8.321 seconds)
 
 
 .. _sphx_glr_download_tutorial_quickstart_agent.py:

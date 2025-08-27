@@ -506,10 +506,9 @@ Charlie: 我也是！顺便说一下，我是 Charlie。
 <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">example_msghub</span><span class="p">())</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Alice: 大家好，我叫Alice，是一名学生。很高兴认识大家！我对学习新知识充满热情，平时喜欢阅读和探索不同的文化。希望我们能友好相处，并且可以一起分享有趣的事情。你们呢？可以谈谈自己吗？
-Bob: 大家好，我叫Bob，也是一名学生。我对科学和技术特别感兴趣，平时喜欢捣鼓一些小发明和编程项目。我也热爱音乐，在闲暇时会弹吉他放松自己。很高兴遇到同样热爱学习的你们！期待与各位交流心得，共同进步。
-Charlie: 大家好，我叫Charlie，同样也是一名学生。我对艺术和设计很感兴趣，平时喜欢画画和摄影。我也热衷于参与社区服务，相信通过贡献自己的力量可以让世界变得更美好一点。很高兴能够遇见你们，Alice对不同文化的热情还有Bob的科学精神都让我感到十分钦佩。希望我们可以互相学习，一起享受这段交流时光。
-Charlie: 大家好，我叫Charlie，同样也是一名学生。我对艺术和设计很感兴趣，平时喜欢画画和摄影。我也热衷于参与社区服务，相信通过贡献自己的力量可以让世界变得更美好一点。很高兴能够遇见你们，Alice对不同文化的热情还有Bob的科学精神都让我感到十分钦佩。希望我们可以互相学习，一起享受这段交流时光。
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Alice: 大家好，我叫Alice，是一名学生。很高兴认识大家！我喜欢阅读和探索新知识，也热衷于参加各种户外活动。希望我们能成为好朋友，一起分享学习和生活中的点滴。你们都有什么兴趣爱好呢？
+Bob: 大家好，我叫Bob，也是学生。我对科学和技术特别感兴趣，平时喜欢捣鼓一些电子设备，也爱玩视频游戏。我也很期待和大家成为朋友，一起学习进步。很高兴遇到有共同话题的朋友！Alice，你最喜欢哪类书籍？
+Charlie: 大家好，我叫Charlie，和你们一样也是学生。我对音乐特别有热情，平时喜欢弹吉他和写歌。我也热爱体育，特别是篮球。在学习上，我对数学和物理很感兴趣。Alice，你最喜欢哪种类型的户外活动？Bob，你最近在玩什么视频游戏？希望我们能一起分享我们的兴趣！
 </pre></div>
 </div>
 <p>现在我们打印 Alice 的记忆，检查她的记忆是否正确更新。</p>
@@ -529,18 +528,18 @@ Charlie: 大家好，我叫Charlie，同样也是一名学生。我对艺术和�
 system: &quot;现在大家互相认识一下，简单自我介绍。&quot;
 Alice: [
     {
-        &quot;id&quot;: &quot;Go5YhGQMvecfnNpFsa7cY8&quot;,
+        &quot;id&quot;: &quot;WRC9oxPwwWJvsQK5aeJ9YW&quot;,
         &quot;type&quot;: &quot;tool_use&quot;,
         &quot;name&quot;: &quot;generate_response&quot;,
         &quot;input&quot;: {
-            &quot;response&quot;: &quot;大家好，我叫Alice，是一名学生。很高兴认识大家！我对学习新知识充满热情，平时喜欢阅读和探索不同的文化。希望我们能友好相处，并且可以一起分享有趣的事情。你们呢？可以谈谈自己吗？&quot;
+            &quot;response&quot;: &quot;大家好，我叫Alice，是一名学生。很高兴认识大家！我喜欢阅读和探索新知识，也热衷于参加各种户外活动。希望我们能成为好朋友，一起分享学习和生活中的点滴。你们都有什么兴趣爱好呢？&quot;
         }
     }
 ]
 system: [
     {
         &quot;type&quot;: &quot;tool_result&quot;,
-        &quot;id&quot;: &quot;Go5YhGQMvecfnNpFsa7cY8&quot;,
+        &quot;id&quot;: &quot;WRC9oxPwwWJvsQK5aeJ9YW&quot;,
         &quot;name&quot;: &quot;generate_response&quot;,
         &quot;output&quot;: [
             {
@@ -550,9 +549,9 @@ system: [
         ]
     }
 ]
-Alice: &quot;大家好，我叫Alice，是一名学生。很高兴认识大家！我对学习新知识充满热情，平时喜欢阅读和探索不同的文化。希望我们能友好相处，并且可以一起分享有趣的事情。你们呢？可以谈谈自己吗？&quot;
-Bob: &quot;大家好，我叫Bob，也是一名学生。我对科学和技术特别感兴趣，平时喜欢捣鼓一些小发明和编程项目。我也热爱音乐，在闲暇时会弹吉他放松自己。很高兴遇到同样热爱学习的你们！期待与各位交流心得，共同进步。&quot;
-Charlie: &quot;大家好，我叫Charlie，同样也是一名学生。我对艺术和设计很感兴趣，平时喜欢画画和摄影。我也热衷于参与社区服务，相信通过贡献自己的力量可以让世界变得更美好一点。很高兴能够遇见你们，Alice对不同文化的热情还有Bob的科学精神都让我感到十分钦佩。希望我们可以互相学习，一起享受这段交流时光。&quot;
+Alice: &quot;大家好，我叫Alice，是一名学生。很高兴认识大家！我喜欢阅读和探索新知识，也热衷于参加各种户外活动。希望我们能成为好朋友，一起分享学习和生活中的点滴。你们都有什么兴趣爱好呢？&quot;
+Bob: &quot;大家好，我叫Bob，也是学生。我对科学和技术特别感兴趣，平时喜欢捣鼓一些电子设备，也爱玩视频游戏。我也很期待和大家成为朋友，一起学习进步。很高兴遇到有共同话题的朋友！Alice，你最喜欢哪类书籍？&quot;
+Charlie: &quot;大家好，我叫Charlie，和你们一样也是学生。我对音乐特别有热情，平时喜欢弹吉他和写歌。我也热爱体育，特别是篮球。在学习上，我对数学和物理很感兴趣。Alice，你最喜欢哪种类型的户外活动？Bob，你最近在玩什么视频游戏？希望我们能一起分享我们的兴趣！&quot;
 </pre></div>
 </div>
 </section>
@@ -563,7 +562,7 @@ Charlie: &quot;大家好，我叫Charlie，同样也是一名学生。我对艺�
 <li><p><a class="reference internal" href="task_prompt.html#prompt"><span class="std std-ref">提示词格式化</span></a></p></li>
 <li><p><a class="reference internal" href="task_pipeline.html#pipeline"><span class="std std-ref">管道 (Pipeline)</span></a></p></li>
 </ul>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 20.476 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 16.068 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorial-workflow-conversation-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/6fc2f5ac2a455c83476d717ce963aa17/workflow_conversation.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">workflow_conversation.ipynb</span></code></a></p>

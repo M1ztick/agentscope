@@ -208,7 +208,7 @@ ReAct 智能体
 
     Jarvis: {
         "type": "tool_use",
-        "id": "call_f0cdbc89a6aa4328bdbfbb",
+        "id": "call_c45604eaec5a4bf1acee4e",
         "name": "example_tool_function",
         "input": {
             "tag": "tag1"
@@ -216,18 +216,18 @@ ReAct 智能体
     }
     system: {
         "type": "tool_result",
-        "id": "call_f0cdbc89a6aa4328bdbfbb",
+        "id": "call_c45604eaec5a4bf1acee4e",
         "name": "example_tool_function",
         "output": [
             {
                 "type": "text",
-                "text": "标签 tag1 开始于 03:40:43.794873，结束于 03:40:46.797951。"
+                "text": "标签 tag1 开始于 03:47:14.097036，结束于 03:47:17.100112。"
             }
         ]
     }
     Jarvis: {
         "type": "tool_use",
-        "id": "call_8b5773f7f7fc43b7975b1a",
+        "id": "call_2dbea22e7dff4a989c4ac4",
         "name": "example_tool_function",
         "input": {
             "tag": "tag2"
@@ -235,21 +235,21 @@ ReAct 智能体
     }
     system: {
         "type": "tool_result",
-        "id": "call_8b5773f7f7fc43b7975b1a",
+        "id": "call_2dbea22e7dff4a989c4ac4",
         "name": "example_tool_function",
         "output": [
             {
                 "type": "text",
-                "text": "标签 tag2 开始于 03:40:48.461289，结束于 03:40:51.464364。"
+                "text": "标签 tag2 开始于 03:47:19.559931，结束于 03:47:22.562974。"
             }
         ]
     }
-    Jarvis: 两个函数调用已经并行执行完毕。下面是它们各自的运行时间：
+    Jarvis: 两个函数调用已经并行执行完成。下面是它们各自的运行时间：
 
-    - 第一个带有标签 `tag1` 的 'example_tool_function' 开始于 03:40:43.794873，结束于 03:40:46.797951。
-    - 第二个带有标签 `tag2` 的 'example_tool_function' 开始于 03:40:48.461289，结束于 03:40:51.464364。
+    - 标签为 'tag1' 的 `example_tool_function` 开始于 03:47:14.097036，结束于 03:47:17.100112。
+    - 标签为 'tag2' 的 `example_tool_function` 开始于 03:47:19.559931，结束于 03:47:22.562974。
 
-    这两个函数是独立调用的，所以在实际环境中，如果系统支持真正的并行处理，它们将能够同时运行。在当前情况下，由于我们的环境限制，并行性通过连续调用来模拟。
+    由于这两个函数是并行调用的，您可以看到它们的开始和结束时间是交错的，这表明它们几乎同时被执行。请注意，实际的并发性取决于运行环境的支持。在某些情况下，比如这里，函数可能是顺序执行的，即使请求是并行发出的。如果需要真正的并行处理，可能需要使用多线程或多进程技术。
 
 
 
@@ -314,17 +314,17 @@ AgentScope 中的结构化输出是与工具调用紧密结合的。具体来说
 
  .. code-block:: none
 
-    Jarvis: 阿尔伯特·爱因斯坦（Albert Einstein，1879-1955）是一位理论物理学家，他最著名的贡献是相对论。爱因斯坦以其对光电效应的理论解释获得了1921年的诺贝尔物理学奖。他的质能方程E=mc²是世界上最著名的公式之一。爱因斯坦的工作不仅改变了我们对于时间、空间和重力的理解，而且奠定了现代物理学的基础。
+    Jarvis: 阿尔伯特·爱因斯坦（Albert Einstein, 1879-1955）是一位理论物理学家，他最著名的贡献是相对论。他出生于德国乌尔姆的一个犹太家庭，后来移居瑞士并在那里工作和生活。爱因斯坦在1921年获得了诺贝尔物理学奖，以表彰他对理论物理学的贡献，特别是光电效应定律的发现。他的质能方程E=mc²是现代物理学的基石之一，并且对原子能的发展产生了深远的影响。
 
     结构化输出：
     {
         "name": "Albert Einstein",
-        "description": "一位理论物理学家，以相对论闻名于世。",
+        "description": "一位开创了现代物理学新纪元的理论物理学家",
         "age": 76,
         "honor": [
-            "1921年诺贝尔物理学奖",
-            "普朗克奖章",
-            "科普利奖章"
+            "诺贝尔物理学奖",
+            "科普利奖章",
+            "马克斯·普朗克奖章"
         ]
     }
 
@@ -394,7 +394,7 @@ AgentScope 提供了两个基类：``AgentBase`` 和 ``ReActAgentBase``，它们
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 26.164 seconds)
+   **Total running time of the script:** (0 minutes 30.830 seconds)
 
 
 .. _sphx_glr_download_tutorial_task_agent.py:

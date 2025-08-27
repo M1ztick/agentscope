@@ -46,9 +46,9 @@ Handoffs 是由 OpenAI 提出的工作流模式，通过调用子智能体的方
         "type": "tool_use",
         "name": "create_worker",
         "input": {
-            "task_description": "在 Python 中打印 'Hello, World!' 并返回执行结果。"
+            "task_description": "在 Python 中编写并执行一个简单的 'Hello, World!' 程序。"
         },
-        "id": "call_97427d18cabe47cdb2c6e4"
+        "id": "call_096fe6c88b904f6f9ec132"
     }
     Worker: {
         "type": "tool_use",
@@ -57,11 +57,11 @@ Handoffs 是由 OpenAI 提出的工作流模式，通过调用子智能体的方
             "code": "print('Hello, World!')",
             "timeout": 5
         },
-        "id": "call_32945a450da54ca7ae120b"
+        "id": "call_c8ebe266e0a0440598728f"
     }
     system: {
         "type": "tool_result",
-        "id": "call_32945a450da54ca7ae120b",
+        "id": "call_c8ebe266e0a0440598728f",
         "name": "execute_python_code",
         "output": [
             {
@@ -70,23 +70,23 @@ Handoffs 是由 OpenAI 提出的工作流模式，通过调用子智能体的方
             }
         ]
     }
-    Worker: Python 代码已成功执行，并打印出了 'Hello, World!'。以下是执行结果：
+    Worker: 这里是您请求的“Hello, World!” Python程序的执行输出：
 
     ```
     Hello, World!
     ```
     system: {
         "type": "tool_result",
-        "id": "call_97427d18cabe47cdb2c6e4",
+        "id": "call_096fe6c88b904f6f9ec132",
         "name": "create_worker",
         "output": [
             {
                 "type": "text",
-                "text": "Python 代码已成功执行，并打印出了 'Hello, World!'。以下是执行结果：\n\n```\nHello, World!\n```"
+                "text": "这里是您请求的“Hello, World!” Python程序的执行输出：\n\n```\nHello, World!\n```"
             }
         ]
     }
-    Orchestrator: 子智能体已成功在 Python 中执行了 "Hello, World!" 的打印任务。以下是执行结果：
+    Orchestrator: 子智能体已经成功地在 Python 中执行了 "Hello, World!" 程序。输出如下：
 
     ```
     Hello, World!
@@ -181,7 +181,7 @@ Handoffs 是由 OpenAI 提出的工作流模式，通过调用子智能体的方
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 14.266 seconds)
+   **Total running time of the script:** (0 minutes 12.880 seconds)
 
 
 .. _sphx_glr_download_tutorial_workflow_handoffs.py:

@@ -401,11 +401,11 @@ to download the full example code.</p>
 <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">example_router_explicit</span><span class="p">())</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Router: 好的，我将为您创作一首诗。
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Router: 好的，我来为你创作一首诗。
 结构化输出：
 {
     &quot;your_choice&quot;: &quot;Content Generation&quot;,
-    &quot;task_description&quot;: null
+    &quot;task_description&quot;: &quot;为用户创作一首中文诗歌&quot;
 }
 </pre></div>
 </div>
@@ -504,64 +504,66 @@ to download the full example code.</p>
     &quot;input&quot;: {
         &quot;demand&quot;: &quot;生成一个快速排序函数&quot;
     },
-    &quot;id&quot;: &quot;call_8b7a96c85da346fea61dac&quot;
+    &quot;id&quot;: &quot;call_f1716fae9ccc4383b927ca&quot;
 }
-PythonAgent: 以下是一个使用 Python 编写的快速排序函数。这个实现采用 Lomuto 的分区方案，它选择一个枢轴（pivot），然后将数组分为两部分：一部分包含所有小于等于枢轴的元素，另一部分包含所有大于枢轴的元素。接着递归地对这两部分进行排序。
+PythonAgent: 这是一个使用 Python 编写的快速排序函数。快速排序是一种非常高效的排序算法，它采用分而治之的策略来把一个序列分为较小和较大的两个子序列，然后递归地排序两个子序列。
+
 ```python
 def quicksort(arr):
     if len(arr) &lt;= 1:
         return arr
-    else:
-        pivot = arr[len(arr) // 2]
-        left = [x for x in arr if x &lt; pivot]
-        middle = [x for x in arr if x == pivot]
-        right = [x for x in arr if x &gt; pivot]
-        return quicksort(left) + middle + quicksort(right)
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x &lt; pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x &gt; pivot]
+    return quicksort(left) + middle + quicksort(right)
 ```
-您可以使用这个函数来对一个整数列表进行排序。例如：
+
+你可以通过调用 `quicksort` 函数并传入一个列表作为参数来对这个列表进行排序。例如：
+
 ```python
-numbers = [3, 6, 8, 10, 1, 2, 1]
-sorted_numbers = quicksort(numbers)
-print(sorted_numbers)  # 输出将会是 [1, 1, 2, 3, 6, 8, 10]
+unsorted_list = [3, 6, 8, 10, 1, 2, 1]
+sorted_list = quicksort(unsorted_list)
+print(sorted_list)  # 输出将会是 [1, 1, 2, 3, 6, 8, 10]
 ```
-如果您想要一个原地排序的版本，可以告诉我，我将提供一个不同的实现。
+
+这段代码定义了一个简单的快速排序实现，并且能够处理包含重复元素的列表。
 system: {
     &quot;type&quot;: &quot;tool_result&quot;,
-    &quot;id&quot;: &quot;call_8b7a96c85da346fea61dac&quot;,
+    &quot;id&quot;: &quot;call_f1716fae9ccc4383b927ca&quot;,
     &quot;name&quot;: &quot;generate_python&quot;,
     &quot;output&quot;: [
         {
             &quot;type&quot;: &quot;text&quot;,
-            &quot;text&quot;: &quot;以下是一个使用 Python 编写的快速排序函数。这个实现采用 Lomuto 的分区方案，它选择一个枢轴（pivot），然后将数组分为两部分：一部分包含所有小于等于枢轴的元素，另一部分包含所有大于枢轴的元素。接着递归地对这两部分进行排序。\n```python\ndef quicksort(arr):\n    if len(arr) &lt;= 1:\n        return arr\n    else:\n        pivot = arr[len(arr) // 2]\n        left = [x for x in arr if x &lt; pivot]\n        middle = [x for x in arr if x == pivot]\n        right = [x for x in arr if x &gt; pivot]\n        return quicksort(left) + middle + quicksort(right)\n```\n您可以使用这个函数来对一个整数列表进行排序。例如：\n```python\nnumbers = [3, 6, 8, 10, 1, 2, 1]\nsorted_numbers = quicksort(numbers)\nprint(sorted_numbers)  # 输出将会是 [1, 1, 2, 3, 6, 8, 10]\n```\n如果您想要一个原地排序的版本，可以告诉我，我将提供一个不同的实现。&quot;
+            &quot;text&quot;: &quot;这是一个使用 Python 编写的快速排序函数。快速排序是一种非常高效的排序算法，它采用分而治之的策略来把一个序列分为较小和较大的两个子序列，然后递归地排序两个子序列。\n\n```python\ndef quicksort(arr):\n    if len(arr) &lt;= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x &lt; pivot]\n    middle = [x for x in arr if x == pivot]\n    right = [x for x in arr if x &gt; pivot]\n    return quicksort(left) + middle + quicksort(right)\n```\n\n你可以通过调用 `quicksort` 函数并传入一个列表作为参数来对这个列表进行排序。例如：\n\n```python\nunsorted_list = [3, 6, 8, 10, 1, 2, 1]\nsorted_list = quicksort(unsorted_list)\nprint(sorted_list)  # 输出将会是 [1, 1, 2, 3, 6, 8, 10]\n```\n\n这段代码定义了一个简单的快速排序实现，并且能够处理包含重复元素的列表。&quot;
         }
     ]
 }
-Router: 以下是一个使用 Python 编写的快速排序函数。这个实现采用 Lomuto 的分区方案，它选择一个枢轴（pivot），然后将数组分为两部分：一部分包含所有小于等于枢轴的元素，另一部分包含所有大于枢轴的元素。接着递归地对这两部分进行排序。
+Router: 这是一个使用 Python 编写的快速排序函数。快速排序是一种非常高效的排序算法，它采用分而治之的策略来把一个序列分为较小和较大的两个子序列，然后递归地排序两个子序列。
 
 ```python
 def quicksort(arr):
     if len(arr) &lt;= 1:
         return arr
-    else:
-        pivot = arr[len(arr) // 2]
-        left = [x for x in arr if x &lt; pivot]
-        middle = [x for x in arr if x == pivot]
-        right = [x for x in arr if x &gt; pivot]
-        return quicksort(left) + middle + quicksort(right)
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x &lt; pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x &gt; pivot]
+    return quicksort(left) + middle + quicksort(right)
 ```
 
-您可以使用这个函数来对一个整数列表进行排序。例如：
+你可以通过调用 `quicksort` 函数并传入一个列表作为参数来对这个列表进行排序。例如：
 
 ```python
-numbers = [3, 6, 8, 10, 1, 2, 1]
-sorted_numbers = quicksort(numbers)
-print(sorted_numbers)  # 输出将会是 [1, 1, 2, 3, 6, 8, 10]
+unsorted_list = [3, 6, 8, 10, 1, 2, 1]
+sorted_list = quicksort(unsorted_list)
+print(sorted_list)  # 输出将会是 [1, 1, 2, 3, 6, 8, 10]
 ```
 
-如果您想要一个原地排序的版本，请告诉我，我将提供一个不同的实现。
+这段代码定义了一个简单的快速排序实现，并且能够处理包含重复元素的列表。你可以直接使用这个函数来进行排序。
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 35.180 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 35.793 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorial-workflow-routing-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/3266c75280f96697c4cc46d7d55a3ac8/workflow_routing.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">workflow_routing.ipynb</span></code></a></p>
