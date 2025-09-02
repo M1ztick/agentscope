@@ -11,18 +11,18 @@
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="在 AgentScope 中，记忆（memory）用于存储智能体的上下文，并在需要时检索它。 具体而言，AgentScope 在 agentscope.memory 模块下提供了记忆基类 MemoryBase 和一个可直接使用的基于内存实现 InMemoryMemory。">
+    <div class="sphx-glr-thumbcontainer" tooltip="AgentScope Studio 是一个本地部署的 Web 应用程序，它">
 
 .. only:: html
 
-  .. image:: /tutorial/images/thumb/sphx_glr_task_memory_thumb.png
+  .. image:: /tutorial/images/thumb/sphx_glr_task_studio_thumb.png
     :alt:
 
-  :ref:`sphx_glr_tutorial_task_memory.py`
+  :ref:`sphx_glr_tutorial_task_studio.py`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">记忆</div>
+      <div class="sphx-glr-thumbnail-title">AgentScope Studio</div>
     </div>
 
 
@@ -45,23 +45,6 @@
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="关于 AgentScope ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 什么是AgentScope？     AgentScope 是一个多智能体框架，旨在提供一种简单高效的方式来构建基于大语言模型的智能体应用程序。">
-
-.. only:: html
-
-  .. image:: /tutorial/images/thumb/sphx_glr_faq_thumb.png
-    :alt:
-
-  :ref:`sphx_glr_tutorial_faq.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">常见问题</div>
-    </div>
-
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="AgentScope 实现了基于 OpenTelemetry 的追踪来监控和调试 智能体应用程序的执行，具有以下特性">
 
 .. only:: html
@@ -79,18 +62,35 @@
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="AgentScope Studio 是一个本地部署的 Web 应用程序，它">
+    <div class="sphx-glr-thumbcontainer" tooltip="关于 AgentScope ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 什么是AgentScope？     AgentScope 是一个多智能体框架，旨在提供一种简单高效的方式来构建基于大语言模型的智能体应用程序。">
 
 .. only:: html
 
-  .. image:: /tutorial/images/thumb/sphx_glr_task_studio_thumb.png
+  .. image:: /tutorial/images/thumb/sphx_glr_faq_thumb.png
     :alt:
 
-  :ref:`sphx_glr_tutorial_task_studio.py`
+  :ref:`sphx_glr_tutorial_faq.py`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">AgentScope Studio</div>
+      <div class="sphx-glr-thumbnail-title">常见问题</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="在 AgentScope 中，记忆（memory）用于存储智能体的上下文，并在需要时检索它。 具体而言，AgentScope 在 agentscope.memory 模块下提供了记忆基类 MemoryBase 和一个可直接使用的基于内存实现 InMemoryMemory。">
+
+.. only:: html
+
+  .. image:: /tutorial/images/thumb/sphx_glr_task_memory_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_tutorial_task_memory.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">记忆</div>
     </div>
 
 
@@ -444,11 +444,11 @@
 .. toctree::
    :hidden:
 
-   /tutorial/task_memory
-   /tutorial/quickstart_key_concept
-   /tutorial/faq
-   /tutorial/task_tracing
    /tutorial/task_studio
+   /tutorial/quickstart_key_concept
+   /tutorial/task_tracing
+   /tutorial/faq
+   /tutorial/task_memory
    /tutorial/quickstart_installation
    /tutorial/task_token
    /tutorial/workflow_concurrent_agents
