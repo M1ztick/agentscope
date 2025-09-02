@@ -11,18 +11,18 @@
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="In AgentScope, the memory is used to store the context of the agent, and retrieve it when needed. Specifically, AgentScope provides a memory base class MemoryBase and an in-memory implementation InMemoryMemory under agentscope.memory that can be used directly.">
+    <div class="sphx-glr-thumbcontainer" tooltip="AgentScope Studio is a local-deployed web application that">
 
 .. only:: html
 
-  .. image:: /tutorial/images/thumb/sphx_glr_task_memory_thumb.png
+  .. image:: /tutorial/images/thumb/sphx_glr_task_studio_thumb.png
     :alt:
 
-  :ref:`sphx_glr_tutorial_task_memory.py`
+  :ref:`sphx_glr_tutorial_task_studio.py`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Memory</div>
+      <div class="sphx-glr-thumbnail-title">AgentScope Studio</div>
     </div>
 
 
@@ -45,23 +45,6 @@
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="About AgentScope ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ What is AgentScope?     AgentScope is a multi-agent framework, aiming to provide a simple yet efficient way to build LLM-empowered agent applications.">
-
-.. only:: html
-
-  .. image:: /tutorial/images/thumb/sphx_glr_faq_thumb.png
-    :alt:
-
-  :ref:`sphx_glr_tutorial_faq.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">FAQ</div>
-    </div>
-
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="AgentScope implements OpenTelemetry-based tracing to monitor and debug the execution of agent applications, which features">
 
 .. only:: html
@@ -79,18 +62,35 @@
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="AgentScope Studio is a local-deployed web application that">
+    <div class="sphx-glr-thumbcontainer" tooltip="About AgentScope ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ What is AgentScope?     AgentScope is a multi-agent framework, aiming to provide a simple yet efficient way to build LLM-empowered agent applications.">
 
 .. only:: html
 
-  .. image:: /tutorial/images/thumb/sphx_glr_task_studio_thumb.png
+  .. image:: /tutorial/images/thumb/sphx_glr_faq_thumb.png
     :alt:
 
-  :ref:`sphx_glr_tutorial_task_studio.py`
+  :ref:`sphx_glr_tutorial_faq.py`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">AgentScope Studio</div>
+      <div class="sphx-glr-thumbnail-title">FAQ</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In AgentScope, the memory is used to store the context of the agent, and retrieve it when needed. Specifically, AgentScope provides a memory base class MemoryBase and an in-memory implementation InMemoryMemory under agentscope.memory that can be used directly.">
+
+.. only:: html
+
+  .. image:: /tutorial/images/thumb/sphx_glr_task_memory_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_tutorial_task_memory.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Memory</div>
     </div>
 
 
@@ -444,11 +444,11 @@
 .. toctree::
    :hidden:
 
-   /tutorial/task_memory
-   /tutorial/quickstart_key_concept
-   /tutorial/faq
-   /tutorial/task_tracing
    /tutorial/task_studio
+   /tutorial/quickstart_key_concept
+   /tutorial/task_tracing
+   /tutorial/faq
+   /tutorial/task_memory
    /tutorial/quickstart_installation
    /tutorial/task_token
    /tutorial/workflow_concurrent_agents

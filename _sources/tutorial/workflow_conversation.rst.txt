@@ -280,10 +280,9 @@ Specifically, the agents within the same ``MsgHub`` will receive messages from o
 
  .. code-block:: none
 
-    Alice: Hello! I'm Alice, a student currently pursuing my studies. It's nice to meet you. Could you tell me a little bit about yourself?
-    Bob: Hello Alice! I'm Bob, also a student. It's great to meet you too. What are you studying and what do you like to do in your free time?
-    Charlie: Alice: I'm majoring in Environmental Science and I really enjoy it. In my free time, I like to go hiking and read books about nature. What about you, Bob? What's your major and what do you like to do when you're not studying?
-    Charlie: That sounds fascinating, Alice! I'm actually studying Computer Science. When I have some downtime, I love to code for fun and play video games. It's a nice way to relax and still keep my problem-solving skills sharp.
+    Alice: Hi there! I'm Alice, a student with a passion for learning and exploring new things. Nice to meet you! Could you tell me a bit about yourself?
+    Bob: Hi Alice, I'm Bob. It's great to meet you! I'm also a student and I enjoy diving into new subjects and gaining knowledge. What kind of things are you into?
+    Charlie: Hello Alice and Bob, I'm Charlie. It's a pleasure to meet both of you. I'm also a student and I'm really into technology and how it can be used to solve problems. What subjects are you currently interested in?
 
 
 
@@ -320,9 +319,9 @@ Now we print the memory of Alice to check if her memory is updated correctly.
     system: Now you meet each other with a brief self-introduction.
     Alice: None
     system: None
-    Alice: Hello! I'm Alice, a student currently pursuing my studies. It's nice to meet you. Could you tell me a little bit about yourself?
-    Bob: Hello Alice! I'm Bob, also a student. It's great to meet you too. What are you studying and what do you like to do in your free time?
-    Charlie: That sounds fascinating, Alice! I'm actually studying Computer Science. When I have some downtime, I love to code for fun and play video games. It's a nice way to relax and still keep my problem-solving skills sharp.
+    Alice: Hi there! I'm Alice, a student with a passion for learning and exploring new things. Nice to meet you! Could you tell me a bit about yourself?
+    Bob: Hi Alice, I'm Bob. It's great to meet you! I'm also a student and I enjoy diving into new subjects and gaining knowledge. What kind of things are you into?
+    Charlie: Hello Alice and Bob, I'm Charlie. It's a pleasure to meet both of you. I'm also a student and I'm really into technology and how it can be used to solve problems. What subjects are you currently interested in?
 
 
 
@@ -339,7 +338,7 @@ Further Reading
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 12.890 seconds)
+   **Total running time of the script:** (0 minutes 11.910 seconds)
 
 
 .. _sphx_glr_download_tutorial_workflow_conversation.py:
