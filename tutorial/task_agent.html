@@ -491,7 +491,7 @@ they will be executed in parallel by the <code class="docutils literal notransla
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Jarvis: {
     &quot;type&quot;: &quot;tool_use&quot;,
-    &quot;id&quot;: &quot;call_c9f40380e81045f8a535e9&quot;,
+    &quot;id&quot;: &quot;call_0bd3434651bc45508346a6&quot;,
     &quot;name&quot;: &quot;example_tool_function&quot;,
     &quot;input&quot;: {
         &quot;tag&quot;: &quot;tag1&quot;
@@ -499,18 +499,18 @@ they will be executed in parallel by the <code class="docutils literal notransla
 }
 system: {
     &quot;type&quot;: &quot;tool_result&quot;,
-    &quot;id&quot;: &quot;call_c9f40380e81045f8a535e9&quot;,
+    &quot;id&quot;: &quot;call_0bd3434651bc45508346a6&quot;,
     &quot;name&quot;: &quot;example_tool_function&quot;,
     &quot;output&quot;: [
         {
             &quot;type&quot;: &quot;text&quot;,
-            &quot;text&quot;: &quot;Tag tag1 started at 02:49:29.110071 and ended at 02:49:32.113139. &quot;
+            &quot;text&quot;: &quot;Tag tag1 started at 08:04:58.175613 and ended at 08:05:01.178716. &quot;
         }
     ]
 }
 Jarvis: {
     &quot;type&quot;: &quot;tool_use&quot;,
-    &quot;id&quot;: &quot;call_64837f22d7b14146a01830&quot;,
+    &quot;id&quot;: &quot;call_984d8ede7e1d4520811699&quot;,
     &quot;name&quot;: &quot;example_tool_function&quot;,
     &quot;input&quot;: {
         &quot;tag&quot;: &quot;tag2&quot;
@@ -518,16 +518,21 @@ Jarvis: {
 }
 system: {
     &quot;type&quot;: &quot;tool_result&quot;,
-    &quot;id&quot;: &quot;call_64837f22d7b14146a01830&quot;,
+    &quot;id&quot;: &quot;call_984d8ede7e1d4520811699&quot;,
     &quot;name&quot;: &quot;example_tool_function&quot;,
     &quot;output&quot;: [
         {
             &quot;type&quot;: &quot;text&quot;,
-            &quot;text&quot;: &quot;Tag tag2 started at 02:49:34.649228 and ended at 02:49:37.652292. &quot;
+            &quot;text&quot;: &quot;Tag tag2 started at 08:05:03.559867 and ended at 08:05:06.562945. &quot;
         }
     ]
 }
-Jarvis: Both function calls with &#39;example_tool_function&#39; have been executed in parallel. The first call with tag &#39;tag1&#39; started at 02:49:29.110071 and ended at 02:49:32.113139, while the second call with tag &#39;tag2&#39; started at 02:49:34.649228 and ended at 02:49:37.652292.
+Jarvis: The &#39;example_tool_function&#39; has been called twice with the tags &#39;tag1&#39; and &#39;tag2&#39;.
+
+For &#39;tag1&#39;, it started at 08:04:58.175613 and ended at 08:05:01.178716.
+For &#39;tag2&#39;, it started at 08:05:03.559867 and ended at 08:05:06.562945.
+
+The calls were made in parallel as requested.
 </pre></div>
 </div>
 </section>
@@ -583,12 +588,12 @@ Then we can get the structured output from the <code class="docutils literal not
 <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">example_structured_output</span><span class="p">())</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Jarvis: Albert Einstein was a theoretical physicist who developed the theory of relativity, one of the two pillars of modern physics. He is best known for his mass–energy equivalence formula E=mc².
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Jarvis: Albert Einstein was a renowned physicist who developed the theory of relativity, one of the two pillars of modern physics. He is best known for his mass–energy equivalence formula E = mc².
 
 The structured output:
 {
     &quot;name&quot;: &quot;Albert Einstein&quot;,
-    &quot;description&quot;: &quot;A theoretical physicist who developed the theory of relativity&quot;,
+    &quot;description&quot;: &quot;A renowned physicist who developed the theory of relativity&quot;,
     &quot;age&quot;: 76,
     &quot;honor&quot;: [
         &quot;Nobel Prize in Physics (1921)&quot;,
@@ -682,7 +687,7 @@ We summarize the agent under <code class="docutils literal notranslate"><span cl
 <li><p><a class="reference internal" href="task_tool.html#tool"><span class="std std-ref">Tool</span></a></p></li>
 <li><p><a class="reference internal" href="task_hook.html#hook"><span class="std std-ref">Agent Hooks</span></a></p></li>
 </ul>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 31.777 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 27.830 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorial-task-agent-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/7dec07e2c813e72e1dad091b3ac4913a/task_agent.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">task_agent.ipynb</span></code></a></p>

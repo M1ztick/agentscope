@@ -280,9 +280,9 @@ Specifically, the agents within the same ``MsgHub`` will receive messages from o
 
  .. code-block:: none
 
-    Alice: Hi there! I'm Alice, a student with a passion for learning and exploring new things. Nice to meet you! Could you tell me a bit about yourself?
-    Bob: Hi Alice, I'm Bob. It's great to meet you! I'm also a student and I enjoy diving into new subjects and gaining knowledge. What kind of things are you into?
-    Charlie: Hello Alice and Bob, I'm Charlie. It's a pleasure to meet both of you. I'm also a student and I'm really into technology and how it can be used to solve problems. What subjects are you currently interested in?
+    Alice: Hello! I'm Alice, a student eager to learn and share knowledge. How can I assist you today?
+    Bob: Hello Alice, I'm Bob. It's nice to meet a fellow student who is enthusiastic about learning and sharing knowledge. I look forward to our conversation. How can we help each other today?
+    Charlie: It's great to meet you both, Alice and Bob! I'm Charlie, another student who is always up for a good discussion. Since we're all here to learn, what topics are you interested in, or do you have any questions we could explore together?
 
 
 
@@ -319,9 +319,9 @@ Now we print the memory of Alice to check if her memory is updated correctly.
     system: Now you meet each other with a brief self-introduction.
     Alice: None
     system: None
-    Alice: Hi there! I'm Alice, a student with a passion for learning and exploring new things. Nice to meet you! Could you tell me a bit about yourself?
-    Bob: Hi Alice, I'm Bob. It's great to meet you! I'm also a student and I enjoy diving into new subjects and gaining knowledge. What kind of things are you into?
-    Charlie: Hello Alice and Bob, I'm Charlie. It's a pleasure to meet both of you. I'm also a student and I'm really into technology and how it can be used to solve problems. What subjects are you currently interested in?
+    Alice: Hello! I'm Alice, a student eager to learn and share knowledge. How can I assist you today?
+    Bob: Hello Alice, I'm Bob. It's nice to meet a fellow student who is enthusiastic about learning and sharing knowledge. I look forward to our conversation. How can we help each other today?
+    Charlie: It's great to meet you both, Alice and Bob! I'm Charlie, another student who is always up for a good discussion. Since we're all here to learn, what topics are you interested in, or do you have any questions we could explore together?
 
 
 
@@ -338,7 +338,7 @@ Further Reading
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 11.910 seconds)
+   **Total running time of the script:** (0 minutes 10.033 seconds)
 
 
 .. _sphx_glr_download_tutorial_workflow_conversation.py:

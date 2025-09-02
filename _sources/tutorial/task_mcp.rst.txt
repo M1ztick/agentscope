@@ -63,7 +63,7 @@ The table below summarizes the supported MCP client types and protocols:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 39-59
+.. GENERATED FROM PYTHON SOURCE LINES 39-60
 
 MCP Client
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -82,11 +82,12 @@ They only differ in how to manage the session with the MCP server.
 
 .. note:: - The StdIO MCP server only has stateful client, when ``connect()`` is called, it will start the MCP server locally and then connect to it.
  - For stateful clients, developers must ensure the client is connected when calling the tool functions.
+ - When multiple `HttpStatefulClients` or `StdIOStatefulClients` are connected, they should be closed in Last In First Out (LIFO) order to prevent errors.
 
 Taking Gaode map MCP server as an example, the creation of stateful and stateless clients are very similar:
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 59-74
+.. GENERATED FROM PYTHON SOURCE LINES 60-75
 
 .. code-block:: Python
 
@@ -112,7 +113,7 @@ Taking Gaode map MCP server as an example, the creation of stateful and stateles
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 75-97
+.. GENERATED FROM PYTHON SOURCE LINES 76-98
 
 Both stateful and stateless clients provide the following methods:
 
@@ -137,7 +138,7 @@ You can register all tools from an MCP server into ``Toolkit`` as follows.
 .. tip:: Optionally, you can specify a group name to organize the tools. Refer to :ref:`tool` section for group-wise tools management.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 97-131
+.. GENERATED FROM PYTHON SOURCE LINES 98-132
 
 .. code-block:: Python
 
@@ -213,12 +214,12 @@ You can register all tools from an MCP server into ``Toolkit`` as follows.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 132-134
+.. GENERATED FROM PYTHON SOURCE LINES 133-135
 
 To remove the registered tools, you can use the ``remove_tool_function`` to remove a specific tool function, or ``remove_mcp_clients`` to remove all tools from a specific MCP.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 134-154
+.. GENERATED FROM PYTHON SOURCE LINES 135-155
 
 .. code-block:: Python
 
@@ -257,7 +258,7 @@ To remove the registered tools, you can use the ``remove_tool_function`` to remo
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 155-169
+.. GENERATED FROM PYTHON SOURCE LINES 156-170
 
 Function-Level Management
 --------------------------------
@@ -274,7 +275,7 @@ If you set ``wrap_tool_result=False``, the raw result type ``mcp.types.CallToolR
 Taking the ``maps_geo`` function as an example, you can obtain it as a callable function object as follows:
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 169-198
+.. GENERATED FROM PYTHON SOURCE LINES 170-199
 
 .. code-block:: Python
 
@@ -342,12 +343,12 @@ Taking the ``maps_geo`` function as an example, you can obtain it as a callable 
     }
 
     Function call result:
-    ToolResponse(content=[{'type': 'text', 'text': '{"results":[{"country":"中国","province":"北京市","city":"北京市","citycode":"010","district":"东城区","street":[],"number":[],"adcode":"110101","location":"116.397455,39.909187","level":"兴趣点"}]}'}], metadata=None, stream=False, is_last=True, is_interrupted=False, id='2025-09-02 02:48:58.629_502666')
+    ToolResponse(content=[{'type': 'text', 'text': '{"results":[{"country":"中国","province":"北京市","city":"北京市","citycode":"010","district":"东城区","street":[],"number":[],"adcode":"110101","location":"116.397455,39.909187","level":"兴趣点"}]}'}], metadata=None, stream=False, is_last=True, is_interrupted=False, id='2025-09-02 08:04:31.818_8a6718')
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 199-207
+.. GENERATED FROM PYTHON SOURCE LINES 200-208
 
 Further Reading
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -361,7 +362,7 @@ For more details, see:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 7.786 seconds)
+   **Total running time of the script:** (0 minutes 6.472 seconds)
 
 
 .. _sphx_glr_download_tutorial_task_mcp.py:

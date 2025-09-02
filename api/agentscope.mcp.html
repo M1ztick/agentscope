@@ -536,6 +536,14 @@ MCP servers.</p>
 tool calls, until the client is closed by explicitly calling the
 <cite>close()</cite> method.</p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When multiple StdIOStatefulClient instances are connected,
+they should be closed following the Last In First Out (LIFO) principle
+to avoid potential errors. Always close the most recently registered
+client first, then work backwards to the first one.
+For more details, please refer to this <a class="reference external" href="https://github.com/modelcontextprotocol/python-sdk/issues/577">issue</a>.</p>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="agentscope.mcp.StdIOStatefulClient.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">command</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cwd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding_error_handler</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'strict'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/agentscope/mcp/_stdio_stateful_client.html#StdIOStatefulClient.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#agentscope.mcp.StdIOStatefulClient.__init__" title="Link to this definition">¶</a></dt>
@@ -551,33 +559,11 @@ across the MCP servers.</p></li>
 <li><p><strong>cwd</strong> (<cite>str | None</cite>, optional) – The working directory to use when spawning the process.</p></li>
 <li><p><strong>encoding</strong> (<cite>str</cite>, optional) – The text encoding used when sending/receiving messages to the
 server. Defaults to “utf-8”.</p></li>
-<li><p><strong>(</strong><strong>`Literal</strong><strong>[</strong><strong>&quot;strict&quot;</strong> (<em>encoding_error_handler</em>) – <dl class="simple">
-<dt>defaults to “strict”):</dt><dd><p>The text encoding error handler.</p>
-</dd>
-</dl>
-</p></li>
-<li><p><strong>&quot;ignore&quot;</strong> – <dl class="simple">
-<dt>defaults to “strict”):</dt><dd><p>The text encoding error handler.</p>
-</dd>
-</dl>
-</p></li>
-<li><p><strong>&quot;replace&quot;</strong><strong>]</strong><strong>`</strong> – <dl class="simple">
-<dt>defaults to “strict”):</dt><dd><p>The text encoding error handler.</p>
-</dd>
-</dl>
-</p></li>
-<li><p><strong>encoding_error_handler</strong> (<em>Literal</em><em>[</em><em>'strict'</em><em>, </em><em>'ignore'</em><em>, </em><em>'replace'</em><em>]</em>)</p></li>
+<li><p><strong>encoding_error_handler</strong> (<cite>Literal[“strict”, “ignore”, “replace”]</cite>,              defaults to “strict”) – The text encoding error handler.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
-</dd>
-</dl>
-<dl class="simple">
-<dt>:param :</dt><dd><dl class="simple">
-<dt>defaults to “strict”):</dt><dd><p>The text encoding error handler.</p>
-</dd>
-</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -697,6 +683,14 @@ MCP servers.</p>
 <p>The stateful client will maintain one session across multiple
 tool calls, until the client is closed by explicitly calling the
 <cite>close()</cite> method.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When multiple HttpStatefulClient instances are connected,
+they should be closed following the Last In First Out (LIFO) principle
+to avoid potential errors. Always close the most recently registered
+client first, then work backwards to the first one.
+For more details, please refer to this <a class="reference external" href="https://github.com/modelcontextprotocol/python-sdk/issues/577">issue</a>.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="agentscope.mcp.HttpStatefulClient.__init__">

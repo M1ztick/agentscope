@@ -401,7 +401,7 @@ to download the full example code.</p>
 <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">example_router_explicit</span><span class="p">())</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Router: Sure, I can help with that. Could you give me a theme or some elements you&#39;d like to include in the poem?
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Router: Of course, I can help with that. Could you tell me a little bit more about what you&#39;d like the poem to be about? Any particular theme, style, or mood you have in mind?
 The structured output:
 {
     &quot;your_choice&quot;: &quot;Content Generation&quot;,
@@ -504,77 +504,46 @@ The structured output:
     &quot;input&quot;: {
         &quot;demand&quot;: &quot;a quick sort function&quot;
     },
-    &quot;id&quot;: &quot;call_b61537652c484299bb4ad5&quot;
+    &quot;id&quot;: &quot;call_5cd0461a845549c89e9f9a&quot;
 }
-PythonAgent: Here is a Python implementation of the quicksort algorithm. This version chooses the last element as the pivot, partitions the array around the pivot, and then recursively sorts the sub-arrays.
-
+PythonAgent: Here is a quick sort function in Python:
 ```python
-def quicksort(arr):
+def quick_sort(arr):
     if len(arr) &lt;= 1:
         return arr
-    else:
-        pivot = arr.pop()  # Use the last element as the pivot
-        greater = []  # Elements greater than pivot
-        lower = []  # Elements less than or equal to pivot
-
-        for item in arr:
-            if item &gt; pivot:
-                greater.append(item)
-            else:
-                lower.append(item)
-
-        # Recursively apply the quicksort to the partitions
-        return quicksort(lower) + [pivot] + quicksort(greater)
-
-# Example usage:
-example_array = [10, 7, 8, 9, 1, 5]
-sorted_array = quicksort(example_array)
-print(&#39;Sorted array:&#39;, sorted_array)
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x &lt; pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x &gt; pivot]
+    return quick_sort(left) + middle + quick_sort(right)
 ```
-
-You can run this function with a list of numbers, and it will return a new list that is sorted in ascending order. Let me know if you need an explanation of how the code works or if you would like to see a different version of the quicksort algorithm.
+You can use this function to sort a list of numbers. For example, `sorted_list = quick_sort([3, 6, 8, 10, 1, 2, 1])` will return `[1, 1, 2, 3, 6, 8, 10]`.
 system: {
     &quot;type&quot;: &quot;tool_result&quot;,
-    &quot;id&quot;: &quot;call_b61537652c484299bb4ad5&quot;,
+    &quot;id&quot;: &quot;call_5cd0461a845549c89e9f9a&quot;,
     &quot;name&quot;: &quot;generate_python&quot;,
     &quot;output&quot;: [
         {
             &quot;type&quot;: &quot;text&quot;,
-            &quot;text&quot;: &quot;Here is a Python implementation of the quicksort algorithm. This version chooses the last element as the pivot, partitions the array around the pivot, and then recursively sorts the sub-arrays.\n\n```python\ndef quicksort(arr):\n    if len(arr) &lt;= 1:\n        return arr\n    else:\n        pivot = arr.pop()  # Use the last element as the pivot\n        greater = []  # Elements greater than pivot\n        lower = []  # Elements less than or equal to pivot\n\n        for item in arr:\n            if item &gt; pivot:\n                greater.append(item)\n            else:\n                lower.append(item)\n\n        # Recursively apply the quicksort to the partitions\n        return quicksort(lower) + [pivot] + quicksort(greater)\n\n# Example usage:\nexample_array = [10, 7, 8, 9, 1, 5]\nsorted_array = quicksort(example_array)\nprint(&#39;Sorted array:&#39;, sorted_array)\n```\n\nYou can run this function with a list of numbers, and it will return a new list that is sorted in ascending order. Let me know if you need an explanation of how the code works or if you would like to see a different version of the quicksort algorithm.&quot;
+            &quot;text&quot;: &quot;Here is a quick sort function in Python:\n```python\ndef quick_sort(arr):\n    if len(arr) &lt;= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x &lt; pivot]\n    middle = [x for x in arr if x == pivot]\n    right = [x for x in arr if x &gt; pivot]\n    return quick_sort(left) + middle + quick_sort(right)\n```\nYou can use this function to sort a list of numbers. For example, `sorted_list = quick_sort([3, 6, 8, 10, 1, 2, 1])` will return `[1, 1, 2, 3, 6, 8, 10]`.&quot;
         }
     ]
 }
-Router: The quick sort function in Python has been generated for you. Below is the code:
-
+Router: Here is a quick sort function in Python that you can use to sort a list of numbers. For example, `sorted_list = quick_sort([3, 6, 8, 10, 1, 2, 1])` will return `[1, 1, 2, 3, 6, 8, 10]`.
 ```python
-def quicksort(arr):
+
+def quick_sort(arr):
     if len(arr) &lt;= 1:
         return arr
-    else:
-        pivot = arr.pop()  # Use the last element as the pivot
-        greater = []  # Elements greater than pivot
-        lower = []  # Elements less than or equal to pivot
-
-        for item in arr:
-            if item &gt; pivot:
-                greater.append(item)
-            else:
-                lower.append(item)
-
-        # Recursively apply the quicksort to the partitions
-        return quicksort(lower) + [pivot] + quicksort(greater)
-
-# Example usage:
-example_array = [10, 7, 8, 9, 1, 5]
-sorted_array = quicksort(example_array)
-print(&#39;Sorted array:&#39;, sorted_array)
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x &lt; pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x &gt; pivot]
+    return quick_sort(left) + middle + quick_sort(right)
 ```
-
-You can use this function by providing a list of numbers, and it will return a new list that is sorted in ascending order. If you need an explanation of how the code works or would like to see a different version of the quicksort algorithm, feel free to ask.
-Router: The quick sort function in Python has been provided to you. You can use the `quicksort` function with a list of numbers, and it will return a new list that is sorted in ascending order. If you have any further questions or need additional assistance, feel free to let me know!
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 59.008 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 29.704 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorial-workflow-routing-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/3266c75280f96697c4cc46d7d55a3ac8/workflow_routing.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">workflow_routing.ipynb</span></code></a></p>

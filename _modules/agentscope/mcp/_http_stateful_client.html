@@ -334,6 +334,13 @@
 <span class="sd">    .. note:: The stateful client will maintain one session across multiple</span>
 <span class="sd">     tool calls, until the client is closed by explicitly calling the</span>
 <span class="sd">     `close()` method.</span>
+
+<span class="sd">    .. note:: When multiple HttpStatefulClient instances are connected,</span>
+<span class="sd">     they should be closed following the Last In First Out (LIFO) principle</span>
+<span class="sd">     to avoid potential errors. Always close the most recently registered</span>
+<span class="sd">     client first, then work backwards to the first one.</span>
+<span class="sd">     For more details, please refer to this `issue</span>
+<span class="sd">     &lt;https://github.com/modelcontextprotocol/python-sdk/issues/577&gt;`_.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="HttpStatefulClient.__init__">
