@@ -334,6 +334,13 @@
 <span class="sd">    .. note:: The stateful client will maintain one session across multiple</span>
 <span class="sd">     tool calls, until the client is closed by explicitly calling the</span>
 <span class="sd">     `close()` method.</span>
+
+<span class="sd">    .. note:: When multiple StdIOStatefulClient instances are connected,</span>
+<span class="sd">     they should be closed following the Last In First Out (LIFO) principle</span>
+<span class="sd">     to avoid potential errors. Always close the most recently registered</span>
+<span class="sd">     client first, then work backwards to the first one.</span>
+<span class="sd">     For more details, please refer to this `issue</span>
+<span class="sd">     &lt;https://github.com/modelcontextprotocol/python-sdk/issues/577&gt;`_.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="StdIOStatefulClient.__init__">
@@ -369,7 +376,7 @@
 <span class="sd">            encoding (`str`, optional):</span>
 <span class="sd">                The text encoding used when sending/receiving messages to the</span>
 <span class="sd">                server. Defaults to &quot;utf-8&quot;.</span>
-<span class="sd">            encoding_error_handler (`Literal[&quot;strict&quot;, &quot;ignore&quot;, &quot;replace&quot;]`,</span>
+<span class="sd">            encoding_error_handler (`Literal[&quot;strict&quot;, &quot;ignore&quot;, &quot;replace&quot;]`, \</span>
 <span class="sd">             defaults to &quot;strict&quot;):</span>
 <span class="sd">                The text encoding error handler.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
