@@ -72,6 +72,8 @@ The supported model APIs and providers include:
       - ✅
       - ✅
 
+.. note:: When using vLLM, you need to configure the appropriate tool calling parameters for different models during deployment, such as ``--enable-auto-tool-choice``, ``--tool-call-parser``, etc. For more details, refer to the `official vLLM documentation <https://docs.vllm.ai/en/latest/features/tool_calling.html>`_.
+
 To provide unified model interfaces, the above model classes has the following common methods:
 
 - The first three arguments of the ``__call__`` method are ``messages`` , ``tools`` and ``tool_choice``, representing the input messages, JSON schema of tool functions, and tool selection mode, respectively.
@@ -81,7 +83,7 @@ To provide unified model interfaces, the above model classes has the following c
 
 The ``ChatResponse`` instance contains the generated thinking/text/tool use content, identity, created time and usage information.
 
-.. GENERATED FROM PYTHON SOURCE LINES 66-91
+.. GENERATED FROM PYTHON SOURCE LINES 68-93
 
 .. code-block:: Python
 
@@ -118,16 +120,16 @@ The ``ChatResponse`` instance contains the generated thinking/text/tool use cont
 
  .. code-block:: none
 
-    ChatResponse(content=[{'type': 'thinking', 'thinking': 'I should search for AgentScope on Google.'}, {'type': 'text', 'text': "I'll search for AgentScope on Google."}, {'type': 'tool_use', 'id': '642n298gjna', 'name': 'google_search', 'input': {'query': 'AgentScope?'}}], id='2025-09-04 07:29:16.567_9a4e01', created_at='2025-09-04 07:29:16.567', type='chat', usage=None, metadata=None)
+    ChatResponse(content=[{'type': 'thinking', 'thinking': 'I should search for AgentScope on Google.'}, {'type': 'text', 'text': "I'll search for AgentScope on Google."}, {'type': 'tool_use', 'id': '642n298gjna', 'name': 'google_search', 'input': {'query': 'AgentScope?'}}], id='2025-09-05 08:01:12.669_4438d8', created_at='2025-09-05 08:01:12.669', type='chat', usage=None, metadata=None)
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 92-93
+.. GENERATED FROM PYTHON SOURCE LINES 94-95
 
 Taking ``DashScopeChatModel`` as an example, we can use it to create a chat model instance and call it with messages and tools:
 
-.. GENERATED FROM PYTHON SOURCE LINES 93-118
+.. GENERATED FROM PYTHON SOURCE LINES 95-120
 
 .. code-block:: Python
 
@@ -164,13 +166,13 @@ Taking ``DashScopeChatModel`` as an example, we can use it to create a chat mode
 
  .. code-block:: none
 
-    The response: ChatResponse(content=[{'type': 'text', 'text': 'Hello! How can I assist you today?'}], id='2025-09-04 07:29:17.882_b62784', created_at='2025-09-04 07:29:17.882', type='chat', usage=ChatUsage(input_tokens=10, output_tokens=9, time=1.313802, type='chat'), metadata=None)
-    The response as Msg: Msg(id='kUpCyUeoFac4NqNb2KeVYY', name='Friday', content=[{'type': 'text', 'text': 'Hello! How can I assist you today?'}], role='assistant', metadata=None, timestamp='2025-09-04 07:29:17.882', invocation_id='None')
+    The response: ChatResponse(content=[{'type': 'text', 'text': 'Hello! How can I assist you today?'}], id='2025-09-05 08:01:15.587_328c44', created_at='2025-09-05 08:01:15.588', type='chat', usage=ChatUsage(input_tokens=10, output_tokens=9, time=2.9176, type='chat'), metadata=None)
+    The response as Msg: Msg(id='J5wDkPBVLT4dgX4s3GCb2b', name='Friday', content=[{'type': 'text', 'text': 'Hello! How can I assist you today?'}], role='assistant', metadata=None, timestamp='2025-09-05 08:01:15.588', invocation_id='None')
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 119-126
+.. GENERATED FROM PYTHON SOURCE LINES 121-128
 
 Streaming
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -180,7 +182,7 @@ When streaming is enabled, the ``__call__`` method will return an **async genera
 .. note:: The streaming mode in AgentScope is designed to be **cumulative**, meaning the content in each chunk contains all the previous content plus the newly generated content.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 126-156
+.. GENERATED FROM PYTHON SOURCE LINES 128-158
 
 .. code-block:: Python
 
@@ -225,64 +227,64 @@ When streaming is enabled, the ``__call__`` method will return an **async genera
     The type of the response: <class 'async_generator'>
     Chunk 0
             type: <class 'list'>
-            ChatResponse(content=[{'type': 'text', 'text': '1'}], id='2025-09-04 07:29:18.737_ad9744', created_at='2025-09-04 07:29:18.737', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=1, time=0.853181, type='chat'), metadata=None)
+            ChatResponse(content=[{'type': 'text', 'text': '1'}], id='2025-09-05 08:01:16.961_1dc53b', created_at='2025-09-05 08:01:16.961', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=1, time=1.371471, type='chat'), metadata=None)
 
     Chunk 1
             type: <class 'list'>
-            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n'}], id='2025-09-04 07:29:18.807_2c7f43', created_at='2025-09-04 07:29:18.807', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=4, time=0.923083, type='chat'), metadata=None)
+            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n'}], id='2025-09-05 08:01:17.064_d97de4', created_at='2025-09-05 08:01:17.064', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=4, time=1.474466, type='chat'), metadata=None)
 
     Chunk 2
             type: <class 'list'>
-            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4'}], id='2025-09-04 07:29:18.877_5011a1', created_at='2025-09-04 07:29:18.878', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=7, time=0.994009, type='chat'), metadata=None)
+            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4'}], id='2025-09-05 08:01:17.170_cd7198', created_at='2025-09-05 08:01:17.170', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=7, time=1.580798, type='chat'), metadata=None)
 
     Chunk 3
             type: <class 'list'>
-            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4\n5\n'}], id='2025-09-04 07:29:18.948_63144b', created_at='2025-09-04 07:29:18.948', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=10, time=1.064585, type='chat'), metadata=None)
+            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4\n5\n'}], id='2025-09-05 08:01:17.277_0583fd', created_at='2025-09-05 08:01:17.277', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=10, time=1.687425, type='chat'), metadata=None)
 
     Chunk 4
             type: <class 'list'>
-            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4\n5\n6\n7\n8\n'}], id='2025-09-04 07:29:19.112_62850d', created_at='2025-09-04 07:29:19.112', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=16, time=1.228862, type='chat'), metadata=None)
+            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4\n5\n6\n7\n8\n'}], id='2025-09-05 08:01:17.603_51af26', created_at='2025-09-05 08:01:17.603', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=16, time=2.014326, type='chat'), metadata=None)
 
     Chunk 5
             type: <class 'list'>
-            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n1'}], id='2025-09-04 07:29:19.339_6f098f', created_at='2025-09-04 07:29:19.339', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=22, time=1.455576, type='chat'), metadata=None)
+            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n1'}], id='2025-09-05 08:01:18.345_5d57ba', created_at='2025-09-05 08:01:18.345', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=22, time=2.755694, type='chat'), metadata=None)
 
     Chunk 6
             type: <class 'list'>
-            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n1'}], id='2025-09-04 07:29:19.476_b0fc75', created_at='2025-09-04 07:29:19.476', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=28, time=1.592406, type='chat'), metadata=None)
+            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n1'}], id='2025-09-05 08:01:18.559_6b47fb', created_at='2025-09-05 08:01:18.559', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=28, time=2.970148, type='chat'), metadata=None)
 
     Chunk 7
             type: <class 'list'>
-            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n1'}], id='2025-09-04 07:29:19.752_f5126b', created_at='2025-09-04 07:29:19.752', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=34, time=1.868273, type='chat'), metadata=None)
+            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n1'}], id='2025-09-05 08:01:20.245_194660', created_at='2025-09-05 08:01:20.245', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=34, time=4.656234, type='chat'), metadata=None)
 
     Chunk 8
             type: <class 'list'>
-            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n1'}], id='2025-09-04 07:29:20.674_07b501', created_at='2025-09-04 07:29:20.674', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=40, time=2.790403, type='chat'), metadata=None)
+            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n1'}], id='2025-09-05 08:01:20.449_2fc1f4', created_at='2025-09-05 08:01:20.449', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=40, time=4.859989, type='chat'), metadata=None)
 
     Chunk 9
             type: <class 'list'>
-            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n1'}], id='2025-09-04 07:29:20.815_95ebed', created_at='2025-09-04 07:29:20.815', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=46, time=2.931932, type='chat'), metadata=None)
+            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n1'}], id='2025-09-05 08:01:20.673_037b96', created_at='2025-09-05 08:01:20.673', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=46, time=5.08431, type='chat'), metadata=None)
 
     Chunk 10
             type: <class 'list'>
-            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20'}], id='2025-09-04 07:29:20.977_fa06a0', created_at='2025-09-04 07:29:20.977', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=50, time=3.09326, type='chat'), metadata=None)
+            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20'}], id='2025-09-05 08:01:20.906_067d0d', created_at='2025-09-05 08:01:20.906', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=50, time=5.316751, type='chat'), metadata=None)
 
     Chunk 11
             type: <class 'list'>
-            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20'}], id='2025-09-04 07:29:20.992_ad9909', created_at='2025-09-04 07:29:20.993', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=50, time=3.109009, type='chat'), metadata=None)
+            ChatResponse(content=[{'type': 'text', 'text': '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20'}], id='2025-09-05 08:01:20.922_5f6116', created_at='2025-09-05 08:01:20.922', type='chat', usage=ChatUsage(input_tokens=27, output_tokens=50, time=5.332859, type='chat'), metadata=None)
 
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 157-161
+.. GENERATED FROM PYTHON SOURCE LINES 159-163
 
 Reasoning
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 AgentScope supports reasoning models by providing the ``ThinkingBlock``.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 161-186
+.. GENERATED FROM PYTHON SOURCE LINES 163-188
 
 .. code-block:: Python
 
@@ -320,12 +322,12 @@ AgentScope supports reasoning models by providing the ``ThinkingBlock``.
  .. code-block:: none
 
     The final response:
-    ChatResponse(content=[{'type': 'thinking', 'thinking': 'Okay, the user asked "Who am I?" So, first, I need to figure out what they\'re really asking. They might be curious about my identity as an AI, or maybe they\'re looking for a deeper philosophical answer. Let me start by recalling my basic information. I\'m Qwen, a large-scale language model developed by Alibaba Cloud. But the user might want more than just that.\n\nHmm, maybe they\'re testing my knowledge or want to know my capabilities. I should explain my purpose, which is to assist with information and tasks. But I should also mention that I don\'t have personal experiences or consciousness. Wait, the user could be looking for a more creative or metaphorical answer. Should I include something about being a tool for learning and exploration?\n\nI need to make sure the response is clear and not too technical. Also, since the user might be interested in how I can help them, I should invite them to ask specific questions. Let me structure the answer: start with my identity, explain my role, clarify my limitations, and offer assistance. That should cover the main points without being too lengthy.\n'}, {'type': 'text', 'text': "I am Qwen, a large-scale language model developed by Alibaba Cloud. My purpose is to assist with information, tasks, and conversations. However, I don't have personal experiences, consciousness, or a sense of self. I exist to help you explore ideas, solve problems, and learn. \n\nIf you're asking this question in a philosophical or reflective context, it might be worth considering: **Who are *you*?** What defines your identity, values, or purpose? Let me know how I can help you explore this further! 😊"}], id='2025-09-04 07:29:26.449_9afd3f', created_at='2025-09-04 07:29:26.449', type='chat', usage=ChatUsage(input_tokens=12, output_tokens=342, time=5.452648, type='chat'), metadata=None)
+    ChatResponse(content=[{'type': 'thinking', 'thinking': 'Okay, the user is asking "Who am I?" which is a deep philosophical question. I need to approach this carefully. First, I should acknowledge that this is a complex question with different perspectives. I can mention various philosophical views, like Descartes\' "I think, therefore I am," or existentialist ideas. Also, considering the user\'s possible intent, they might be seeking self-reflection or understanding their identity. I should keep the response open-ended and encourage them to explore their own thoughts. Avoid making assumptions about their specific context. Make sure the answer is respectful and not too technical, allowing them to think for themselves.'}, {'type': 'text', 'text': 'The question "Who am I?" is one of the most profound and enduring inquiries in philosophy, spirituality, and personal reflection. It touches on identity, existence, and the nature of self. Here are some perspectives to consider:\n\n1. **Philosophical**:  \n   - **Descartes** famously said, *"I think, therefore I am"* (*Cogito, ergo sum*), suggesting that the act of questioning one\'s existence confirms it.  \n   - **Existentialists** like Sartre emphasized that identity is not fixed but shaped by choices and actions.  \n   - **Eastern philosophies** (e.g., Buddhism, Advaita Vedanta) often challenge the notion of a permanent "self," pointing to impermanence or the illusion of separation from the universe.\n\n2. **Psychological**:  \n   - Your identity is shaped by experiences, relationships, values, and beliefs. It evolves over time as you grow and encounter new perspectives.  \n   - Carl Jung spoke of the "self" as the integration of all aspects of the psyche, including the conscious and unconscious.\n\n3. **Spiritual/Existential**:  \n   - Some see the self as part of something larger—a connection to others, the universe, or a higher power.  \n   - Others might view it as a transient, ever-changing process rather than a fixed entity.\n\n4. **Personal Reflection**:  \n   - The answer might lie in what you value, how you interact with the world, and the stories you tell yourself. It’s a journey of discovery, not a single truth.\n\nUltimately, the question is deeply personal. It invites you to explore your thoughts, beliefs, and experiences. There’s no single "correct" answer—only the insights you uncover through introspection. What does *your* heart or mind tell you? 🌱'}], id='2025-09-05 08:01:28.077_50acbb', created_at='2025-09-05 08:01:28.077', type='chat', usage=ChatUsage(input_tokens=12, output_tokens=506, time=7.151136, type='chat'), metadata=None)
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 187-195
+.. GENERATED FROM PYTHON SOURCE LINES 189-197
 
 Tools API
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -336,7 +338,7 @@ To provide a unified interface, AgentScope solves the problem by:
 - Providing a unified tools interface in the ``__call__`` method of the model classes, that accepts a list of tools JSON schemas as follows:
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 195-216
+.. GENERATED FROM PYTHON SOURCE LINES 197-218
 
 .. code-block:: Python
 
@@ -368,7 +370,7 @@ To provide a unified interface, AgentScope solves the problem by:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 217-222
+.. GENERATED FROM PYTHON SOURCE LINES 219-224
 
 Further Reading
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -379,7 +381,7 @@ Further Reading
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 9.885 seconds)
+   **Total running time of the script:** (0 minutes 15.414 seconds)
 
 
 .. _sphx_glr_download_tutorial_task_model.py:

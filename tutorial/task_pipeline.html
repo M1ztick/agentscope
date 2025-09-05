@@ -329,6 +329,7 @@ as syntax sugar for chaining agents together, including</p>
 <ul class="simple">
 <li><p><strong>MsgHub</strong>: a message hub for broadcasting messages among multiple agents</p></li>
 <li><p><strong>sequential_pipeline</strong> and <strong>SequentialPipeline</strong>: a functional and class-based implementation that chains agents in a sequential manner</p></li>
+<li><p><strong>fanout_pipeline</strong> and <strong>FanoutPipeline</strong>: a functional and class-based implementation that distributes the same input to multiple agents</p></li>
 </ul>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">asyncio</span>
 
@@ -394,13 +395,13 @@ Note David is not included in this meeting.</p>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Alice: Hello, I&#39;m Alice, a 50-year-old teacher with a passion for education and a wealth of experience in the classroom.
-Bob: Hello, I&#39;m Bob, a 35-year-old engineer with a focus on innovative solutions and technology.
-Charlie: Hello, I&#39;m Charlie, a 28-year-old designer with a keen eye for aesthetics and a flair for creating user-centered experiences.
+Bob: Hello, I&#39;m Bob, a 35-year-old engineer with a focus on innovative solutions and technology development.
+Charlie: Hello, I&#39;m Charlie, a 28-year-old designer with a flair for creating visually appealing and user-friendly designs.
 </pre></div>
 </div>
 <p>Now let’s check if Bob, Charlie and David received Alice’s message.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">check_broadcast_message</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the messages are broadcasted correctly.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the messages are broadcast correctly.&quot;&quot;&quot;</span>
     <span class="n">user_msg</span> <span class="o">=</span> <span class="n">Msg</span><span class="p">(</span>
         <span class="s2">&quot;user&quot;</span><span class="p">,</span>
         <span class="s2">&quot;Do you know who&#39;s Alice, and what she does? Answer me briefly.&quot;</span><span class="p">,</span>
@@ -417,7 +418,7 @@ Charlie: Hello, I&#39;m Charlie, a 28-year-old designer with a keen eye for aest
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Bob: Alice is a 50-year-old teacher who is passionate about education and has extensive experience in the classroom.
 Charlie: Alice is a 50-year-old teacher who is passionate about education and has extensive experience in the classroom.
-David: I don&#39;t have specific information about an Alice without more context. Could you provide more details, such as her full name or the field she works in?
+David: I don&#39;t have specific information about an Alice without more context, as it&#39;s a common name. Could you provide more details such as her profession or the field she&#39;s associated with?
 </pre></div>
 </div>
 <p>Now we observe that Bob and Charlie know Alice and her profession, while David has no idea
@@ -452,9 +453,16 @@ about Alice since he is not included in the <code class="docutils literal notran
 <section id="id2">
 <h2>Pipeline<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>Pipeline serves as a syntax sugar for multi-agent orchestration.</p>
-<p>Currently, AgentScope provides a sequential pipeline implementation, which
-execute agents one by one in a predefined order.
-For example, the two following code snippets are equivalent:</p>
+<p>Currently, AgentScope provides two main pipeline implementations:</p>
+<ol class="arabic simple">
+<li><p><strong>Sequential Pipeline</strong>: Execute agents one by one in a predefined order</p></li>
+<li><p><strong>Fanout Pipeline</strong>: Distribute the same input to multiple agents and collect their responses</p></li>
+</ol>
+<section id="sequential-pipeline">
+<h3>Sequential Pipeline<a class="headerlink" href="#sequential-pipeline" title="Link to this heading">¶</a></h3>
+<p>The sequential pipeline executes agents one by one, where the output of the previous agent
+becomes the input of the next agent.</p>
+<p>For example, the two following code snippets are equivalent:</p>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">Code snippet 1: Manually call agents one by one</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">msg</span> <span class="o">=</span> <span class="kc">None</span>
@@ -477,13 +485,55 @@ For example, the two following code snippets are equivalent:</p>
 </pre></div>
 </div>
 </div>
+</section>
+<section id="fanout-pipeline">
+<h3>Fanout Pipeline<a class="headerlink" href="#fanout-pipeline" title="Link to this heading">¶</a></h3>
+<p>The fanout pipeline distributes the same input message to multiple agents simultaneously and collects all their responses. This is useful when you want to gather different perspectives or expertise on the same topic.</p>
+<p>For example, the two following code snippets are equivalent:</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">Code snippet 3: Manually call agents one by one</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+
+<span class="n">msgs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="p">[</span><span class="n">alice</span><span class="p">,</span> <span class="n">bob</span><span class="p">,</span> <span class="n">charlie</span><span class="p">,</span> <span class="n">david</span><span class="p">]:</span>
+    <span class="n">msgs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="k">await</span> <span class="n">agent</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">msg</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">Code snippet 4: Use fanout pipeline</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">agentscope.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">fanout_pipeline</span>
+<span class="n">msgs</span> <span class="o">=</span> <span class="k">await</span> <span class="n">fanout_pipeline</span><span class="p">(</span>
+    <span class="c1"># List of agents to be executed in order</span>
+    <span class="n">agents</span><span class="o">=</span><span class="p">[</span><span class="n">alice</span><span class="p">,</span> <span class="n">bob</span><span class="p">,</span> <span class="n">charlie</span><span class="p">,</span> <span class="n">david</span><span class="p">],</span>
+    <span class="c1"># The first input message, can be None</span>
+    <span class="n">msg</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">enable_gather</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">enable_gather</span></code> parameter controls the execution mode of the fanout pipeline:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_gather=True</span></code> (default): Executes all agents <strong>concurrently</strong> using <code class="docutils literal notranslate"><span class="pre">asyncio.gather()</span></code>. This provides better performance for I/O-bound operations like API calls, as agents run in parallel.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_gather=False</span></code>: Executes agents <strong>sequentially</strong> one by one. This is useful when you need deterministic execution order or want to avoid overwhelming external services with concurrent requests.</p></li>
+</ul>
+<p>Choose concurrent execution for better performance, or sequential execution for predictable ordering and resource control.</p>
+</div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>By combining <cite>MsgHub</cite> and <cite>sequential_pipeline</cite>, you can create more complex workflows very easily.</p>
+<p>By combining <code class="docutils literal notranslate"><span class="pre">MsgHub</span></code> and <code class="docutils literal notranslate"><span class="pre">sequential_pipeline</span></code> or <code class="docutils literal notranslate"><span class="pre">fanout_pipeline</span></code>, you can create more complex workflows very easily.</p>
 </div>
+</section>
+</section>
+<section id="advanced-pipeline-features">
+<h2>Advanced Pipeline Features<a class="headerlink" href="#advanced-pipeline-features" title="Link to this heading">¶</a></h2>
 <p>Additionally, for reusability, we also provide a class-based implementation:</p>
-<div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text">Using SequentialPipeline class</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">Using SequentialPipeline class</span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">agentscope.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">SequentialPipeline</span>
 
 <span class="c1"># Create a pipeline object</span>
@@ -497,7 +547,22 @@ For example, the two following code snippets are equivalent:</p>
 </pre></div>
 </div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 19.350 seconds)</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">Using FanoutPipeline class</span><a class="headerlink" href="#id8" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">agentscope.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">FanoutPipeline</span>
+
+<span class="c1"># Create a pipeline object</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">FanoutPipeline</span><span class="p">(</span><span class="n">agents</span><span class="o">=</span><span class="p">[</span><span class="n">alice</span><span class="p">,</span> <span class="n">bob</span><span class="p">,</span> <span class="n">charlie</span><span class="p">,</span> <span class="n">david</span><span class="p">])</span>
+
+<span class="c1"># Call the pipeline</span>
+<span class="n">msgs</span> <span class="o">=</span> <span class="k">await</span> <span class="n">pipeline</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># Reuse the pipeline with different input</span>
+<span class="n">msgs</span> <span class="o">=</span> <span class="k">await</span> <span class="n">pipeline</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="n">Msg</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;Hello!&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 20.173 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorial-task-pipeline-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/a841049f564cf5f9c0fea523e59490f5/task_pipeline.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">task_pipeline.ipynb</span></code></a></p>
@@ -573,7 +638,12 @@ For example, the two following code snippets are equivalent:</p>
 <li><a class="reference internal" href="#dynamic-participant-management">Dynamic Participant Management</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id2">Pipeline</a></li>
+<li><a class="reference internal" href="#id2">Pipeline</a><ul>
+<li><a class="reference internal" href="#sequential-pipeline">Sequential Pipeline</a></li>
+<li><a class="reference internal" href="#fanout-pipeline">Fanout Pipeline</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#advanced-pipeline-features">Advanced Pipeline Features</a></li>
 </ul>
 </li>
 </ul>

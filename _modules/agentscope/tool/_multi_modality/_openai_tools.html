@@ -390,16 +390,16 @@
 <span class="sd">        size (`Literal[&quot;256x256&quot;, &quot;512x512&quot;, &quot;1024x1024&quot;, &quot;1792x1024&quot;, \</span>
 <span class="sd">        &quot;1024x1792&quot;]`, defaults to `&quot;256x256&quot;`):</span>
 <span class="sd">            The size of the generated images.</span>
-<span class="sd">             Must be one of 1024x1024, 1536x1024 (landscape), 1024x1536 (</span>
-<span class="sd">             portrait), or auto (default value) for gpt-image-1,</span>
-<span class="sd">              one of 256x256, 512x512, or 1024x1024 for dall-e-2,</span>
-<span class="sd">               and one of 1024x1024, 1792x1024, or 1024x1792 for dall-e-3.</span>
+<span class="sd">            Must be one of 1024x1024, 1536x1024 (landscape), 1024x1536 (</span>
+<span class="sd">            portrait), or auto (default value) for gpt-image-1,</span>
+<span class="sd">            one of 256x256, 512x512, or 1024x1024 for dall-e-2,</span>
+<span class="sd">            and one of 1024x1024, 1792x1024, or 1024x1792 for dall-e-3.</span>
 <span class="sd">        quality (`Literal[&quot;auto&quot;, &quot;standard&quot;, &quot;hd&quot;, &quot;high&quot;, &quot;medium&quot;, \</span>
 <span class="sd">        &quot;low&quot;]`,  defaults to `&quot;auto&quot;`):</span>
 <span class="sd">            The quality of the image that will be generated.</span>
 
 <span class="sd">            - `auto` (default value) will automatically select the best</span>
-<span class="sd">                quality for the given model.</span>
+<span class="sd">              quality for the given model.</span>
 <span class="sd">            - `high`, `medium` and `low` are supported for gpt-image-1.</span>
 <span class="sd">            - `hd` and `standard` are supported for dall-e-3.</span>
 <span class="sd">            - `standard` is the only option for dall-e-2.</span>
@@ -407,18 +407,20 @@
 <span class="sd">            The style of the generated images.</span>
 <span class="sd">            This parameter is only supported for dall-e-3.</span>
 <span class="sd">            Must be one of `vivid` or `natural`.</span>
+
 <span class="sd">            - `Vivid` causes the model to lean towards generating hyper-real</span>
-<span class="sd">                and dramatic images.</span>
+<span class="sd">              and dramatic images.</span>
 <span class="sd">            - `Natural` causes the model to produce more natural,</span>
-<span class="sd">                less hyper-real looking images.</span>
+<span class="sd">              less hyper-real looking images.</span>
 <span class="sd">        response_format (`Literal[&quot;url&quot;, &quot;b64_json&quot;]`, defaults to `&quot;url&quot;`):</span>
 <span class="sd">            The format in which generated images with dall-e-2 and dall-e-3</span>
-<span class="sd">                are returned.</span>
+<span class="sd">            are returned.</span>
+
 <span class="sd">            - Must be one of &quot;url&quot; or &quot;b64_json&quot;.</span>
 <span class="sd">            - URLs are only valid for 60 minutes after the image has been</span>
-<span class="sd">                generated.</span>
+<span class="sd">              generated.</span>
 <span class="sd">            - This parameter isn&#39;t supported for gpt-image-1 which will always</span>
-<span class="sd">                return base64-encoded images.</span>
+<span class="sd">              return base64-encoded images.</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        `ToolResponse`:</span>
 <span class="sd">            A ToolResponse containing the generated content</span>
@@ -530,16 +532,17 @@
 <span class="sd">            The size of the edited images.</span>
 <span class="sd">        response_format (`Literal[&quot;url&quot;, &quot;b64_json&quot;]`, defaults to `&quot;url&quot;`):</span>
 <span class="sd">            The format in which generated images are returned.</span>
-<span class="sd">            Must be one of &quot;url&quot; or &quot;b64_json&quot;.</span>
-<span class="sd">            URLs are only valid for 60 minutes after generation.</span>
-<span class="sd">             This parameter isn&#39;t supported for gpt-image-1 which will</span>
+
+<span class="sd">            - Must be one of &quot;url&quot; or &quot;b64_json&quot;.</span>
+<span class="sd">            - URLs are only valid for 60 minutes after generation.</span>
+<span class="sd">            - This parameter isn&#39;t supported for gpt-image-1 which will</span>
 <span class="sd">              always return base64-encoded images.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        `ToolResponse`:</span>
 <span class="sd">            A ToolResponse containing the generated content</span>
-<span class="sd">             (ImageBlock/TextBlock/AudioBlock) or error information if the</span>
-<span class="sd">             operation failed.</span>
+<span class="sd">            (ImageBlock/TextBlock/AudioBlock) or error information if the</span>
+<span class="sd">            operation failed.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -665,15 +668,16 @@
 <span class="sd">            The size of the generated image variations.</span>
 <span class="sd">        response_format (`Literal[&quot;url&quot;, &quot;b64_json&quot;]`, defaults to `&quot;url&quot;`):</span>
 <span class="sd">            The format in which generated images are returned.</span>
-<span class="sd">            Must be one of url or b64_json.</span>
-<span class="sd">            URLs are only valid for 60 minutes after the image has been</span>
-<span class="sd">            generated.</span>
+
+<span class="sd">            - Must be one of url or b64_json.</span>
+<span class="sd">            - URLs are only valid for 60 minutes after the image has been</span>
+<span class="sd">              generated.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        `ToolResponse`:</span>
 <span class="sd">            A ToolResponse containing the generated content</span>
-<span class="sd">             (ImageBlock/TextBlock/AudioBlock) or error information if the</span>
-<span class="sd">             operation failed.</span>
+<span class="sd">            (ImageBlock/TextBlock/AudioBlock) or error information if the</span>
+<span class="sd">            operation failed.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># _parse_url handles both local and web URLs and returns BytesIO</span>
@@ -758,8 +762,8 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        `ToolResponse`:</span>
 <span class="sd">            A ToolResponse containing the generated content</span>
-<span class="sd">             (ImageBlock/TextBlock/AudioBlock) or error information if the</span>
-<span class="sd">             operation failed.</span>
+<span class="sd">            (ImageBlock/TextBlock/AudioBlock) or error information if the</span>
+<span class="sd">            operation failed.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image_urls</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -862,15 +866,14 @@
 <span class="sd">        speed (`float`, defaults to `1.0`):</span>
 <span class="sd">            The speed of the audio playback. A value of 1.0 is normal speed.</span>
 <span class="sd">        res_format (`Literal[&quot;mp3&quot;, &quot;wav&quot;, &quot;opus&quot;, &quot;aac&quot;, &quot;flac&quot;, \</span>
-<span class="sd">        &quot;wav&quot;, &quot;pcm&quot;]`,</span>
-<span class="sd">        defaults to `&quot;mp3&quot;`):</span>
+<span class="sd">        &quot;wav&quot;, &quot;pcm&quot;]`, defaults to `&quot;mp3&quot;`):</span>
 <span class="sd">            The format of the audio file.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        `ToolResponse`:</span>
 <span class="sd">            A ToolResponse containing the generated content</span>
-<span class="sd">             (ImageBlock/TextBlock/AudioBlock) or error information if the</span>
-<span class="sd">             operation failed.</span>
+<span class="sd">            (ImageBlock/TextBlock/AudioBlock) or error information if the</span>
+<span class="sd">            operation failed.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">try</span><span class="p">:</span>
@@ -942,8 +945,8 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        `ToolResponse`:</span>
 <span class="sd">            A ToolResponse containing the generated content</span>
-<span class="sd">             (ImageBlock/TextBlock/AudioBlock) or error information if the</span>
-<span class="sd">             operation failed.</span>
+<span class="sd">            (ImageBlock/TextBlock/AudioBlock) or error information if the</span>
+<span class="sd">            operation failed.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">try</span><span class="p">:</span>

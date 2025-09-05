@@ -28,8 +28,9 @@ as syntax sugar for chaining agents together, including
 
 - **MsgHub**: a message hub for broadcasting messages among multiple agents
 - **sequential_pipeline** and **SequentialPipeline**: a functional and class-based implementation that chains agents in a sequential manner
+- **fanout_pipeline** and **FanoutPipeline**: a functional and class-based implementation that distributes the same input to multiple agents
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-24
+.. GENERATED FROM PYTHON SOURCE LINES 16-25
 
 .. code-block:: Python
 
@@ -49,7 +50,7 @@ as syntax sugar for chaining agents together, including
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 25-37
+.. GENERATED FROM PYTHON SOURCE LINES 26-38
 
 Broadcasting with MsgHub
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -64,7 +65,7 @@ Here we create four agents: Alice, Bob, Charlie and David.
 Then we start a meeting with Alice, Bob and Charlie by introducing themselves.
 Note David is not included in this meeting.
 
-.. GENERATED FROM PYTHON SOURCE LINES 37-57
+.. GENERATED FROM PYTHON SOURCE LINES 38-58
 
 .. code-block:: Python
 
@@ -95,14 +96,14 @@ Note David is not included in this meeting.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 58-62
+.. GENERATED FROM PYTHON SOURCE LINES 59-63
 
 Then we start a meeting and let them introduce themselves without manual message passing:
 
 .. hint:: The message in ``announcement`` will be broadcasted to all participants when entering the ``MsgHub`` context.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 62-84
+.. GENERATED FROM PYTHON SOURCE LINES 63-85
 
 .. code-block:: Python
 
@@ -137,25 +138,25 @@ Then we start a meeting and let them introduce themselves without manual message
  .. code-block:: none
 
     Alice: Hello, I'm Alice, a 50-year-old teacher with a passion for education and a wealth of experience in the classroom.
-    Bob: Hello, I'm Bob, a 35-year-old engineer with a focus on innovative solutions and technology.
-    Charlie: Hello, I'm Charlie, a 28-year-old designer with a keen eye for aesthetics and a flair for creating user-centered experiences.
+    Bob: Hello, I'm Bob, a 35-year-old engineer with a focus on innovative solutions and technology development.
+    Charlie: Hello, I'm Charlie, a 28-year-old designer with a flair for creating visually appealing and user-friendly designs.
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 85-87
+.. GENERATED FROM PYTHON SOURCE LINES 86-88
 
 Now let's check if Bob, Charlie and David received Alice's message.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 87-104
+.. GENERATED FROM PYTHON SOURCE LINES 88-105
 
 .. code-block:: Python
 
 
 
     async def check_broadcast_message():
-        """Check if the messages are broadcasted correctly."""
+        """Check if the messages are broadcast correctly."""
         user_msg = Msg(
             "user",
             "Do you know who's Alice, and what she does? Answer me briefly.",
@@ -179,12 +180,12 @@ Now let's check if Bob, Charlie and David received Alice's message.
 
     Bob: Alice is a 50-year-old teacher who is passionate about education and has extensive experience in the classroom.
     Charlie: Alice is a 50-year-old teacher who is passionate about education and has extensive experience in the classroom.
-    David: I don't have specific information about an Alice without more context. Could you provide more details, such as her full name or the field she works in?
+    David: I don't have specific information about an Alice without more context, as it's a common name. Could you provide more details such as her profession or the field she's associated with?
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 105-184
+.. GENERATED FROM PYTHON SOURCE LINES 106-173
 
 Now we observe that Bob and Charlie know Alice and her profession, while David has no idea
 about Alice since he is not included in the ``MsgHub`` context.
@@ -219,8 +220,16 @@ Pipeline
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Pipeline serves as a syntax sugar for multi-agent orchestration.
 
-Currently, AgentScope provides a sequential pipeline implementation, which
-execute agents one by one in a predefined order.
+Currently, AgentScope provides two main pipeline implementations:
+
+1. **Sequential Pipeline**: Execute agents one by one in a predefined order
+2. **Fanout Pipeline**: Distribute the same input to multiple agents and collect their responses
+
+Sequential Pipeline
+------------------------
+The sequential pipeline executes agents one by one, where the output of the previous agent
+becomes the input of the next agent.
+
 For example, the two following code snippets are equivalent:
 
 
@@ -245,8 +254,54 @@ For example, the two following code snippets are equivalent:
         msg=None
     )
 
-.. tip:: By combining `MsgHub` and `sequential_pipeline`, you can create more complex workflows very easily.
 
+.. GENERATED FROM PYTHON SOURCE LINES 175-215
+
+Fanout Pipeline
+------------------------
+The fanout pipeline distributes the same input message to multiple agents simultaneously and collects all their responses. This is useful when you want to gather different perspectives or expertise on the same topic.
+
+For example, the two following code snippets are equivalent:
+
+
+.. code-block:: python
+    :caption: Code snippet 3: Manually call agents one by one
+
+    from copy import deepcopy
+
+    msgs = []
+    msg = None
+    for agent in [alice, bob, charlie, david]:
+        msgs.append(await agent(deepcopy(msg)))
+
+
+.. code-block:: python
+    :caption: Code snippet 4: Use fanout pipeline
+
+    from agentscope.pipeline import fanout_pipeline
+    msgs = await fanout_pipeline(
+        # List of agents to be executed in order
+        agents=[alice, bob, charlie, david],
+        # The first input message, can be None
+        msg=None,
+        enable_gather=False,
+    )
+
+.. note::
+    The ``enable_gather`` parameter controls the execution mode of the fanout pipeline:
+
+    - ``enable_gather=True`` (default): Executes all agents **concurrently** using ``asyncio.gather()``. This provides better performance for I/O-bound operations like API calls, as agents run in parallel.
+    - ``enable_gather=False``: Executes agents **sequentially** one by one. This is useful when you need deterministic execution order or want to avoid overwhelming external services with concurrent requests.
+
+    Choose concurrent execution for better performance, or sequential execution for predictable ordering and resource control.
+
+.. tip::
+    By combining ``MsgHub`` and ``sequential_pipeline`` or ``fanout_pipeline``, you can create more complex workflows very easily.
+
+.. GENERATED FROM PYTHON SOURCE LINES 217-251
+
+Advanced Pipeline Features
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Additionally, for reusability, we also provide a class-based implementation:
 
@@ -265,11 +320,25 @@ Additionally, for reusability, we also provide a class-based implementation:
     msg = await pipeline(msg=Msg("user", "Hello!", "user"))
 
 
+.. code-block:: python
+    :caption: Using FanoutPipeline class
+
+    from agentscope.pipeline import FanoutPipeline
+
+    # Create a pipeline object
+    pipeline = FanoutPipeline(agents=[alice, bob, charlie, david])
+
+    # Call the pipeline
+    msgs = await pipeline(msg=None)
+
+    # Reuse the pipeline with different input
+    msgs = await pipeline(msg=Msg("user", "Hello!", "user"))
+
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 19.350 seconds)
+   **Total running time of the script:** (0 minutes 20.173 seconds)
 
 
 .. _sphx_glr_download_tutorial_task_pipeline.py:
