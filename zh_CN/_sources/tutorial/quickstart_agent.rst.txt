@@ -167,7 +167,7 @@ AgentScope 在 ``agentscope.agent`` 模块下提供了开箱即用的 ReAct 智�
 
     Jarvis: {
         "type": "tool_use",
-        "id": "call_7bb1fdbe83a94c1e9c8e3e",
+        "id": "call_b487d6dc70e54f5f86018a",
         "name": "execute_python_code",
         "input": {
             "code": "print('Hello World')",
@@ -176,7 +176,7 @@ AgentScope 在 ``agentscope.agent`` 模块下提供了开箱即用的 ReAct 智�
     }
     system: {
         "type": "tool_result",
-        "id": "call_7bb1fdbe83a94c1e9c8e3e",
+        "id": "call_b487d6dc70e54f5f86018a",
         "name": "execute_python_code",
         "output": [
             {
@@ -311,7 +311,7 @@ AgentScope 在 ``agentscope.agent`` 模块下提供了开箱即用的 ReAct 智�
 
  .. code-block:: none
 
-    Friday: 我是Friday，一个设计来帮助回答问题、提供信息和协助完成各种任务的助手。有什么我可以帮你的吗？
+    Friday: 我是Friday，一个虚拟助手，旨在帮助回答问题、提供信息和支持。有什么我可以帮您的吗？
 
 
 

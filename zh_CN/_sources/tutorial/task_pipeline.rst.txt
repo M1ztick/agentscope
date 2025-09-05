@@ -27,9 +27,10 @@
 作为将智能体链接在一起的语法糖，具体包括
 
 - **MsgHub**: 用于多个智能体之间消息的广播
-- **sequential_pipeline** 和 **SequentialPipeline**: 以顺序方式执行多个智能体
+- **sequential_pipeline** 和 **SequentialPipeline**: 以顺序方式执行多个智能体的函数式和类式实现
+- **fanout_pipeline** 和 **FanoutPipeline**: 将相同输入分发给多个智能体的函数式和类式实现
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-24
+.. GENERATED FROM PYTHON SOURCE LINES 16-25
 
 .. code-block:: Python
 
@@ -49,7 +50,7 @@
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 25-35
+.. GENERATED FROM PYTHON SOURCE LINES 26-36
 
 使用 MsgHub 进行广播
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -62,7 +63,7 @@
 然后我们让 Alice、Bob 和 Charlie 通过自我介绍开始一个会议。需要注意的是 David 没有包含在这个会议中。
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 35-55
+.. GENERATED FROM PYTHON SOURCE LINES 36-56
 
 .. code-block:: Python
 
@@ -93,14 +94,14 @@
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 56-60
+.. GENERATED FROM PYTHON SOURCE LINES 57-61
 
 然后我们创建一个 ``MsgHub`` 上下文，并让他们自我介绍:
 
 .. hint:: ``announcement`` 中的消息将在进入 ``MsgHub`` 上下文时广播给所有参与者。
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 60-82
+.. GENERATED FROM PYTHON SOURCE LINES 61-83
 
 .. code-block:: Python
 
@@ -134,19 +135,19 @@
 
  .. code-block:: none
 
-    Alice: 您好，我叫Alice，今年50岁了，我的职业是一名教师。很高兴认识您！如果您有任何问题想要了解或者需要帮助，请随时告诉我。
-    Bob: 您好，我叫Bob，今年35岁，是一名工程师。很高兴认识你，Alice。如果有什么工程相关的问题或者需要技术方面的帮助，也欢迎随时向我咨询。
-    Charlie: 您好，我叫Charlie，今年28岁，是一名设计师。很高兴认识你们两位，Alice和Bob。如果你们需要设计方面的建议或者帮助，请随时联系我。
+    Alice: 您好，我叫Alice，今年50岁，是一名教师。很高兴认识您！请问有什么我可以帮助您的吗？
+    Bob: 您好！我叫Bob，今年35岁，是一名工程师。很高兴认识您，Alice老师。我们能怎样互相帮助呢？
+    Charlie: 您好，我叫Charlie，今年28岁，是一名设计师。很高兴认识你们两位，Alice老师和Bob。我们来自不同的专业领域，相信我们可以分享很多有趣的观点和知识。有什么话题或者项目是我们可以一起探讨的吗？
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 83-85
+.. GENERATED FROM PYTHON SOURCE LINES 84-86
 
 现在让我们检查 Bob、Charlie 和 David 是否收到了 Alice 的消息。
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 85-100
+.. GENERATED FROM PYTHON SOURCE LINES 86-103
 
 .. code-block:: Python
 
@@ -165,14 +166,24 @@
         await david(user_msg)
 
 
+    asyncio.run(check_broadcast_message())
 
 
 
 
 
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    Bob: Alice是一位50岁的教师。她在之前的对话中介绍过自己，表示很高兴认识我们，并询问是否有什么可以提供的帮助。如果您想了解更多关于Alice的信息或者她能如何提供帮助，请告诉我您具体想了解的内容。
+    Charlie: Alice 是一位50岁的教师。在之前的对话中她介绍过自己，她很高兴认识我们，并且愿意提供帮助。如果你有教育相关的问题或者需要教师的专业意见，Alice 应该会是很好的资源。
+    David: Alice 是一个常见的英文名字，没有更多的信息我无法确定你指的是哪一位 Alice。如果你能提供更多信息，比如她的职业或者她所在的领域，我可以帮助你找到更多关于她的信息。
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 101-179
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 104-170
 
 现在我们观察到 Bob 和 Charlie 知道 Alice 和她的职业，而 David 对
 Alice 一无所知，因为他没有包含在 ``MsgHub`` 上下文中。
@@ -207,7 +218,15 @@ Alice 一无所知，因为他没有包含在 ``MsgHub`` 上下文中。
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 管道是 AgentScope 中多智能体编排的一种语法糖。
 
-目前，AgentScope 提供了一个顺序管道实现，它按预定义的顺序逐个执行智能体。
+目前，AgentScope 提供了两种主要的管道实现：
+
+1. **顺序管道 (Sequential Pipeline)**: 按预定义顺序逐个执行智能体
+2. **扇出管道 (Fanout Pipeline)**: 将相同输入分发给多个智能体并收集它们的响应
+
+顺序管道
+------------------------
+顺序管道逐个执行智能体，前一个智能体的输出成为下一个智能体的输入。
+
 例如，以下两个代码片段是等价的：
 
 .. code-block:: python
@@ -232,8 +251,54 @@ Alice 一无所知，因为他没有包含在 ``MsgHub`` 上下文中。
         msg=None
     )
 
-.. tip:: 通过结合 `MsgHub` 和 `sequential_pipeline`，你可以非常容易地创建更复杂的工作流。
 
+.. GENERATED FROM PYTHON SOURCE LINES 172-212
+
+扇出管道
+------------------------
+扇出管道将相同的输入消息同时分发给多个智能体并收集所有响应。当你想要收集对同一话题的不同观点或专业意见时，这非常有用。
+
+例如，以下两个代码片段是等价的：
+
+.. code-block:: python
+    :caption: 代码片段 3: 手动逐个调用智能体
+
+    from copy import deepcopy
+
+    msgs = []
+    msg = None
+    for agent in [alice, bob, charlie, david]:
+        msgs.append(await agent(deepcopy(msg)))
+
+
+.. code-block:: python
+    :caption: 代码片段 4: 使用扇出管道
+
+    from agentscope.pipeline import fanout_pipeline
+
+    msgs = await fanout_pipeline(
+        # 要执行的智能体列表
+        agents=[alice, bob, charlie, david],
+        # 输入消息，可以是 None
+        msg=None,
+        enable_gather=False,
+    )
+
+.. note::
+    ``enable_gather`` 参数控制扇出管道的执行模式：
+
+    - ``enable_gather=True`` (默认): 使用 ``asyncio.gather()`` **并发** 执行所有智能体。这为 I/O 密集型操作（如 API 调用）提供更好的性能，因为智能体并行运行。
+    - ``enable_gather=False``: 逐个 **顺序** 执行智能体。当你需要确定性的执行顺序或想要避免并发请求压垮外部服务时，这很有用。
+
+    选择并发执行以获得更好的性能，或选择顺序执行以获得可预测的顺序和资源控制。
+
+.. tip::
+    通过结合 ``MsgHub`` 和 ``sequential_pipeline`` 或 ``fanout_pipeline``，你可以非常容易地创建更复杂的工作流。
+
+.. GENERATED FROM PYTHON SOURCE LINES 214-248
+
+高级管道特性
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 此外，为了可重用性，我们还提供了基于类的实现：
 
@@ -252,11 +317,25 @@ Alice 一无所知，因为他没有包含在 ``MsgHub`` 上下文中。
     msg = await pipeline(msg=Msg("user", "你好！", "user"))
 
 
+.. code-block:: python
+    :caption: 使用 FanoutPipeline 类
+
+    from agentscope.pipeline import FanoutPipeline
+
+    # 创建管道对象
+    pipeline = FanoutPipeline(agents=[alice, bob, charlie, david])
+
+    # 调用管道
+    msgs = await pipeline(msg=None)
+
+    # 使用不同输入复用管道
+    msgs = await pipeline(msg=Msg("user", "你好！", "user"))
+
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 9.143 seconds)
+   **Total running time of the script:** (0 minutes 31.096 seconds)
 
 
 .. _sphx_glr_download_tutorial_task_pipeline.py:

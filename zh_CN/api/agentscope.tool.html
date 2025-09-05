@@ -477,8 +477,8 @@ active groups.</p>
 schema, and the extended model is applied if it is set.</p>
 </div>
 <p class="rubric">示例</p>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">Example of tool function JSON schemas</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">Example of tool function JSON schemas</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
 <div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;function&quot;</span><span class="p">,</span>
@@ -876,12 +876,9 @@ or base64 data.</p>
 </ul>
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>A ToolResponse containing the generated content</dt><dd><p>(ImageBlock/TextBlock/AudioBlock) or error information if the
+<dd class="field-even"><p>A ToolResponse containing the generated content
+(ImageBlock/TextBlock/AudioBlock) or error information if the
 operation failed.</p>
-</dd>
-</dl>
-</p>
 </dd>
 <dt class="field-odd">返回类型<span class="colon">:</span></dt>
 <dd class="field-odd"><p><cite>ToolResponse</cite></p>
@@ -898,18 +895,15 @@ operation failed.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>text</strong> (<cite>str</cite>) -- The text to be converted into audio.</p></li>
 <li><p><strong>api_key</strong> (<cite>str</cite>) -- The api key for the dashscope API.</p></li>
-<li><p><strong>model</strong> (<cite>str</cite>, defaults to 'sambert-zhichu-v1') -- The model to use. Full model list can be found in
-<a class="reference external" href="https://help.aliyun.com/zh/dashscope/model-list">https://help.aliyun.com/zh/dashscope/model-list</a></p></li>
+<li><p><strong>model</strong> (<cite>str</cite>, defaults to 'sambert-zhichu-v1') -- The model to use. Full model list can be found in the
+<a class="reference external" href="https://help.aliyun.com/zh/model-studio/sambert-python-sdk">official document</a>.</p></li>
 <li><p><strong>sample_rate</strong> (<cite>int</cite>, defaults to 48000) -- Sample rate of the audio.</p></li>
 </ul>
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>A ToolResponse containing the generated content</dt><dd><p>(ImageBlock/TextBlock/AudioBlock) or error information if the
+<dd class="field-even"><p>A ToolResponse containing the generated content
+(ImageBlock/TextBlock/AudioBlock) or error information if the
 operation failed.</p>
-</dd>
-</dl>
-</p>
 </dd>
 <dt class="field-odd">返回类型<span class="colon">:</span></dt>
 <dd class="field-odd"><p><cite>ToolResponse</cite></p>
@@ -931,12 +925,9 @@ operation failed.</p>
 </ul>
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>A ToolResponse containing the generated content</dt><dd><p>(ImageBlock/TextBlock/AudioBlock) or error information if the
+<dd class="field-even"><p>A ToolResponse containing the generated content
+(ImageBlock/TextBlock/AudioBlock) or error information if the
 operation failed.</p>
-</dd>
-</dl>
-</p>
 </dd>
 <dt class="field-odd">返回类型<span class="colon">:</span></dt>
 <dd class="field-odd"><p><cite>ToolResponse</cite></p>
@@ -956,25 +947,15 @@ base64 data.</p>
 <li><p><strong>api_key</strong> (<cite>str</cite>) -- The API key for the OpenAI API.</p></li>
 <li><p><strong>n</strong> (<cite>int</cite>, defaults to <cite>1</cite>) -- The number of images to generate.</p></li>
 <li><p><strong>model</strong> (<cite>Literal[&quot;dall-e-2&quot;, &quot;dall-e-3&quot;]</cite>, defaults to <cite>&quot;dall-e-2&quot;</cite>) -- The model to use for image generation.</p></li>
-<li><p><strong>size</strong> (<cite>Literal[&quot;256x256&quot;, &quot;512x512&quot;, &quot;1024x1024&quot;, &quot;1792x1024&quot;,         &quot;1024x1792&quot;]</cite>, defaults to <cite>&quot;256x256&quot;</cite>) -- <dl>
-<dt>The size of the generated images.</dt><dd><p>Must be one of 1024x1024, 1536x1024 (landscape), 1024x1536 (
-portrait), or auto (default value) for gpt-image-1,</p>
-<blockquote>
-<div><dl class="simple">
-<dt>one of 256x256, 512x512, or 1024x1024 for dall-e-2,</dt><dd><p>and one of 1024x1024, 1792x1024, or 1024x1792 for dall-e-3.</p>
-</dd>
-</dl>
-</div></blockquote>
-</dd>
-</dl>
-</p></li>
+<li><p><strong>size</strong> (<cite>Literal[&quot;256x256&quot;, &quot;512x512&quot;, &quot;1024x1024&quot;, &quot;1792x1024&quot;,         &quot;1024x1792&quot;]</cite>, defaults to <cite>&quot;256x256&quot;</cite>) -- The size of the generated images.
+Must be one of 1024x1024, 1536x1024 (landscape), 1024x1536 (
+portrait), or auto (default value) for gpt-image-1,
+one of 256x256, 512x512, or 1024x1024 for dall-e-2,
+and one of 1024x1024, 1792x1024, or 1024x1792 for dall-e-3.</p></li>
 <li><p><strong>quality</strong> (<cite>Literal[&quot;auto&quot;, &quot;standard&quot;, &quot;hd&quot;, &quot;high&quot;, &quot;medium&quot;,         &quot;low&quot;]</cite>,  defaults to <cite>&quot;auto&quot;</cite>) -- <p>The quality of the image that will be generated.</p>
 <ul>
-<li><dl class="simple">
-<dt><cite>auto</cite> (default value) will automatically select the best</dt><dd><p>quality for the given model.</p>
-</dd>
-</dl>
-</li>
+<li><p><cite>auto</cite> (default value) will automatically select the best
+quality for the given model.</p></li>
 <li><p><cite>high</cite>, <cite>medium</cite> and <cite>low</cite> are supported for gpt-image-1.</p></li>
 <li><p><cite>hd</cite> and <cite>standard</cite> are supported for dall-e-3.</p></li>
 <li><p><cite>standard</cite> is the only option for dall-e-2.</p></li>
@@ -982,35 +963,22 @@ portrait), or auto (default value) for gpt-image-1,</p>
 </p></li>
 <li><p><strong>style</strong> (<cite>Literal[&quot;vivid&quot;, &quot;natural&quot;]</cite>, defaults to <cite>&quot;vivid&quot;</cite>) -- <p>The style of the generated images.
 This parameter is only supported for dall-e-3.
-Must be one of <cite>vivid</cite> or <cite>natural</cite>.
-- <cite>Vivid</cite> causes the model to lean towards generating hyper-real</p>
-<blockquote>
-<div><p>and dramatic images.</p>
-</div></blockquote>
+Must be one of <cite>vivid</cite> or <cite>natural</cite>.</p>
 <ul>
-<li><dl class="simple">
-<dt><cite>Natural</cite> causes the model to produce more natural,</dt><dd><p>less hyper-real looking images.</p>
-</dd>
-</dl>
-</li>
+<li><p><cite>Vivid</cite> causes the model to lean towards generating hyper-real
+and dramatic images.</p></li>
+<li><p><cite>Natural</cite> causes the model to produce more natural,
+less hyper-real looking images.</p></li>
 </ul>
 </p></li>
-<li><p><strong>response_format</strong> (<cite>Literal[&quot;url&quot;, &quot;b64_json&quot;]</cite>, defaults to <cite>&quot;url&quot;</cite>) -- <dl class="simple">
-<dt>The format in which generated images with dall-e-2 and dall-e-3</dt><dd><p>are returned.</p>
-</dd>
-</dl>
+<li><p><strong>response_format</strong> (<cite>Literal[&quot;url&quot;, &quot;b64_json&quot;]</cite>, defaults to <cite>&quot;url&quot;</cite>) -- <p>The format in which generated images with dall-e-2 and dall-e-3
+are returned.</p>
 <ul>
 <li><p>Must be one of &quot;url&quot; or &quot;b64_json&quot;.</p></li>
-<li><dl class="simple">
-<dt>URLs are only valid for 60 minutes after the image has been</dt><dd><p>generated.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>This parameter isn't supported for gpt-image-1 which will always</dt><dd><p>return base64-encoded images.</p>
-</dd>
-</dl>
-</li>
+<li><p>URLs are only valid for 60 minutes after the image has been
+generated.</p></li>
+<li><p>This parameter isn't supported for gpt-image-1 which will always
+return base64-encoded images.</p></li>
 </ul>
 </p></li>
 </ul>
@@ -1038,43 +1006,16 @@ operation failed.</p>
 <li><p><strong>model</strong> (<cite>Literal[&quot;tts-1&quot;, &quot;tts-1-hd&quot;]</cite>, defaults to <cite>&quot;tts-1&quot;</cite>) -- The model to use for text-to-speech conversion.</p></li>
 <li><p><strong>voice</strong> (<cite>Literal[&quot;alloy&quot;, &quot;echo&quot;, &quot;fable&quot;, &quot;onyx&quot;, &quot;nova&quot;,         &quot;shimmer&quot;]</cite>, defaults to <cite>&quot;alloy&quot;</cite>) -- The voice to use for the audio output.</p></li>
 <li><p><strong>speed</strong> (<cite>float</cite>, defaults to <cite>1.0</cite>) -- The speed of the audio playback. A value of 1.0 is normal speed.</p></li>
-<li><p><strong>(</strong><strong>`Literal</strong><strong>[</strong><strong>&quot;mp3&quot;</strong> (<em>res_format</em>) -- </p></li>
-<li><p><strong>&quot;wav&quot;</strong></p></li>
-<li><p><strong>&quot;opus&quot;</strong></p></li>
-<li><p><strong>&quot;aac&quot;</strong></p></li>
-<li><p><strong>&quot;flac&quot;</strong></p></li>
-<li><p><strong>&quot;wav&quot;</strong></p></li>
-<li><p><strong>&quot;pcm&quot;</strong><strong>]</strong><strong>`</strong></p></li>
-<li><p><strong>res_format</strong> (<em>Literal</em><em>[</em><em>'mp3'</em><em>, </em><em>'opus'</em><em>, </em><em>'aac'</em><em>, </em><em>'flac'</em><em>, </em><em>'wav'</em><em>, </em><em>'pcm'</em><em>]</em>)</p></li>
+<li><p><strong>res_format</strong> (<cite>Literal[&quot;mp3&quot;, &quot;wav&quot;, &quot;opus&quot;, &quot;aac&quot;, &quot;flac&quot;,         &quot;wav&quot;, &quot;pcm&quot;]</cite>, defaults to <cite>&quot;mp3&quot;</cite>) -- The format of the audio file.</p></li>
 </ul>
 </dd>
-<dt class="field-even">返回类型<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#agentscope.tool.ToolResponse" title="agentscope.tool._response.ToolResponse"><em>ToolResponse</em></a></p>
-</dd>
-</dl>
-<p>:param :
-:param defaults to <cite>&quot;mp3&quot;</cite>): The format of the audio file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">返回<span class="colon">:</span></dt>
-<dd class="field-odd"><p><dl class="simple">
-<dt>A ToolResponse containing the generated content</dt><dd><p>(ImageBlock/TextBlock/AudioBlock) or error information if the
+<dt class="field-even">返回<span class="colon">:</span></dt>
+<dd class="field-even"><p>A ToolResponse containing the generated content
+(ImageBlock/TextBlock/AudioBlock) or error information if the
 operation failed.</p>
 </dd>
-</dl>
-</p>
-</dd>
-<dt class="field-even">返回类型<span class="colon">:</span></dt>
-<dd class="field-even"><p><cite>ToolResponse</cite></p>
-</dd>
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<em>str</em>)</p></li>
-<li><p><strong>api_key</strong> (<em>str</em>)</p></li>
-<li><p><strong>model</strong> (<em>Literal</em><em>[</em><em>'tts-1'</em><em>, </em><em>'tts-1-hd'</em><em>, </em><em>'gpt-4o-mini-tts'</em><em>]</em>)</p></li>
-<li><p><strong>voice</strong> (<em>Literal</em><em>[</em><em>'alloy'</em><em>, </em><em>'ash'</em><em>, </em><em>'ballad'</em><em>, </em><em>'coral'</em><em>, </em><em>'echo'</em><em>, </em><em>'fable'</em><em>, </em><em>'nova'</em><em>, </em><em>'onyx'</em><em>, </em><em>'sage'</em><em>, </em><em>'shimmer'</em><em>]</em>)</p></li>
-<li><p><strong>speed</strong> (<em>float</em>)</p></li>
-<li><p><strong>res_format</strong> (<em>Literal</em><em>[</em><em>'mp3'</em><em>, </em><em>'opus'</em><em>, </em><em>'aac'</em><em>, </em><em>'flac'</em><em>, </em><em>'wav'</em><em>, </em><em>'pcm'</em><em>]</em>)</p></li>
-</ul>
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p><cite>ToolResponse</cite></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1095,25 +1036,20 @@ image URL(s) or base64 data.</p>
 to be edited.</p></li>
 <li><p><strong>n</strong> (<cite>int</cite>, defaults to <cite>1</cite>) -- The number of edited images to generate.</p></li>
 <li><p><strong>size</strong> (<cite>Literal[&quot;256x256&quot;, &quot;512x512&quot;, &quot;1024x1024&quot;]</cite>, defaults to         <cite>&quot;256x256&quot;</cite>) -- The size of the edited images.</p></li>
-<li><p><strong>response_format</strong> (<cite>Literal[&quot;url&quot;, &quot;b64_json&quot;]</cite>, defaults to <cite>&quot;url&quot;</cite>) -- <p>The format in which generated images are returned.
-Must be one of &quot;url&quot; or &quot;b64_json&quot;.
-URLs are only valid for 60 minutes after generation.</p>
-<blockquote>
-<div><dl class="simple">
-<dt>This parameter isn't supported for gpt-image-1 which will</dt><dd><p>always return base64-encoded images.</p>
-</dd>
-</dl>
-</div></blockquote>
+<li><p><strong>response_format</strong> (<cite>Literal[&quot;url&quot;, &quot;b64_json&quot;]</cite>, defaults to <cite>&quot;url&quot;</cite>) -- <p>The format in which generated images are returned.</p>
+<ul>
+<li><p>Must be one of &quot;url&quot; or &quot;b64_json&quot;.</p></li>
+<li><p>URLs are only valid for 60 minutes after generation.</p></li>
+<li><p>This parameter isn't supported for gpt-image-1 which will
+always return base64-encoded images.</p></li>
+</ul>
 </p></li>
 </ul>
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>A ToolResponse containing the generated content</dt><dd><p>(ImageBlock/TextBlock/AudioBlock) or error information if the
+<dd class="field-even"><p>A ToolResponse containing the generated content
+(ImageBlock/TextBlock/AudioBlock) or error information if the
 operation failed.</p>
-</dd>
-</dl>
-</p>
 </dd>
 <dt class="field-odd">返回类型<span class="colon">:</span></dt>
 <dd class="field-odd"><p><cite>ToolResponse</cite></p>
@@ -1134,19 +1070,19 @@ generated.</p></li>
 <li><p><strong>n</strong> (<cite>int</cite>, defaults to <cite>1</cite>) -- The number of image variations to generate.</p></li>
 <li><p><strong>model</strong> (` Literal[&quot;dall-e-2&quot;]`, default to <cite>dall-e-2</cite>) -- The model to use for image variation.</p></li>
 <li><p><strong>size</strong> (<cite>Literal[&quot;256x256&quot;, &quot;512x512&quot;, &quot;1024x1024&quot;]</cite>, defaults to         <cite>&quot;256x256&quot;</cite>) -- The size of the generated image variations.</p></li>
-<li><p><strong>response_format</strong> (<cite>Literal[&quot;url&quot;, &quot;b64_json&quot;]</cite>, defaults to <cite>&quot;url&quot;</cite>) -- The format in which generated images are returned.
-Must be one of url or b64_json.
-URLs are only valid for 60 minutes after the image has been
+<li><p><strong>response_format</strong> (<cite>Literal[&quot;url&quot;, &quot;b64_json&quot;]</cite>, defaults to <cite>&quot;url&quot;</cite>) -- <p>The format in which generated images are returned.</p>
+<ul>
+<li><p>Must be one of url or b64_json.</p></li>
+<li><p>URLs are only valid for 60 minutes after the image has been
 generated.</p></li>
+</ul>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>A ToolResponse containing the generated content</dt><dd><p>(ImageBlock/TextBlock/AudioBlock) or error information if the
+<dd class="field-even"><p>A ToolResponse containing the generated content
+(ImageBlock/TextBlock/AudioBlock) or error information if the
 operation failed.</p>
-</dd>
-</dl>
-</p>
 </dd>
 <dt class="field-odd">返回类型<span class="colon">:</span></dt>
 <dd class="field-odd"><p><cite>ToolResponse</cite></p>
@@ -1171,12 +1107,9 @@ the image(s).</p></li>
 </ul>
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>A ToolResponse containing the generated content</dt><dd><p>(ImageBlock/TextBlock/AudioBlock) or error information if the
+<dd class="field-even"><p>A ToolResponse containing the generated content
+(ImageBlock/TextBlock/AudioBlock) or error information if the
 operation failed.</p>
-</dd>
-</dl>
-</p>
 </dd>
 <dt class="field-odd">返回类型<span class="colon">:</span></dt>
 <dd class="field-odd"><p><cite>ToolResponse</cite></p>
@@ -1202,12 +1135,9 @@ randomness of the output.</p></li>
 </ul>
 </dd>
 <dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>A ToolResponse containing the generated content</dt><dd><p>(ImageBlock/TextBlock/AudioBlock) or error information if the
+<dd class="field-even"><p>A ToolResponse containing the generated content
+(ImageBlock/TextBlock/AudioBlock) or error information if the
 operation failed.</p>
-</dd>
-</dl>
-</p>
 </dd>
 <dt class="field-odd">返回类型<span class="colon">:</span></dt>
 <dd class="field-odd"><p><cite>ToolResponse</cite></p>
