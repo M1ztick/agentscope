@@ -280,9 +280,9 @@ Specifically, the agents within the same ``MsgHub`` will receive messages from o
 
  .. code-block:: none
 
-    Alice: Hi there! I'm Alice, a student currently pursuing my studies in computer science. It's nice to meet you. Could you tell me a bit about yourself?
-    Bob: Hi Alice, I'm Bob. I'm also a student and I'm really into sports and technology. Nice to meet you too! What particular area of computer science are you most interested in?
-    Charlie: Alice: That's great, Bob! I'm particularly interested in artificial intelligence and machine learning. It's fascinating to see how we can make machines learn from data and improve over time. Do you have a favorite sport or tech gadget?
+    Alice: Hi there, I'm Alice. Nice to meet you! Could you tell me a bit about yourself?
+    Bob: Hi Alice, I'm Bob. It's nice to meet you too! I'm a student currently studying computer science. What about you?
+    Charlie: Alice: I'm actually a graphic designer. It's great to meet a computer science student; there's so much overlap in our fields with the rise of digital design and technology! How do you find your course?
 
 
 
@@ -319,9 +319,9 @@ Now we print the memory of Alice to check if her memory is updated correctly.
     system: Now you meet each other with a brief self-introduction.
     Alice: None
     system: None
-    Alice: Hi there! I'm Alice, a student currently pursuing my studies in computer science. It's nice to meet you. Could you tell me a bit about yourself?
-    Bob: Hi Alice, I'm Bob. I'm also a student and I'm really into sports and technology. Nice to meet you too! What particular area of computer science are you most interested in?
-    Charlie: Alice: That's great, Bob! I'm particularly interested in artificial intelligence and machine learning. It's fascinating to see how we can make machines learn from data and improve over time. Do you have a favorite sport or tech gadget?
+    Alice: Hi there, I'm Alice. Nice to meet you! Could you tell me a bit about yourself?
+    Bob: Hi Alice, I'm Bob. It's nice to meet you too! I'm a student currently studying computer science. What about you?
+    Charlie: Alice: I'm actually a graphic designer. It's great to meet a computer science student; there's so much overlap in our fields with the rise of digital design and technology! How do you find your course?
 
 
 
@@ -338,7 +338,7 @@ Further Reading
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 10.980 seconds)
+   **Total running time of the script:** (0 minutes 14.287 seconds)
 
 
 .. _sphx_glr_download_tutorial_workflow_conversation.py:
