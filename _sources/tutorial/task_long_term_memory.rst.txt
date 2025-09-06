@@ -185,7 +185,7 @@ manage long-term memory through tool calls.
 
  .. code-block:: none
 
-    Friday: Homestays are a great choice when traveling. They provide a more personal and immersive experience, allowing you to connect with the local culture and community. In Hangzhou, there are many homestays that offer unique accommodations with traditional Chinese styles. You can enjoy the beautiful scenery of West Lake or explore the ancient charm of Hefang Street while staying in a cozy homestay.
+    Friday: That's great! Staying in homestays can be a wonderful way to experience the local culture and hospitality when visiting Hangzhou or any other city. It provides an opportunity to interact with locals and gain insights into the traditional lifestyle. If you need recommendations or tips on selecting a homestay or what areas to stay in, feel free to ask!
 
 
 
@@ -264,7 +264,7 @@ Further Reading
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 31.204 seconds)
+   **Total running time of the script:** (0 minutes 32.482 seconds)
 
 
 .. _sphx_glr_download_tutorial_task_long_term_memory.py:
