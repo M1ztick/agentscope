@@ -506,10 +506,9 @@ Charlie: 我也是！顺便说一下，我是 Charlie。
 <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">example_msghub</span><span class="p">())</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Alice: 大家好，我叫Alice，是一名学生。很高兴认识大家！我喜欢阅读、学习新知识和参加户外活动。希望我们能够友好相处，并且可以一起分享有趣的经历和故事。你们有什么爱好呢？
-Bob: 大家好，我叫Bob，也是学生。平时我喜欢打篮球、听音乐还有旅行。很高兴见到大家，希望我们能成为好朋友，一起度过美好的时光。听起来Alice你有很多兴趣爱好，有没有什么最近在读的好书推荐呢？
-Charlie: 大家好，我叫Charlie，同样是一名学生。我喜欢画画、玩电子游戏和探索新的科技产品。很高兴认识你们，Alice和Bob，我们都有各自的兴趣爱好，这真是太棒了。或许我们可以一起做一些创意项目或者玩游戏。Bob，你最喜欢哪一种音乐类型？还有Alice，我也很好奇你最近有没有读到什么好书。
-Charlie: 很高兴见到你们，Alice和Bob！我最近迷上了一些科幻类的书籍，如果你俩也对这个感兴趣的话，我可以推荐给你们。另外，我发现了一款非常有趣的多人在线游戏，也许我们可以组队玩一玩。Bob，既然你喜欢旅行，那你有没有什么特别想去的地方呢？
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Alice: 大家好，我叫Alice，是一名学生。我喜欢阅读、学习新知识还有和朋友们一起度过愉快的时光。很高兴认识大家！你们呢？可以分享一些关于你们自己的事情吗？
+Bob: 嗨，Alice！我叫Bob，同样也是一名学生。我对科技和编程特别感兴趣，平时喜欢捣鼓一些小项目。我也热爱音乐，在空闲的时候会弹吉他放松一下。很高兴遇到你！
+Charlie: 大家好，我叫Charlie，也是学生。我对历史和文化非常感兴趣，喜欢参观博物馆和古迹。我还热衷于运动，尤其是足球。很高兴认识你们！
 </pre></div>
 </div>
 <p>现在我们打印 Alice 的记忆，检查她的记忆是否正确更新。</p>
@@ -529,18 +528,18 @@ Charlie: 很高兴见到你们，Alice和Bob！我最近迷上了一些科幻类
 system: &quot;现在大家互相认识一下，简单自我介绍。&quot;
 Alice: [
     {
-        &quot;id&quot;: &quot;ZXzTNQr9Dgf85TjEwKZv8m&quot;,
+        &quot;id&quot;: &quot;TtzLHgnxJ6z2mgN8CoSNuy&quot;,
         &quot;type&quot;: &quot;tool_use&quot;,
         &quot;name&quot;: &quot;generate_response&quot;,
         &quot;input&quot;: {
-            &quot;response&quot;: &quot;大家好，我叫Alice，是一名学生。很高兴认识大家！我喜欢阅读、学习新知识和参加户外活动。希望我们能够友好相处，并且可以一起分享有趣的经历和故事。你们有什么爱好呢？&quot;
+            &quot;response&quot;: &quot;大家好，我叫Alice，是一名学生。我喜欢阅读、学习新知识还有和朋友们一起度过愉快的时光。很高兴认识大家！你们呢？可以分享一些关于你们自己的事情吗？&quot;
         }
     }
 ]
 system: [
     {
         &quot;type&quot;: &quot;tool_result&quot;,
-        &quot;id&quot;: &quot;ZXzTNQr9Dgf85TjEwKZv8m&quot;,
+        &quot;id&quot;: &quot;TtzLHgnxJ6z2mgN8CoSNuy&quot;,
         &quot;name&quot;: &quot;generate_response&quot;,
         &quot;output&quot;: [
             {
@@ -550,9 +549,9 @@ system: [
         ]
     }
 ]
-Alice: &quot;大家好，我叫Alice，是一名学生。很高兴认识大家！我喜欢阅读、学习新知识和参加户外活动。希望我们能够友好相处，并且可以一起分享有趣的经历和故事。你们有什么爱好呢？&quot;
-Bob: &quot;大家好，我叫Bob，也是学生。平时我喜欢打篮球、听音乐还有旅行。很高兴见到大家，希望我们能成为好朋友，一起度过美好的时光。听起来Alice你有很多兴趣爱好，有没有什么最近在读的好书推荐呢？&quot;
-Charlie: &quot;很高兴见到你们，Alice和Bob！我最近迷上了一些科幻类的书籍，如果你俩也对这个感兴趣的话，我可以推荐给你们。另外，我发现了一款非常有趣的多人在线游戏，也许我们可以组队玩一玩。Bob，既然你喜欢旅行，那你有没有什么特别想去的地方呢？&quot;
+Alice: &quot;大家好，我叫Alice，是一名学生。我喜欢阅读、学习新知识还有和朋友们一起度过愉快的时光。很高兴认识大家！你们呢？可以分享一些关于你们自己的事情吗？&quot;
+Bob: &quot;嗨，Alice！我叫Bob，同样也是一名学生。我对科技和编程特别感兴趣，平时喜欢捣鼓一些小项目。我也热爱音乐，在空闲的时候会弹吉他放松一下。很高兴遇到你！&quot;
+Charlie: &quot;大家好，我叫Charlie，也是学生。我对历史和文化非常感兴趣，喜欢参观博物馆和古迹。我还热衷于运动，尤其是足球。很高兴认识你们！&quot;
 </pre></div>
 </div>
 </section>
@@ -563,7 +562,7 @@ Charlie: &quot;很高兴见到你们，Alice和Bob！我最近迷上了一些科
 <li><p><a class="reference internal" href="task_prompt.html#prompt"><span class="std std-ref">提示词格式化</span></a></p></li>
 <li><p><a class="reference internal" href="task_pipeline.html#pipeline"><span class="std std-ref">管道 (Pipeline)</span></a></p></li>
 </ul>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 18.496 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 9.690 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorial-workflow-conversation-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/6fc2f5ac2a455c83476d717ce963aa17/workflow_conversation.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">workflow_conversation.ipynb</span></code></a></p>

@@ -504,64 +504,62 @@ to download the full example code.</p>
     &quot;input&quot;: {
         &quot;demand&quot;: &quot;生成一个快速排序函数&quot;
     },
-    &quot;id&quot;: &quot;call_8be705c37545492486170a&quot;
+    &quot;id&quot;: &quot;call_3153e5d92bdf4a2abd0180&quot;
 }
-PythonAgent: 这是一个使用 Python 编写的快速排序函数。快速排序是一种高效的排序算法，它采用分治策略来递归地将列表分成更小的部分。
+PythonAgent: 下面是一个使用 Python 编写的快速排序函数。这个实现选择了列表中的第一个元素作为基准（pivot），然后递归地对基准左右两侧的子数组进行排序。
 
 ```python
 def quicksort(arr):
     if len(arr) &lt;= 1:
         return arr
-    pivot = arr[len(arr) // 2]
-    left = [x for x in arr if x &lt; pivot]
-    middle = [x for x in arr if x == pivot]
-    right = [x for x in arr if x &gt; pivot]
-    return quicksort(left) + middle + quicksort(right)
+    else:
+        pivot = arr[0]
+        less = [x for x in arr[1:] if x &lt; pivot]
+        greater = [x for x in arr[1:] if x &gt;= pivot]
+        return quicksort(less) + [pivot] + quicksort(greater)
+
+# 示例
+example_list = [3, 6, 8, 10, 1, 2, 1]
+sorted_list = quicksort(example_list)
+print(&quot;Sorted list:&quot;, sorted_list)
 ```
 
-你可以用这个函数来对一个整数列表进行排序，例如：
+这段代码中，`quicksort` 函数首先检查输入的数组 `arr` 的长度是否小于或等于 1，如果是，则直接返回该数组，因为它已经是有序的了（或者为空）。否则，它会选择数组的第一个元素作为基准，并创建两个列表：一个用于存放所有比基准小的元素 (`less`)，另一个用于存放所有大于或等于基准的元素 (`greater`)。之后，函数将递归地对 `less` 和 `greater` 列表进行快速排序，并将结果连接起来形成最终的排序数组。
 
-```python
-numbers = [3, 6, 8, 10, 1, 2, 1]
-sorted_numbers = quicksort(numbers)
-print(sorted_numbers)  # 输出应该是 [1, 1, 2, 3, 6, 8, 10]
-```
+你可以复制上面的代码并在你的 Python 环境中运行它来测试快速排序的功能。如果你想要使用数组中不同的位置作为基准，或者尝试原地排序以优化空间复杂度，请告诉我，我可以提供相应的修改。
 system: {
     &quot;type&quot;: &quot;tool_result&quot;,
-    &quot;id&quot;: &quot;call_8be705c37545492486170a&quot;,
+    &quot;id&quot;: &quot;call_3153e5d92bdf4a2abd0180&quot;,
     &quot;name&quot;: &quot;generate_python&quot;,
     &quot;output&quot;: [
         {
             &quot;type&quot;: &quot;text&quot;,
-            &quot;text&quot;: &quot;这是一个使用 Python 编写的快速排序函数。快速排序是一种高效的排序算法，它采用分治策略来递归地将列表分成更小的部分。\n\n```python\ndef quicksort(arr):\n    if len(arr) &lt;= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x &lt; pivot]\n    middle = [x for x in arr if x == pivot]\n    right = [x for x in arr if x &gt; pivot]\n    return quicksort(left) + middle + quicksort(right)\n```\n\n你可以用这个函数来对一个整数列表进行排序，例如：\n\n```python\nnumbers = [3, 6, 8, 10, 1, 2, 1]\nsorted_numbers = quicksort(numbers)\nprint(sorted_numbers)  # 输出应该是 [1, 1, 2, 3, 6, 8, 10]\n```&quot;
+            &quot;text&quot;: &quot;下面是一个使用 Python 编写的快速排序函数。这个实现选择了列表中的第一个元素作为基准（pivot），然后递归地对基准左右两侧的子数组进行排序。\n\n```python\ndef quicksort(arr):\n    if len(arr) &lt;= 1:\n        return arr\n    else:\n        pivot = arr[0]\n        less = [x for x in arr[1:] if x &lt; pivot]\n        greater = [x for x in arr[1:] if x &gt;= pivot]\n        return quicksort(less) + [pivot] + quicksort(greater)\n\n# 示例\nexample_list = [3, 6, 8, 10, 1, 2, 1]\nsorted_list = quicksort(example_list)\nprint(\&quot;Sorted list:\&quot;, sorted_list)\n```\n\n这段代码中，`quicksort` 函数首先检查输入的数组 `arr` 的长度是否小于或等于 1，如果是，则直接返回该数组，因为它已经是有序的了（或者为空）。否则，它会选择数组的第一个元素作为基准，并创建两个列表：一个用于存放所有比基准小的元素 (`less`)，另一个用于存放所有大于或等于基准的元素 (`greater`)。之后，函数将递归地对 `less` 和 `greater` 列表进行快速排序，并将结果连接起来形成最终的排序数组。\n\n你可以复制上面的代码并在你的 Python 环境中运行它来测试快速排序的功能。如果你想要使用数组中不同的位置作为基准，或者尝试原地排序以优化空间复杂度，请告诉我，我可以提供相应的修改。&quot;
         }
     ]
 }
-Router: 这是一个使用 Python 编写的快速排序函数。快速排序是一种高效的排序算法，它采用分治策略来递归地将列表分成更小的部分。
+Router: 生成的 Python 快速排序函数如下：
 
 ```python
 def quicksort(arr):
     if len(arr) &lt;= 1:
         return arr
-    pivot = arr[len(arr) // 2]
-    left = [x for x in arr if x &lt; pivot]
-    middle = [x for x in arr if x == pivot]
-    right = [x for x in arr if x &gt; pivot]
-    return quicksort(left) + middle + quicksort(right)
+    else:
+        pivot = arr[0]
+        less = [x for x in arr[1:] if x &lt; pivot]
+        greater = [x for x in arr[1:] if x &gt;= pivot]
+        return quicksort(less) + [pivot] + quicksort(greater)
+
+# 示例
+example_list = [3, 6, 8, 10, 1, 2, 1]
+sorted_list = quicksort(example_list)
+print(&quot;Sorted list:&quot;, sorted_list)
 ```
 
-你可以用这个函数来对一个整数列表进行排序，例如：
-
-```python
-numbers = [3, 6, 8, 10, 1, 2, 1]
-sorted_numbers = quicksort(numbers)
-print(sorted_numbers)  # 输出应该是 [1, 1, 2, 3, 6, 8, 10]
-```
-
-这段代码定义了一个 `quicksort` 函数，并且给出了如何使用它的示例。当你运行提供的例子时，它会输出一个排好序的数字列表。
+这段代码实现了一个基本的快速排序算法，它选择列表中的第一个元素作为基准值，并递归地对小于和大于基准值的子数组进行排序。你可以直接在你的 Python 环境中运行这段代码来测试快速排序功能。如果你需要进一步的帮助或有其他特殊需求，请告诉我！
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 31.580 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 29.044 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorial-workflow-routing-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/3266c75280f96697c4cc46d7d55a3ac8/workflow_routing.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">workflow_routing.ipynb</span></code></a></p>
