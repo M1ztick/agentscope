@@ -26,7 +26,6 @@ from agentscope.tool import (
 # Load environment variables from .env file
 load_dotenv()
 
-
 async def main() -> None:
     """Main entry point for the OpenAI ReAct agent example."""
     # Create toolkit and register basic tools
@@ -41,9 +40,9 @@ async def main() -> None:
         stream=True,
         generate_kwargs={
             "temperature": 0.5,  # Lower temperature for more deterministic outputs
-            "max_tokens": 800,  # Conservative token limit
-            "top_p": 0.9,  # Reduce randomness while keeping some flexibility
-        },
+            "max_tokens": 800,   # Conservative token limit
+            "top_p": 0.9,       # Reduce randomness while keeping some flexibility
+        }
     )
 
     # System prompt for the agent
@@ -89,21 +88,16 @@ Remember: You're operating in a VS Code environment and can help with developmen
 
             # Let the assistant process and respond
             msg = await agent(msg)
-
+            
         except openai.InternalServerError as e:
             print("\nOpenAI API error occurred. Attempting to recover...\n")
-            msg = await user.reply(
-                "I apologize, but I encountered a temporary error. Could you please rephrase your last message or ask a different question?"
-            )
+            msg = await user.reply("I apologize, but I encountered a temporary error. Could you please rephrase your last message or ask a different question?")
             continue
-
+            
         except Exception as e:
             print(f"\nAn error occurred: {str(e)}\n")
-            msg = await user.reply(
-                "I apologize, but something went wrong. Could you please try again?"
-            )
+            msg = await user.reply("I apologize, but something went wrong. Could you please try again?")
             continue
-
 
 if __name__ == "__main__":
     asyncio.run(main())
