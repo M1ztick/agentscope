@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Insertabot Demo</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 20px;
+      }
+      #chat {
+        max-width: 500px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      .messages {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 12px;
+        height: 380px;
+        overflow: auto;
+      }
+      .msg {
+        margin: 8px 0;
+      }
+      .user {
+        text-align: right;
+      }
+      .bot {
+        text-align: left;
+      }
+      .input {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      input[type="text"] {
+        flex: 1;
+        padding: 10px;
+        font-size: 1em;
+      }
+      button {
+        padding: 10px 14px;
+        font-size: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chat">
+      <h2>Insertabot Demo</h2>
+      <div class="messages" id="messages"></div>
+      <div class="input">
+        <input id="text" type="text" placeholder="Ask me something..." />
+        <button id="send">Send</button>
+      </div>
+    </div>
+    <script>
+      const sendBtn = document.getElementById("send");
+      const input = document.getElementById("text");
+      const messages = document.getElementById("messages");
+
+      function addMessage(text, cls) {
+        const el = document.createElement("div");
+        el.className = "msg " + cls;
+        el.textContent = text;
+        messages.appendChild(el);
+        messages.scrollTop = messages.scrollHeight;
+      }
+
+      async function send() {
+        const text = input.value.trim();
+        if (!text) return;
+        addMessage(text, "user");
+        input.value = "";
+        addMessage("...", "bot");
+        try {
+          const res = await fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text }),
+          });
+          const data = await res.json();
+          // replace the last bot placeholder
+          const botEls = messages.getElementsByClassName("bot");
+          const lastBot = botEls[botEls.length - 1];
+          if (lastBot) lastBot.textContent = data.reply || "(no reply)";
+        } catch (err) {
+          const botEls = messages.getElementsByClassName("bot");
+          const lastBot = botEls[botEls.length - 1];
+          if (lastBot) lastBot.textContent = "Error: " + err.message;
+        }
+      }
+
+      sendBtn.addEventListener("click", send);
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") send();
+      });
+    </script>
+  </body>
+</html>

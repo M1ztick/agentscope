@@ -1,0 +1,16 @@
+{
+    "name": "mistykmedia-chatbot",
+    "description": "A WordPress plugin for integrating a chatbot into your website.",
+    "type": "wordpress-plugin",
+    "require": {
+        "php": ">=7.2",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MistykMedia\\Chatbot\\": "includes/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

@@ -1,0 +1,19 @@
+{
+  "name": "mistykmedia-chatbot",
+  "version": "1.0.0",
+  "description": "A WordPress plugin for integrating a chatbot into your website.",
+  "main": "mistykmedia-chatbot.php",
+  "scripts": {
+    "build": "echo 'Building project...'",
+    "start": "echo 'Starting project...'",
+    "test": "echo 'Running tests...'"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}
